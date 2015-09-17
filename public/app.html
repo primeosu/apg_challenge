@@ -3,7 +3,9 @@
   <head>
 
     <meta charset="utf-8">
-    <title>APP</title>
+    <meta name="author" content="Chris Young (young.c.5690@gmail.com)">
+
+    <title>APG Malware Tool</title>
 
     <link href="/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="/bower_components/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
@@ -13,14 +15,60 @@
   </head>
   <body>
 
-    <h1>APP</h1>
+    <noscript>
+      <div class="page-error">
+        <div class="box-vertical-align"></div>
+        <div class="box">
+          <div class="box-header">
+            <span class="fa fa-info-circle fa-fw fa-lg box-icon"></span>
+            <h1>Error</h1>
+          </div>
+          <div class="box-content text-right">
+            <p class="text-center">This app required JavaScript. Enable it and then refresh the page.</p>
+          </div>
+        </div>
+      </div>
+    </noscript>
+
+    <div id="header" class="row hidden"></div>
+    <div id="content-wrapper" class="container-fluid hidden">
+      <div id="nav" class="nav-expanded hidden"></div>
+      <div id="content"></div>
+    </div>
 
     <script src="/bower_components/jquery/dist/jquery.js"></script> 
     <script src="/bower_components/underscore/underscore.js"></script>
     <script src="/bower_components/backbone/backbone.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/bower_components/async/dist/async.js"></script>
 
-    <script src="/app.js"></script>
+    <script id="error-template" type="text/template">
+      <div class="page-error">
+        <div class="box-vertical-align"></div>
+        <div class="box">
+          <div class="box-header">
+            <span class="fa fa-info-circle fa-fw fa-lg box-icon"></span>
+            <h1>Error</h1>
+          </div>
+          <div class="box-content text-right">
+            <p id="error-message" class="text-center">Something on this page failed to load. Refresh to try again.</p>
+            <button onclick="javascript:history.go(0);">Refresh</button>
+          </div>
+        </div>
+      </div>
+    </script>
+
+    <script id="loading-template" type="text/template">
+      <div class="loading-page">
+        <div class="loading-vertical-align"></div>
+        <div class="loading-spinner text-center">
+          <span class="fa fa-refresh fa-fw fa-3x fa-spin"></span>
+          <h3>Loading...</h3>
+        </div>
+      </div>
+    </script>
+
+    <script src="/bundle.js"></script>
 
   </body>
 </html>
