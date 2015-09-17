@@ -1,0 +1,10 @@
+#!/bin/bash
+# Description: Starts the server
+# Author: Chris Young (young.c.5690@gmail.com)
+# Created: September 17th 2015
+
+export APG_USER="root"
+export APG_PASS=""
+
+node --use-strict --harmony_destructuring ./server.js
+
