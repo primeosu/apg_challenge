@@ -10,7 +10,8 @@ let express = require('express'),
     bodyParser = require('body-parser'),
     uuid = require('node-uuid');
 
-let malware = require(`${__dirname}/controllers/malware`);
+let Malware = require(`${__dirname}/controllers/malware`),
+    Type = require(`${__dirname}/controllers/type`);
 
 let app = express(),
     port = 8421;
@@ -41,13 +42,19 @@ app.get(`/`, (request, response) => {
  * POST /malware
  * @description: Persists multiple malwares to the database
  */
-app.post(`/malwares`, malware.create);
+app.post(`/malwares`, Malware.create);
 
 /**
  * GET /malware
  * @description: Serves a list of all malware in the database
  */
-app.get(`/malwares`, malware.read);
+app.get(`/malwares`, Malware.readAll);
+
+/**
+ * GET /types
+ * @description: Serves a list of different types of malware
+ */
+app.get(`/types`, Type.readAll);
 
 let server = app.listen(port, () => {
   console.log(`Server listening on port ${port}`);

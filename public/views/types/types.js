@@ -8,7 +8,7 @@
 
 var Request = require('../../utils/request.js');
 
-var Malwares = require('../../collections/malwares.js');
+var Types = require('../../collections/types.js');
 
 module.exports = Backbone.View.extend({
 
@@ -22,7 +22,7 @@ module.exports = Backbone.View.extend({
 
     _.extend(this, options);
 
-    this.malwares = new Malwares();
+    this.types = new Types();
 
     this.errorTemplate = _.template(this.parent.ui.$errorTemplate.html());
     this.loadingTemplate = _.template(this.parent.ui.$loadingTemplate.html());
@@ -62,25 +62,33 @@ module.exports = Backbone.View.extend({
       return this.$el.html(this.errorTemplate());
     }
 
-    if (!this.malwares.length) {
+    if (!this.types.length) {
       this.$el.html(this.loadingTemplate());
     } else {
       this.ui.$pageLoading.removeClass('hidden');
     }
 
-    this.malwares.on('error sync', function (error) {
+    this.types.on('error sync', function (error) {
       if (event.type === 'error') {
         return that.$el.html(that.errorTemplate());
       }
 
-      that.$el.html(that.template({ types: that.malwares.amountOfTypes() }));
+      that.$el.html(that.template({ types: that.types }));
       that.setUiElements();
 
       that.resize()
-      $(window).resize(this.resize);
+      $(window).resize(_.bind(that.resize, that));
     });
 
-    this.malwares.fetch();
+    this.types.fetch();
+  },
+
+  /**
+   * events
+   * @description: Declares view click events
+   */
+  events: {
+    'click #types-content a.sort-link': 'sort'
   },
 
   /**
@@ -89,6 +97,22 @@ module.exports = Backbone.View.extend({
    */
   resize: function () {
     this.ui.$tableWrapper.css('max-height', this.ui.$contentBox.height());
+  },
+
+  /**
+   * Database.sort()
+   * @description: Reorders the collection based on sort method
+   */
+  sort: function (event) {
+    var $target = $(event.target).parents('a.sort-link');
+
+    event.preventDefault();
+
+    this.types.sortMethod.key = $target.data('key');
+    this.types.sortMethod.direction = $target.find('span.sort-icon').hasClass('fa-sort-down') ? 1 : -1;
+    this.types.sort();
+
+    this.render();
   }
 
 });

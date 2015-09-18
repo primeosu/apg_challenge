@@ -10,28 +10,54 @@
       <h2 id="types-page-loading" class="hidden">Loading...</h2>
 
       <div class="table-wrapper">
-        <table id="malware-table" class="table table-bordered">
+        <table id="type-table" class="table table-bordered">
           <thead>
             <tr>
-              <th>Classification Type</th>
-              <th>Amount of Malware</th>
+              <th>
+                <div class="col-xs-11">
+                  <span>Classification Type</span>
+                </div>
+                <div class="col-xs-1 text-right">
+                  <a class="sort-link" href="#" data-key="classificationType">
+                    <% if (types.sortMethod.key === 'classificationType') { %>
+                      <span class="fa <%- (types.sortMethod.direction > 0) ? 'fa-sort-up' : 'fa-sort-down' %> sort-icon"></span>
+                    <% } else { %>
+                      <span class="fa fa-sort sort-icon"></span>
+                    <% } %>
+                  </a>
+                </div>
+              </th>
+              <th>
+                <div class="col-xs-11">
+                  <span>Amount of Malware</span>
+                </div>
+                <div class="col-xs-1 text-right">
+                  <a class="sort-link" href="#" data-key="amount">
+                    <% if (types.sortMethod.key === 'amount') { %>
+                      <span class="fa <%- (types.sortMethod.direction > 0) ? 'fa-sort-up' : 'fa-sort-down' %> sort-icon"></span>
+                    <% } else { %>
+                      <span class="fa fa-sort sort-icon"></span>
+                    <% } %>
+                  </a>
+                </div>
+              </th>
             </tr>
           </thead>
           <tbody>
-            <% _.each(types, function (type) { %>
+            <% _.each(types.models, function (type) { %>
               <tr>
-                <td><%- type.classificationType %></td>
-                <td><%- type.malwares.length %></td>
+                <td><%- type.get('classificationType') %></td>
+                <td><%- type.get('amount') %></td>
               </tr>
             <% }); %>
           </tbody>
         </table>
       <% } else { %>
-        <div id="no-malwares-wrapper">
-          <div id="no-malwares-vertical-align"></div>
-          <div id="no-malwares" class="text-center">
-            <h1>No malwares where found.</h1>
-            <h2>Upload some on the <span>Upload</span> page and then come back.</h2>
+        <div id="no-types-wrapper">
+          <div id="no-types-vertical-align"></div>
+          <div id="no-types" class="text-center">
+            <h1>No malwares types where found.</h1>
+            <h2>Upload some malware on the <span>Upload</span> page and then come back.</h2>
           </div>
         </div>
       <% } %>

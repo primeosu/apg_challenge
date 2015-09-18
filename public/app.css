@@ -234,7 +234,7 @@ div.loading-page {
 
 div.nav-expanded {
   transition: width 0.2s;
-  width: 190px; }
+  width: 180px; }
   div.nav-expanded span.nav-text {
     opacity: 1;
     transition: opacity 1s; }
@@ -250,28 +250,28 @@ div.nav-collapsed {
     opacity: 0;
     transition: opacity 0.1s; }
 
-#database-content {
+#malware-content {
   height: 100%; }
-  #database-content h1 {
+  #malware-content h1 {
     display: inline-block;
     font-size: 2rem; }
-  #database-content h2 {
+  #malware-content h2 {
     color: #AAA;
     display: inline;
     font-size: 1.8rem;
     margin-left: 1rem; }
-  #database-content #no-malwares-wrapper {
+  #malware-content #no-malwares-wrapper {
     height: 100%; }
-    #database-content #no-malwares-wrapper #no-malwares-vertical-align {
+    #malware-content #no-malwares-wrapper #no-malwares-vertical-align {
       display: inline-block;
       height: 100%;
       width: 1px;
       vertical-align: middle; }
-    #database-content #no-malwares-wrapper #no-malwares {
+    #malware-content #no-malwares-wrapper #no-malwares {
       display: inline-block;
       width: 99%;
       vertical-align: middle; }
-      #database-content #no-malwares-wrapper #no-malwares h1 {
+      #malware-content #no-malwares-wrapper #no-malwares h1 {
         display: block; }
 
 #upload-content h1 {
@@ -304,18 +304,18 @@ div.nav-collapsed {
     display: inline;
     font-size: 1.8rem;
     margin-left: 1rem; }
-  #types-content #no-malwares-wrapper {
+  #types-content #no-types-wrapper {
     height: 100%; }
-    #types-content #no-malwares-wrapper #no-malwares-vertical-align {
+    #types-content #no-types-wrapper #no-types-vertical-align {
       display: inline-block;
       height: 100%;
       width: 1px;
       vertical-align: middle; }
-    #types-content #no-malwares-wrapper #no-malwares {
+    #types-content #no-types-wrapper #no-types {
       display: inline-block;
       width: 99%;
       vertical-align: middle; }
-      #types-content #no-malwares-wrapper #no-malwares h1 {
+      #types-content #no-types-wrapper #no-types h1 {
         display: block; }
 
 /*# sourceMappingURL=app.css.map */

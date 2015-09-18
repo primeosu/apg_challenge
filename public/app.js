@@ -12,7 +12,7 @@
 
   var Header = require('./views/header/header.js'),
       Nav = require('./views/nav/nav.js'),
-      Database = require('./views/database/database.js'),
+      Malware = require('./views/malware/malware.js'),
       Upload = require('./views/upload/upload.js'),
       Types = require('./views/types/types.js');
 
@@ -27,6 +27,7 @@
 
       this.views = {};
       this.ui = {
+        $body: $('body'),
         $header: $('#header'),
         $nav: $('#nav'),
         $content: $('#content'),
@@ -59,7 +60,17 @@
 
         that.ui.$contentWrapper.removeClass('hidden');
         that.ui.$contentWrapper.height(that.ui.$contentWrapper.height() - that.ui.$header.height());
+        
+        $(window).resize(_.bind(that.resize, that));
       });
+    },
+
+    /**
+     * App.resize()
+     * @description: Vertically resizes content on window resize
+     */
+    resize: function () {
+      this.ui.$contentWrapper.height(this.ui.$body.height() - this.ui.$header.height());
     },
 
     /**
@@ -68,7 +79,7 @@
      */
     routes: {
       '': 'redirectToUpload',
-      'database': 'database',
+      'malware': 'malware',
       'upload': 'upload',
       'types': 'types'
     },
@@ -82,17 +93,17 @@
     },
 
     /**
-     * App.database()
-     * @description: Creates the database view or renders it if it already exists
+     * App.malware()
+     * @description: Creates the malware view or renders it if it already exists
      */
-    database: function () {
-      if (!this.views.database) {
-        this.views.database = new Database({
+    malware: function () {
+      if (!this.views.malware) {
+        this.views.malware = new Malware({
           parent: this,
           el: this.ui.$content
         });
       } else {
-        this.views.database.render();
+        this.views.malware.render();
       }
     },
 

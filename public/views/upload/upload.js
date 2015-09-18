@@ -104,7 +104,10 @@ module.exports = Backbone.View.extend({
     function load() {
       return function (event) {
         var malwares = that.parseFile(event.target.result);
-        that.uploadMalwares(malwares);
+
+        if (malwares) {
+          that.uploadMalwares(malwares);
+        }
       }
     }
 
@@ -121,7 +124,8 @@ module.exports = Backbone.View.extend({
    * @returns: {Array}
    */
   parseFile: function (file) {
-    var rows = file.split('\n'),
+    var that = this,
+        rows = file.split('\n'),
         invalid = false,
         rowDatas = [],
         md5s = [];
@@ -208,7 +212,7 @@ module.exports = Backbone.View.extend({
           return showModal('Error', 'The malwares failed to upload.');
         }
 
-        showModal('Info', 'The malwares uploaded succesfully. You can now view the amount of each malware type on the Types page.');
+        showModal('Info', 'The malwares uploaded succesfully.\nYou can now view the amount of each malware type on the Types page.');
       }
     });
   }
