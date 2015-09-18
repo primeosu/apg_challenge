@@ -30,8 +30,9 @@ module.exports = Backbone.View.extend({
     new Request({
       url: 'views/upload/upload.tmpl',
       callback: function (error, body) {
-        if (!error)
+        if (!error) {
           that.template = _.template(body);
+        }
 
         that.render();
       }
@@ -53,8 +54,9 @@ module.exports = Backbone.View.extend({
    * @description: Draws the view
    */
   render: function () {
-    if (!this.template)
+    if (!this.template) {
       return this.$el.html(this.errorTemplate());
+    }
 
     this.$el.html(this.template());
     this.setUiElements();
@@ -74,7 +76,6 @@ module.exports = Backbone.View.extend({
    */
   selectFile: function () {
     this.ui.$uploadInput.click().on('change', _.bind(this.changeFile, this));
-    // document.getElementById('upload-input').onchange = _.bind(this.changeFile, this);
   },
 
   /**
@@ -84,8 +85,9 @@ module.exports = Backbone.View.extend({
   changeFile: function () {
     var filePath = this.ui.$uploadInput.val();
 
-    if (!filePath)
+    if (!filePath) {
       return;
+    }
 
     this.getFileData();
   },
@@ -102,7 +104,6 @@ module.exports = Backbone.View.extend({
     function load() {
       return function (event) {
         var malwares = that.parseFile(event.target.result);
-
         that.uploadMalwares(malwares);
       }
     }
@@ -133,22 +134,26 @@ module.exports = Backbone.View.extend({
       });
     }
 
-    if (rows[0] != ["MD5,ClassificationName,ClassificationType,Size,FileType"])
+    if (rows[0] != ["MD5,ClassificationName,ClassificationType,Size,FileType"]) {
       return invalidData('The selected CSV file does not contain column headers.');
+    }
 
     rows.shift();
 
     for (var index = 0; index < rows.length; index++) {
-      if (!rows[index])
+      if (!rows[index]) {
         continue;
+      }
 
       rowDatas.push(rows[index].split(','));
 
-      if (rowDatas[index].length !== 5)
+      if (rowDatas[index].length !== 5) {
         return invalidData('The selected CSV file has an invalid number of columns.');
+      }
 
-      if (_.contains(md5s, rowDatas[index][0]))
+      if (_.contains(md5s, rowDatas[index][0])) {
         return invalidData('The selected CSV file contains a duplicate md5.');
+      }
 
       md5s.push(rowDatas[index][0]);
     }
@@ -161,8 +166,9 @@ module.exports = Backbone.View.extend({
         }
       });
 
-      if (invalid)
+      if (invalid) {
         return;
+      }
     }
 
    return  _.map(rowDatas, function (rowData) {
@@ -198,8 +204,9 @@ module.exports = Backbone.View.extend({
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(malwares),
       callback: function (error, response) {
-        if (error)
+        if (error) {
           return showModal('Error', 'The malwares failed to upload.');
+        }
 
         showModal('Info', 'The malwares uploaded succesfully. You can now view the amount of each malware type on the Types page.');
       }

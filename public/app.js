@@ -53,8 +53,9 @@
           router: that
         });
       }], function (error) {
-        if (error)
+        if (error) {
           that.ui.$content.html(this.errorTemplate());
+        }
 
         that.ui.$contentWrapper.removeClass('hidden');
         that.ui.$contentWrapper.height(that.ui.$contentWrapper.height() - that.ui.$header.height());
@@ -85,13 +86,14 @@
      * @description: Creates the database view or renders it if it already exists
      */
     database: function () {
-      if (!this.views.database)
+      if (!this.views.database) {
         this.views.database = new Database({
           parent: this,
           el: this.ui.$content
         });
-      else
+      } else {
         this.views.database.render();
+      }
     },
 
     /**
@@ -99,13 +101,14 @@
      * @description: Creates the upload view or renders it if it already exists
      */
     upload: function () {
-      if (!this.views.upload)
+      if (!this.views.upload) {
         this.views.upload = new Upload({
           parent: this,
           el: this.ui.$content
         });
-      else
+      } else {
         this.views.upload.render();
+      }
     },
 
     /**
@@ -113,13 +116,14 @@
      * @description: Creates the types view or renders it if it already exists
      */
     types: function () {
-      if (!this.views.types)
+      if (!this.views.types) {
         this.views.types = new Types({
           parent: this,
           el: this.ui.$content
         });
-      else
+      } else {
         this.views.types.render();
+      }
     }
 
   });

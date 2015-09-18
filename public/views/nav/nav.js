@@ -23,8 +23,9 @@ module.exports = Backbone.View.extend({
     new Request({
       url: 'views/nav/nav.tmpl',
       callback: function (error, body) {
-        if (error)
-          return options.callback(error); 
+        if (error) {
+          return options.callback(error);
+        }
 
         that.template = _.template(body);
         that.render();
@@ -97,8 +98,9 @@ module.exports = Backbone.View.extend({
 
     this.ui.$lis.removeClass('active');
 
-    if ($a.hasClass('nav-sub-level'))
+    if ($a.hasClass('nav-sub-level')) {
       $a.parents('li').addClass('active');
+    }
 
     $a.parent().addClass('active');
   }

@@ -30,8 +30,9 @@ module.exports = Backbone.View.extend({
     new Request({
       url: 'views/types/types.tmpl',
       callback: function (error, body) {
-        if (!error)
+        if (!error) {
           that.template = _.template(body);
+        }
 
         that.render();
       }
@@ -57,17 +58,20 @@ module.exports = Backbone.View.extend({
   render: function () {
     var that = this;
 
-    if (!this.template)
+    if (!this.template) {
       return this.$el.html(this.errorTemplate());
+    }
 
-    if (!this.malwares.length)
+    if (!this.malwares.length) {
       this.$el.html(this.loadingTemplate());
-    else
+    } else {
       this.ui.$pageLoading.removeClass('hidden');
+    }
 
     this.malwares.on('error sync', function (error) {
-      if (event.type === 'error')
+      if (event.type === 'error') {
         return that.$el.html(that.errorTemplate());
+      }
 
       that.$el.html(that.template({ types: that.malwares.amountOfTypes() }));
       that.setUiElements();

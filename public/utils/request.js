@@ -30,8 +30,9 @@ Request.prototype.fetch = function () {
    * @param: {Object} response
    */
   function checkStatus(response) {
-    if (response.status >= 200 && response.status < 300)
+    if (response.status >= 200 && response.status < 300) {
       return response;
+    }
 
     throw {
       statusText: response.statusText,
@@ -45,18 +46,21 @@ Request.prototype.fetch = function () {
     body: this.body
   }).then(checkStatus)
     .then(function (response) {
-      if (response.status === 204)
+      if (response.status === 204) {
         return;
+      }
 
-      if (response.headers.get('Content-Type') === 'application/json')
+      if (response.headers.get('Content-Type') === 'application/json') {
         return response.json();
+      }
         
       return response.text();
     }).then(function (body) {
       return that.callback(null, body);
     }).catch(function (error) {
-      if (error.response && error.response.status === 204)
+      if (error.response && error.response.status === 204) {
         return that.callback();
+      }
 
       return that.callback(error);
     });

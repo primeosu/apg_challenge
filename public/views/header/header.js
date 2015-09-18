@@ -23,8 +23,9 @@ module.exports = Backbone.View.extend({
     new Request({
       url: 'views/header/header.tmpl',
       callback: function (error, body) {
-        if (error)
+        if (error) {
           return that.callback(error);
+        }
 
         that.template = _.template(body);
         that.render();

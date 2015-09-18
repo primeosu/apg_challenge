@@ -54,8 +54,9 @@
           router: that
         });
       }], function (error) {
-        if (error)
+        if (error) {
           that.ui.$content.html(this.errorTemplate());
+        }
 
         that.ui.$contentWrapper.removeClass('hidden');
         that.ui.$contentWrapper.height(that.ui.$contentWrapper.height() - that.ui.$header.height());
@@ -86,13 +87,14 @@
      * @description: Creates the database view or renders it if it already exists
      */
     database: function () {
-      if (!this.views.database)
+      if (!this.views.database) {
         this.views.database = new Database({
           parent: this,
           el: this.ui.$content
         });
-      else
+      } else {
         this.views.database.render();
+      }
     },
 
     /**
@@ -100,13 +102,14 @@
      * @description: Creates the upload view or renders it if it already exists
      */
     upload: function () {
-      if (!this.views.upload)
+      if (!this.views.upload) {
         this.views.upload = new Upload({
           parent: this,
           el: this.ui.$content
         });
-      else
+      } else {
         this.views.upload.render();
+      }
     },
 
     /**
@@ -114,13 +117,14 @@
      * @description: Creates the types view or renders it if it already exists
      */
     types: function () {
-      if (!this.views.types)
+      if (!this.views.types) {
         this.views.types = new Types({
           parent: this,
           el: this.ui.$content
         });
-      else
+      } else {
         this.views.types.render();
+      }
     }
 
   });
@@ -158,13 +162,14 @@ module.exports = Backbone.Collection.extend({
     _.each(this.models, function (malware) {
       var classificationType = _.findWhere(classificationTypes, { classificationType: malware.get('classificationType') });
 
-      if (classificationType)
+      if (classificationType) {
         classificationType.malwares.push(malware);
-      else
+      } else {
         classificationTypes.push({
           classificationType: malware.get('classificationType'),
           malwares: [malware]
         });
+      }
     });
 
     return classificationTypes;
@@ -286,8 +291,9 @@ Request.prototype.fetch = function () {
    * @param: {Object} response
    */
   function checkStatus(response) {
-    if (response.status >= 200 && response.status < 300)
+    if (response.status >= 200 && response.status < 300) {
       return response;
+    }
 
     throw {
       statusText: response.statusText,
@@ -301,18 +307,21 @@ Request.prototype.fetch = function () {
     body: this.body
   }).then(checkStatus)
     .then(function (response) {
-      if (response.status === 204)
+      if (response.status === 204) {
         return;
+      }
 
-      if (response.headers.get('Content-Type') === 'application/json')
+      if (response.headers.get('Content-Type') === 'application/json') {
         return response.json();
+      }
         
       return response.text();
     }).then(function (body) {
       return that.callback(null, body);
     }).catch(function (error) {
-      if (error.response && error.response.status === 204)
+      if (error.response && error.response.status === 204) {
         return that.callback();
+      }
 
       return that.callback(error);
     });
@@ -353,8 +362,9 @@ module.exports = Backbone.View.extend({
     new Request({
       url: 'views/database/database.tmpl',
       callback: function (error, body) {
-        if (!error)
+        if (!error) {
           that.template = _.template(body);
+        }
 
         that.render();
       }
@@ -380,17 +390,20 @@ module.exports = Backbone.View.extend({
   render: function () {
     var that = this;
 
-    if (!this.template)
+    if (!this.template) {
       return this.$el.html(this.errorTemplate());
+    }
 
-    if (!this.malwares.length)
+    if (!this.malwares.length) {
       this.$el.html(this.loadingTemplate());
-    else
+    } else {
       this.ui.$databasePageLoading.removeClass('hidden');
+    }
 
     this.malwares.on('error sync', function (event) {
-      if (event.type === 'error')
+      if (event.type === 'error') {
         return that.$el.html(that.errorTemplate());
+      }
 
       that.$el.html(that.template({ malwares: that.malwares }));
       that.setUiElements();
@@ -439,8 +452,9 @@ module.exports = Backbone.View.extend({
     new Request({
       url: 'views/header/header.tmpl',
       callback: function (error, body) {
-        if (error)
+        if (error) {
           return that.callback(error);
+        }
 
         that.template = _.template(body);
         that.render();
@@ -500,8 +514,9 @@ module.exports = Backbone.View.extend({
     new Request({
       url: 'views/nav/nav.tmpl',
       callback: function (error, body) {
-        if (error)
-          return options.callback(error); 
+        if (error) {
+          return options.callback(error);
+        }
 
         that.template = _.template(body);
         that.render();
@@ -574,8 +589,9 @@ module.exports = Backbone.View.extend({
 
     this.ui.$lis.removeClass('active');
 
-    if ($a.hasClass('nav-sub-level'))
+    if ($a.hasClass('nav-sub-level')) {
       $a.parents('li').addClass('active');
+    }
 
     $a.parent().addClass('active');
   }
@@ -616,8 +632,9 @@ module.exports = Backbone.View.extend({
     new Request({
       url: 'views/types/types.tmpl',
       callback: function (error, body) {
-        if (!error)
+        if (!error) {
           that.template = _.template(body);
+        }
 
         that.render();
       }
@@ -643,17 +660,20 @@ module.exports = Backbone.View.extend({
   render: function () {
     var that = this;
 
-    if (!this.template)
+    if (!this.template) {
       return this.$el.html(this.errorTemplate());
+    }
 
-    if (!this.malwares.length)
+    if (!this.malwares.length) {
       this.$el.html(this.loadingTemplate());
-    else
+    } else {
       this.ui.$pageLoading.removeClass('hidden');
+    }
 
     this.malwares.on('error sync', function (error) {
-      if (event.type === 'error')
+      if (event.type === 'error') {
         return that.$el.html(that.errorTemplate());
+      }
 
       that.$el.html(that.template({ types: that.malwares.amountOfTypes() }));
       that.setUiElements();
@@ -709,8 +729,9 @@ module.exports = Backbone.View.extend({
     new Request({
       url: 'views/upload/upload.tmpl',
       callback: function (error, body) {
-        if (!error)
+        if (!error) {
           that.template = _.template(body);
+        }
 
         that.render();
       }
@@ -732,8 +753,9 @@ module.exports = Backbone.View.extend({
    * @description: Draws the view
    */
   render: function () {
-    if (!this.template)
+    if (!this.template) {
       return this.$el.html(this.errorTemplate());
+    }
 
     this.$el.html(this.template());
     this.setUiElements();
@@ -753,7 +775,6 @@ module.exports = Backbone.View.extend({
    */
   selectFile: function () {
     this.ui.$uploadInput.click().on('change', _.bind(this.changeFile, this));
-    // document.getElementById('upload-input').onchange = _.bind(this.changeFile, this);
   },
 
   /**
@@ -763,8 +784,9 @@ module.exports = Backbone.View.extend({
   changeFile: function () {
     var filePath = this.ui.$uploadInput.val();
 
-    if (!filePath)
+    if (!filePath) {
       return;
+    }
 
     this.getFileData();
   },
@@ -781,7 +803,6 @@ module.exports = Backbone.View.extend({
     function load() {
       return function (event) {
         var malwares = that.parseFile(event.target.result);
-
         that.uploadMalwares(malwares);
       }
     }
@@ -812,22 +833,26 @@ module.exports = Backbone.View.extend({
       });
     }
 
-    if (rows[0] != ["MD5,ClassificationName,ClassificationType,Size,FileType"])
+    if (rows[0] != ["MD5,ClassificationName,ClassificationType,Size,FileType"]) {
       return invalidData('The selected CSV file does not contain column headers.');
+    }
 
     rows.shift();
 
     for (var index = 0; index < rows.length; index++) {
-      if (!rows[index])
+      if (!rows[index]) {
         continue;
+      }
 
       rowDatas.push(rows[index].split(','));
 
-      if (rowDatas[index].length !== 5)
+      if (rowDatas[index].length !== 5) {
         return invalidData('The selected CSV file has an invalid number of columns.');
+      }
 
-      if (_.contains(md5s, rowDatas[index][0]))
+      if (_.contains(md5s, rowDatas[index][0])) {
         return invalidData('The selected CSV file contains a duplicate md5.');
+      }
 
       md5s.push(rowDatas[index][0]);
     }
@@ -840,8 +865,9 @@ module.exports = Backbone.View.extend({
         }
       });
 
-      if (invalid)
+      if (invalid) {
         return;
+      }
     }
 
    return  _.map(rowDatas, function (rowData) {
@@ -877,8 +903,9 @@ module.exports = Backbone.View.extend({
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(malwares),
       callback: function (error, response) {
-        if (error)
+        if (error) {
           return showModal('Error', 'The malwares failed to upload.');
+        }
 
         showModal('Info', 'The malwares uploaded succesfully. You can now view the amount of each malware type on the Types page.');
       }
