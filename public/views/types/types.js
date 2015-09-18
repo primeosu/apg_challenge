@@ -68,7 +68,7 @@ module.exports = Backbone.View.extend({
       this.ui.$pageLoading.removeClass('hidden');
     }
 
-    this.types.on('error sync', function (error) {
+    this.types.on('error sync', function (event) {
       if (event.type === 'error') {
         return that.$el.html(that.errorTemplate());
       }
