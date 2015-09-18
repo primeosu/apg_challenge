@@ -86,14 +86,14 @@ npm install
 gulp
 ```
 
-7. Set database credential environmental variables if you get the root user a password or want to use a user other than root. If you did not set a password for root then you can skip this step.
+7. Set database credential environmental variables if you set a password for the root user or want to use a user other than root. If you did not set a password for root then you can skip this step.
 
 ```
 export APG_USER="root"
 export APG_PASS=""
 ```
 
-8. Finally start the server
+8. Finally, start the server
 
 ```
 cd ..
