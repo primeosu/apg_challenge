@@ -36,6 +36,13 @@ Evaluation of your submission will be based on the following criteria:
 
 To setup and start the application follow the steps below. You can also find a live version of it running at [chrisyou.ng/apg_challenge](http://www.chrisyou.ng/apg_challenge)
 
+0. Clone in to this repository
+
+```
+git clone https://github.com/chris--young/apg_challenge.git
+cd apg_challenge
+```
+
 1. Install NVM and Node.js v4.0.0. This project uses ES6 so we must use the latest version of Node.
 
 ```
