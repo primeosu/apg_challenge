@@ -6,9 +6,5 @@
 export APG_USER="root"
 export APG_PASS=""
 
-touch log.txt
-
-node --use-strict --harmony_destructuring ./server.js > log.txt
-
-less +F ./log.txt
+node --use-strict --harmony_destructuring ./server.js
 
