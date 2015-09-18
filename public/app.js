@@ -26,27 +26,38 @@
       var that = this;
 
       this.views = {};
-      this.errorTemplate = _.template($('#error-template').html());
+      this.ui = {
+        $header: $('#header'),
+        $nav: $('#nav'),
+        $content: $('#content'),
+        $contentWrapper: $('#content-wrapper'),
+        $errorTemplate: $('#error-template'),
+        $loadingTemplate: $('#loading-template')
+      };
+
+      this.errorTemplate = _.template(this.ui.$errorTemplate.html());
 
       Backbone.history.start();
 
       async.series([function (callback) {
         that.header = new Header({
-          el: $('#header'),
+          parent: that,
+          el: that.ui.$header,
           callback: callback
         });
       }, function (callback) {
         that.nav = new Nav({
-          el: $('#nav'),
+          parent: that,
+          el: that.ui.$nav,
           callback: callback,
           router: that
         });
       }], function (error) {
         if (error)
-          $('#content').html(this.errorTemplate());
+          that.ui.$content.html(this.errorTemplate());
 
-        $('#content-wrapper').removeClass('hidden');
-        $('#content-wrapper').height($('#content-wrapper').height() - $('#header').height());
+        that.ui.$contentWrapper.removeClass('hidden');
+        that.ui.$contentWrapper.height(that.ui.$contentWrapper.height() - that.ui.$header.height());
       });
     },
 
@@ -76,7 +87,8 @@
     database: function () {
       if (!this.views.database)
         this.views.database = new Database({
-          el: $('#content')
+          parent: this,
+          el: this.ui.$content
         });
       else
         this.views.database.render();
@@ -89,7 +101,8 @@
     upload: function () {
       if (!this.views.upload)
         this.views.upload = new Upload({
-          el: $('#content')
+          parent: this,
+          el: this.ui.$content
         });
       else
         this.views.upload.render();
@@ -102,7 +115,8 @@
     types: function () {
       if (!this.views.types)
         this.views.types = new Types({
-          el: $('#content')
+          parent: this,
+          el: this.ui.$content
         });
       else
         this.views.types.render();

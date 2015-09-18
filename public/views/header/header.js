@@ -36,13 +36,23 @@ module.exports = Backbone.View.extend({
   },
 
   /**
+   * Header.setUiElements()
+   * @description: Gets DOM references for view elements
+   */
+  setUiElements: function () {
+    this.ui = {
+      $contentWrapper: $('#content-wrapper')
+    };
+  },
+
+  /**
    * Header.render()
    * @description: Draws the view
    */
   render: function () {
     this.$el.html(this.template());
-
-    $('#content-wrapper').css('height', 'calc(100% - ' + this.$el.height() + 'px)');
+    this.setUiElements();
+    this.ui.$contentWrapper.css('height', 'calc(100% - ' + this.$el.height() + 'px)');
   }
 
 });

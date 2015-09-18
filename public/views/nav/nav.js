@@ -37,11 +37,24 @@ module.exports = Backbone.View.extend({
   },
 
   /**
+   * Nav.setUiElements()
+   * @description: Gets DOM references for view elements
+   */
+  setUiElements: function () {
+    this.ui = {
+      $tooltips: $('#nav [data-toggle="tooltip"]'),
+      $lis: $('#nav li')
+    };
+  },
+
+  /**
    * Nav.render()
    * @description: Draws the view
    */
   render: function () {
     this.$el.html(this.template());
+
+    this.setUiElements();
 
     this.toggle();
     this.setActive();
@@ -68,9 +81,9 @@ module.exports = Backbone.View.extend({
 
     if (this.collapsed) {
       this.$el.removeClass('nav-expanded').addClass('nav-collapsed');
-      $('#nav [data-toggle="tooltip"]').tooltip();
+      this.ui.$tooltips.tooltip();
     } else {
-      $('#nav [data-toggle="tooltip"]').tooltip('destroy');
+      this.ui.$tooltips.tooltip('destroy');
       this.$el.removeClass('nav-collapsed').addClass('nav-expanded');
     }
   },
@@ -82,10 +95,10 @@ module.exports = Backbone.View.extend({
   setActive: function () {
     var $a = $('#nav a[href="' + window.location.hash + '"]');
 
-    $('#nav li').removeClass('active');
+    this.ui.$lis.removeClass('active');
 
     if ($a.hasClass('nav-sub-level'))
-      $a.parent().parent().parent().addClass('active').addClass('expanded');
+      $a.parents('li').addClass('active');
 
     $a.parent().addClass('active');
   }

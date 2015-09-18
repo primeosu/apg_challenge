@@ -24,8 +24,8 @@ module.exports = Backbone.View.extend({
 
     this.malwares = new Malwares();
 
-    this.errorTemplate = _.template($('#error-template').html());
-    this.loadingTemplate = _.template($('#loading-template').html());
+    this.errorTemplate = _.template(this.parent.ui.$errorTemplate.html());
+    this.loadingTemplate = _.template(this.parent.ui.$loadingTemplate.html());
 
     new Request({
       url: 'views/database/database.tmpl',
@@ -36,6 +36,18 @@ module.exports = Backbone.View.extend({
         that.render();
       }
     });
+  },
+
+  /**
+   * Database.setUiElements()
+   * @description: Gets DOM references for view elements
+   */
+  setUiElements: function () {
+    this.ui = {
+      $databasePageLoading: $('#database-page-loading'),
+      $tableWrapper: $('#database-content div.table-wrapper'),
+      $contentBox: $('#content div.box')
+    };
   },
 
   /**
@@ -51,20 +63,20 @@ module.exports = Backbone.View.extend({
     if (!this.malwares.length)
       this.$el.html(this.loadingTemplate());
     else
-      $('#database-page-loading').removeClass('hidden');
+      this.ui.$databasePageLoading.removeClass('hidden');
 
-    this.malwares.on('sync', function () {
+    this.malwares.on('error sync', function (event) {
+      if (event.type === 'error')
+        return that.$el.html(that.errorTemplate());
+
       that.$el.html(that.template({ malwares: that.malwares }));
-    });
+      that.setUiElements();
 
-    this.malwares.on('error', function (error) {
-      that.$el.html(that.errorTemplate());
+      that.resize()
+      $(window).resize(this.resize);
     });
 
     this.malwares.fetch();
-
-    this.resize()
-    $(window).resize(this.resize);
   },
 
   /**
@@ -72,7 +84,7 @@ module.exports = Backbone.View.extend({
    * @description: Resizes the table wrapper on window resize
    */
   resize: function () {
-    $('#database-content div.table-wrapper').css('max-height', $('#content > div.box').height() - 195);
+    this.ui.$tableWrapper.css('max-height', this.ui.$contentBox.height());
   }
 
 });

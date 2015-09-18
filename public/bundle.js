@@ -27,27 +27,38 @@
       var that = this;
 
       this.views = {};
-      this.errorTemplate = _.template($('#error-template').html());
+      this.ui = {
+        $header: $('#header'),
+        $nav: $('#nav'),
+        $content: $('#content'),
+        $contentWrapper: $('#content-wrapper'),
+        $errorTemplate: $('#error-template'),
+        $loadingTemplate: $('#loading-template')
+      };
+
+      this.errorTemplate = _.template(this.ui.$errorTemplate.html());
 
       Backbone.history.start();
 
       async.series([function (callback) {
         that.header = new Header({
-          el: $('#header'),
+          parent: that,
+          el: that.ui.$header,
           callback: callback
         });
       }, function (callback) {
         that.nav = new Nav({
-          el: $('#nav'),
+          parent: that,
+          el: that.ui.$nav,
           callback: callback,
           router: that
         });
       }], function (error) {
         if (error)
-          $('#content').html(this.errorTemplate());
+          that.ui.$content.html(this.errorTemplate());
 
-        $('#content-wrapper').removeClass('hidden');
-        $('#content-wrapper').height($('#content-wrapper').height() - $('#header').height());
+        that.ui.$contentWrapper.removeClass('hidden');
+        that.ui.$contentWrapper.height(that.ui.$contentWrapper.height() - that.ui.$header.height());
       });
     },
 
@@ -77,7 +88,8 @@
     database: function () {
       if (!this.views.database)
         this.views.database = new Database({
-          el: $('#content')
+          parent: this,
+          el: this.ui.$content
         });
       else
         this.views.database.render();
@@ -90,7 +102,8 @@
     upload: function () {
       if (!this.views.upload)
         this.views.upload = new Upload({
-          el: $('#content')
+          parent: this,
+          el: this.ui.$content
         });
       else
         this.views.upload.render();
@@ -103,7 +116,8 @@
     types: function () {
       if (!this.views.types)
         this.views.types = new Types({
-          el: $('#content')
+          parent: this,
+          el: this.ui.$content
         });
       else
         this.views.types.render();
@@ -333,8 +347,8 @@ module.exports = Backbone.View.extend({
 
     this.malwares = new Malwares();
 
-    this.errorTemplate = _.template($('#error-template').html());
-    this.loadingTemplate = _.template($('#loading-template').html());
+    this.errorTemplate = _.template(this.parent.ui.$errorTemplate.html());
+    this.loadingTemplate = _.template(this.parent.ui.$loadingTemplate.html());
 
     new Request({
       url: 'views/database/database.tmpl',
@@ -345,6 +359,18 @@ module.exports = Backbone.View.extend({
         that.render();
       }
     });
+  },
+
+  /**
+   * Database.setUiElements()
+   * @description: Gets DOM references for view elements
+   */
+  setUiElements: function () {
+    this.ui = {
+      $databasePageLoading: $('#database-page-loading'),
+      $tableWrapper: $('#database-content div.table-wrapper'),
+      $contentBox: $('#content div.box')
+    };
   },
 
   /**
@@ -360,20 +386,20 @@ module.exports = Backbone.View.extend({
     if (!this.malwares.length)
       this.$el.html(this.loadingTemplate());
     else
-      $('#database-page-loading').removeClass('hidden');
+      this.ui.$databasePageLoading.removeClass('hidden');
 
-    this.malwares.on('sync', function () {
+    this.malwares.on('error sync', function (event) {
+      if (event.type === 'error')
+        return that.$el.html(that.errorTemplate());
+
       that.$el.html(that.template({ malwares: that.malwares }));
-    });
+      that.setUiElements();
 
-    this.malwares.on('error', function (error) {
-      that.$el.html(that.errorTemplate());
+      that.resize()
+      $(window).resize(this.resize);
     });
 
     this.malwares.fetch();
-
-    this.resize()
-    $(window).resize(this.resize);
   },
 
   /**
@@ -381,7 +407,7 @@ module.exports = Backbone.View.extend({
    * @description: Resizes the table wrapper on window resize
    */
   resize: function () {
-    $('#database-content div.table-wrapper').css('max-height', $('#content > div.box').height() - 195);
+    this.ui.$tableWrapper.css('max-height', this.ui.$contentBox.height());
   }
 
 });
@@ -426,13 +452,23 @@ module.exports = Backbone.View.extend({
   },
 
   /**
+   * Header.setUiElements()
+   * @description: Gets DOM references for view elements
+   */
+  setUiElements: function () {
+    this.ui = {
+      $contentWrapper: $('#content-wrapper')
+    };
+  },
+
+  /**
    * Header.render()
    * @description: Draws the view
    */
   render: function () {
     this.$el.html(this.template());
-
-    $('#content-wrapper').css('height', 'calc(100% - ' + this.$el.height() + 'px)');
+    this.setUiElements();
+    this.ui.$contentWrapper.css('height', 'calc(100% - ' + this.$el.height() + 'px)');
   }
 
 });
@@ -478,11 +514,24 @@ module.exports = Backbone.View.extend({
   },
 
   /**
+   * Nav.setUiElements()
+   * @description: Gets DOM references for view elements
+   */
+  setUiElements: function () {
+    this.ui = {
+      $tooltips: $('#nav [data-toggle="tooltip"]'),
+      $lis: $('#nav li')
+    };
+  },
+
+  /**
    * Nav.render()
    * @description: Draws the view
    */
   render: function () {
     this.$el.html(this.template());
+
+    this.setUiElements();
 
     this.toggle();
     this.setActive();
@@ -509,9 +558,9 @@ module.exports = Backbone.View.extend({
 
     if (this.collapsed) {
       this.$el.removeClass('nav-expanded').addClass('nav-collapsed');
-      $('#nav [data-toggle="tooltip"]').tooltip();
+      this.ui.$tooltips.tooltip();
     } else {
-      $('#nav [data-toggle="tooltip"]').tooltip('destroy');
+      this.ui.$tooltips.tooltip('destroy');
       this.$el.removeClass('nav-collapsed').addClass('nav-expanded');
     }
   },
@@ -523,10 +572,10 @@ module.exports = Backbone.View.extend({
   setActive: function () {
     var $a = $('#nav a[href="' + window.location.hash + '"]');
 
-    $('#nav li').removeClass('active');
+    this.ui.$lis.removeClass('active');
 
     if ($a.hasClass('nav-sub-level'))
-      $a.parent().parent().parent().addClass('active').addClass('expanded');
+      $a.parents('li').addClass('active');
 
     $a.parent().addClass('active');
   }
@@ -561,8 +610,8 @@ module.exports = Backbone.View.extend({
 
     this.malwares = new Malwares();
 
-    this.errorTemplate = _.template($('#error-template').html());
-    this.loadingTemplate = _.template($('#loading-template').html());
+    this.errorTemplate = _.template(this.parent.ui.$errorTemplate.html());
+    this.loadingTemplate = _.template(this.parent.ui.$loadingTemplate.html());
 
     new Request({
       url: 'views/types/types.tmpl',
@@ -573,6 +622,18 @@ module.exports = Backbone.View.extend({
         that.render();
       }
     });
+  },
+
+  /**
+   * Types.setUiElements()
+   * @description: Gets DOM references for view elements
+   */
+  setUiElements: function () {
+    this.ui = {
+      $pageLoading: $('#type-page-loading'),
+      $tableWrapper: $('#type-content div.table-wrapper'),
+      $contentBox: $('#content div.box')
+    };
   },
 
   /**
@@ -588,20 +649,20 @@ module.exports = Backbone.View.extend({
     if (!this.malwares.length)
       this.$el.html(this.loadingTemplate());
     else
-      $('#type-page-loading').removeClass('hidden');
+      this.ui.$pageLoading.removeClass('hidden');
 
-    this.malwares.on('sync', function () {
+    this.malwares.on('error sync', function (error) {
+      if (event.type === 'error')
+        return that.$el.html(that.errorTemplate());
+
       that.$el.html(that.template({ types: that.malwares.amountOfTypes() }));
-    });
+      that.setUiElements();
 
-    this.malwares.on('error', function (error) {
-      that.$el.html(that.errorTemplate());
+      that.resize()
+      $(window).resize(this.resize);
     });
 
     this.malwares.fetch();
-
-    this.resize()
-    $(window).resize(this.resize);
   },
 
   /**
@@ -609,7 +670,7 @@ module.exports = Backbone.View.extend({
    * @description: Resizes the table wrapper on window resize
    */
   resize: function () {
-    $('#type-content div.table-wrapper').css('max-height', $('#content > div.box').height() - 195);
+    this.ui.$tableWrapper.css('max-height', this.ui.$contentBox.height());
   }
 
 });
@@ -641,9 +702,9 @@ module.exports = Backbone.View.extend({
 
     _.extend(this, options);
 
-    this.errorTemplate = _.template($('#error-template').html());
-
     this.malwares = new Malwares();
+
+    this.errorTemplate = _.template(this.parent.ui.$errorTemplate.html());
 
     new Request({
       url: 'views/upload/upload.tmpl',
@@ -657,6 +718,16 @@ module.exports = Backbone.View.extend({
   },
 
   /**
+   * Upload.setUiElements()
+   * @description: Gets DOM references for view elements
+   */
+  setUiElements: function () {
+    this.ui = {
+      $uploadInput: $('#upload-input')
+    };
+  },
+
+  /**
    * Upload.render()
    * @description: Draws the view
    */
@@ -665,6 +736,7 @@ module.exports = Backbone.View.extend({
       return this.$el.html(this.errorTemplate());
 
     this.$el.html(this.template());
+    this.setUiElements();
   },
 
   /**
@@ -680,9 +752,8 @@ module.exports = Backbone.View.extend({
    * @description: Clicks hidden ugly input and sets change event
    */
   selectFile: function () {
-    $('#upload-input').click();
-
-    document.getElementById('upload-input').onchange = _.bind(this.changeFile, this);
+    this.ui.$uploadInput.click().on('change', _.bind(this.changeFile, this));
+    // document.getElementById('upload-input').onchange = _.bind(this.changeFile, this);
   },
 
   /**
@@ -690,7 +761,7 @@ module.exports = Backbone.View.extend({
    * @description: Starts the upload if a file was selected
    */
   changeFile: function () {
-    var filePath = $('#upload-input').val();
+    var filePath = this.ui.$uploadInput.val();
 
     if (!filePath)
       return;
@@ -704,7 +775,7 @@ module.exports = Backbone.View.extend({
    */
   getFileData: function () {
     var that = this,
-        files = $('#upload-input')[0].files,
+        files = this.ui.$uploadInput[0].files,
         reader = new FileReader();
 
     function load() {
@@ -792,27 +863,24 @@ module.exports = Backbone.View.extend({
   uploadMalwares: function (malwares) {
     var that = this;
 
+    function showModal(title, message) {
+      that.modal = new Modal({
+        title: title,
+        message: message,
+        buttons: [{ text: 'Ok', callback: function () { that.modal.close(); } }]
+      });
+    }
+
     new Request({
       method: 'post',
       url: 'malwares',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(malwares),
       callback: function (error, response) {
-        if (error) {
-          that.modal = new Modal({
-            title: 'Error',
-            message: 'The malwares failed to upload.',
-            buttons: [{ text: 'Ok', callback: function () { that.modal.close(); } }]
-          });
+        if (error)
+          return showModal('Error', 'The malwares failed to upload.');
 
-          return;
-        }
-
-        that.modal = new Modal({
-          title: 'Info',
-          message: 'The malwares uploaded successfully. You can now view the amount of each malware type of the Types page.',
-          buttons: [{ text: 'Ok', callback: function () { that.modal.close(); } }]
-        });
+        showModal('Info', 'The malwares uploaded succesfully. You can now view the amount of each malware type on the Types page.');
       }
     });
   }

@@ -23,9 +23,9 @@ module.exports = Backbone.View.extend({
 
     _.extend(this, options);
 
-    this.errorTemplate = _.template($('#error-template').html());
-
     this.malwares = new Malwares();
+
+    this.errorTemplate = _.template(this.parent.ui.$errorTemplate.html());
 
     new Request({
       url: 'views/upload/upload.tmpl',
@@ -39,6 +39,16 @@ module.exports = Backbone.View.extend({
   },
 
   /**
+   * Upload.setUiElements()
+   * @description: Gets DOM references for view elements
+   */
+  setUiElements: function () {
+    this.ui = {
+      $uploadInput: $('#upload-input')
+    };
+  },
+
+  /**
    * Upload.render()
    * @description: Draws the view
    */
@@ -47,6 +57,7 @@ module.exports = Backbone.View.extend({
       return this.$el.html(this.errorTemplate());
 
     this.$el.html(this.template());
+    this.setUiElements();
   },
 
   /**
@@ -62,9 +73,8 @@ module.exports = Backbone.View.extend({
    * @description: Clicks hidden ugly input and sets change event
    */
   selectFile: function () {
-    $('#upload-input').click();
-
-    document.getElementById('upload-input').onchange = _.bind(this.changeFile, this);
+    this.ui.$uploadInput.click().on('change', _.bind(this.changeFile, this));
+    // document.getElementById('upload-input').onchange = _.bind(this.changeFile, this);
   },
 
   /**
@@ -72,7 +82,7 @@ module.exports = Backbone.View.extend({
    * @description: Starts the upload if a file was selected
    */
   changeFile: function () {
-    var filePath = $('#upload-input').val();
+    var filePath = this.ui.$uploadInput.val();
 
     if (!filePath)
       return;
@@ -86,7 +96,7 @@ module.exports = Backbone.View.extend({
    */
   getFileData: function () {
     var that = this,
-        files = $('#upload-input')[0].files,
+        files = this.ui.$uploadInput[0].files,
         reader = new FileReader();
 
     function load() {
@@ -174,27 +184,24 @@ module.exports = Backbone.View.extend({
   uploadMalwares: function (malwares) {
     var that = this;
 
+    function showModal(title, message) {
+      that.modal = new Modal({
+        title: title,
+        message: message,
+        buttons: [{ text: 'Ok', callback: function () { that.modal.close(); } }]
+      });
+    }
+
     new Request({
       method: 'post',
       url: 'malwares',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(malwares),
       callback: function (error, response) {
-        if (error) {
-          that.modal = new Modal({
-            title: 'Error',
-            message: 'The malwares failed to upload.',
-            buttons: [{ text: 'Ok', callback: function () { that.modal.close(); } }]
-          });
+        if (error)
+          return showModal('Error', 'The malwares failed to upload.');
 
-          return;
-        }
-
-        that.modal = new Modal({
-          title: 'Info',
-          message: 'The malwares uploaded successfully. You can now view the amount of each malware type of the Types page.',
-          buttons: [{ text: 'Ok', callback: function () { that.modal.close(); } }]
-        });
+        showModal('Info', 'The malwares uploaded succesfully. You can now view the amount of each malware type on the Types page.');
       }
     });
   }
