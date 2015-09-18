@@ -1,5 +1,5 @@
 /**
- * /public/views/database/database.js
+ * /public/views/types/types.js
  *
  * @description: Database view
  * @author: Chris Young (young.c.5690@gmail.com)
@@ -13,7 +13,7 @@ var Malwares = require('../../collections/malwares.js');
 module.exports = Backbone.View.extend({
 
   /**
-   * Database.initialize()
+   * Types.initialize()
    * @description: Loads view template
    * @param: {Object} options
    */
@@ -28,7 +28,7 @@ module.exports = Backbone.View.extend({
     this.loadingTemplate = _.template($('#loading-template').html());
 
     new Request({
-      url: 'views/database/database.tmpl',
+      url: 'views/types/types.tmpl',
       callback: function (error, body) {
         if (!error)
           that.template = _.template(body);
@@ -39,7 +39,7 @@ module.exports = Backbone.View.extend({
   },
 
   /**
-   * Database.render()
+   * Types.render()
    * @description: Draws the view
    */
   render: function () {
@@ -51,10 +51,10 @@ module.exports = Backbone.View.extend({
     if (!this.malwares.length)
       this.$el.html(this.loadingTemplate());
     else
-      $('#database-page-loading').removeClass('hidden');
+      $('#type-page-loading').removeClass('hidden');
 
     this.malwares.on('sync', function () {
-      that.$el.html(that.template({ malwares: that.malwares }));
+      that.$el.html(that.template({ types: that.malwares.amountOfTypes() }));
     });
 
     this.malwares.on('error', function (error) {
@@ -68,11 +68,11 @@ module.exports = Backbone.View.extend({
   },
 
   /**
-   * Database.resize()
+   * Types.resize()
    * @description: Resizes the table wrapper on window resize
    */
   resize: function () {
-    $('#database-content div.table-wrapper').css('max-height', $('#content > div.box').height() - 195);
+    $('#type-content div.table-wrapper').css('max-height', $('#content > div.box').height() - 195);
   }
 
 });

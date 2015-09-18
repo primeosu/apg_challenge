@@ -18,7 +18,7 @@ function Request(options) {
 }
 
 /**
- * fetch()
+ * Request.fetch()
  * @description: Makes an ajax request using fetch
  */
 Request.prototype.fetch = function () {

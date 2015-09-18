@@ -24,30 +24,30 @@ app.use(bodyParser.json());
  */
 app.use((request, response, next) => {
   request.id = uuid.v4();
-  console.log(`* new request: [${request.id}] ${request.method} ${request.url}`);
+  console.log(`* New request [${request.id}] ${request.method} ${request.url}`);
   next();
 });
 
 /**
  * GET /
- * @description: Serves the front-end app files.
+ * @description: Serves the front-end app files
  */
 app.get(`/`, (request, response) => {
-  console.log(`* [${request.id}] successfully served app files`);
+  console.log(`* [${request.id}] Successfully served app files`);
   response.sendFile(`${__dirname}/public/app.html`);
 });
 
 /**
  * POST /malware
- * @description: Creates a new malware entry in the database.
+ * @description: Persists multiple malwares to the database
  */
-app.post(`/malware`, malware.create);
+app.post(`/malwares`, malware.create);
 
 /**
  * GET /malware
- * @description: Serves a list of all malware in the database.
+ * @description: Serves a list of all malware in the database
  */
-app.get(`/malware`, malware.read);
+app.get(`/malwares`, malware.read);
 
 let server = app.listen(port, () => {
   console.log(`Server listening on port ${port}`);

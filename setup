@@ -5,7 +5,14 @@
 
 start=$(date +%s);
 
-# Do the stuff.
+# Install Node
+# Install MySQL
+# Install SASS
+# Install Gulp
+
+# Setup schema
+# Install node modules
+# Run gulp
 
 printf "Setup completed in %i seconds.\n" $(echo "$(date +%s) - $start" | bc)
 

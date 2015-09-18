@@ -3,9 +3,16 @@
     <span class="fa fa-upload fa-fw fa-lg box-icon"></span>
     <h1>Upload</h1>
   </div>
-  <div id="database-content" class="box-content">
+  <div id="upload-content" class="box-content">
 
-    <h2>other stuff</h2>
+    <h1>Upload Malwares</h1>
+
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;Use the button below to select a .csv file to upload. The file should contain groupings of five columns: MD5, ClassificationName, ClassificationType, Size, and FileType. The columns should always be in that order, there should always be data in each column, and MD5 should always be unique. The first five values in the file should contain the column headers. All values must be less than 64 characters long. <a href="https://raw.githubusercontent.com/primeosu/apg_challenge/master/example_input.csv" target="_blank">Click here to view an example file.</a></p>
+    
+    <div id="upload-buttons" class="text-center">
+      <input id="upload-input" type="file">
+      <button id="select-file">Upload a File</button>
+    </div>
 
   </div>
 </div>

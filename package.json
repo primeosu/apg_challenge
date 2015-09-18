@@ -18,10 +18,12 @@
   },
   "homepage": "https://github.com/chris--young/apg_challenge",
   "dependencies": {
+    "async": "^1.4.2",
     "body-parser": "^1.14.0",
     "express": "^4.13.3",
     "knex": "^0.8.6",
     "mysql": "^2.9.0",
-    "node-uuid": "^1.4.3"
+    "node-uuid": "^1.4.3",
+    "underscore": "^1.8.3"
   }
 }

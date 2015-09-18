@@ -13,18 +13,20 @@
   var Header = require('./views/header/header.js'),
       Nav = require('./views/nav/nav.js'),
       Database = require('./views/database/database.js'),
-      Upload = require('./views/upload/upload.js');
+      Upload = require('./views/upload/upload.js'),
+      Types = require('./views/types/types.js');
 
   var App = Backbone.Router.extend({
 
     /**
-     * initialize()
+     * App.initialize()
      * @description: Sets up the application
      */
     initialize: function () {
       var that = this;
 
       this.views = {};
+      this.errorTemplate = _.template($('#error-template').html());
 
       Backbone.history.start();
 
@@ -36,11 +38,12 @@
       }, function (callback) {
         that.nav = new Nav({
           el: $('#nav'),
-          callback: callback
+          callback: callback,
+          router: that
         });
       }], function (error) {
         if (error)
-          $('#content').html(ERROR_TEMPLATE());
+          $('#content').html(this.errorTemplate());
 
         $('#content-wrapper').removeClass('hidden');
         $('#content-wrapper').height($('#content-wrapper').height() - $('#header').height());
@@ -48,19 +51,28 @@
     },
 
     /**
-     * routes
+     * App.routes
      * @description: Declares app view routing
      */
     routes: {
-      '': 'redirectToDatabase',
+      '': 'redirectToUpload',
       'database': 'database',
-      'upload': 'upload'
+      'upload': 'upload',
+      'types': 'types'
     },
 
-    redirectToDatabase: function () {
-      window.location.replace('#/database');
+    /**
+     * App.redirectToUpload()
+     * @description: Redirect to the upload view when no page is specified
+     */
+    redirectToUpload: function () {
+      window.location.replace('#/upload');
     },
 
+    /**
+     * App.database()
+     * @description: Creates the database view or renders it if it already exists
+     */
     database: function () {
       if (!this.views.database)
         this.views.database = new Database({
@@ -70,6 +82,10 @@
         this.views.database.render();
     },
 
+    /**
+     * App.upload()
+     * @description: Creates the upload view or renders it if it already exists
+     */
     upload: function () {
       if (!this.views.upload)
         this.views.upload = new Upload({
@@ -77,6 +93,19 @@
         });
       else
         this.views.upload.render();
+    },
+
+    /**
+     * App.types()
+     * @description: Creates the types view or renders it if it already exists
+     */
+    types: function () {
+      if (!this.views.types)
+        this.views.types = new Types({
+          el: $('#content')
+        });
+      else
+        this.views.types.render();
     }
 
   });

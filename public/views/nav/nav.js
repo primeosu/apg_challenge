@@ -11,7 +11,7 @@ var Request = require('../../utils/request.js');
 module.exports = Backbone.View.extend({
 
   /**
-   * initialize()
+   * Nav.initialize()
    * @description: Loads view template
    * @param: {Object} options
    */
@@ -37,30 +37,30 @@ module.exports = Backbone.View.extend({
   },
 
   /**
-   * render()
+   * Nav.render()
    * @description: Draws the view
    */
   render: function () {
     this.$el.html(this.template());
 
-    this.toggleNav();
+    this.toggle();
     this.setActive();
   },
 
   /**
-   * events
+   * Nav.events
    * @description: Declares click events
    */
   events: {
-    'click #nav-toggle': 'toggleNav',
+    'click #nav-toggle': 'toggle'
   },
 
   /**
-   * toggleNav()
+   * Nav.toggle()
    * @description: Collpases and expands the navigation view to increase main content width
    * @param: {Object} event
    */
-  toggleNav: function (event) {
+  toggle: function (event) {
     if (event) {
       event.preventDefault();
       this.collapsed = !this.collapsed; 
@@ -76,7 +76,7 @@ module.exports = Backbone.View.extend({
   },
 
   /**
-   * setActive()
+   * Nav.setActive()
    * @description: Highlights the current navigation item
    */
   setActive: function () {

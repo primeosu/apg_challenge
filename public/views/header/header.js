@@ -11,7 +11,7 @@ var Request = require('../../utils/request.js');
 module.exports = Backbone.View.extend({
 
   /**
-   * initialize()
+   * Header.initialize()
    * @description: Loads view template
    * @param: {Object} options
    */
@@ -36,7 +36,7 @@ module.exports = Backbone.View.extend({
   },
 
   /**
-   * render()
+   * Header.render()
    * @description: Draws the view
    */
   render: function () {

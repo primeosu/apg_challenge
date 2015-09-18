@@ -4,11 +4,12 @@ USE `apg_challenge`;
 
 DROP TABLE IF EXISTS `apg_challenge`.`malware`;
 CREATE TABLE IF NOT EXISTS `apg_challenge`.`malware` (
+  `id` VARCHAR(64) NULL,
   `md5` VARCHAR(64) NULL,
   `classificationName` VARCHAR(64) NULL,
   `classificationType` VARCHAR(64) NULL,
   `fileSize` VARCHAR(64) NULL,
   `fileType` VARCHAR(64) NULL,
-  `created` TIMESTAMP NULL
+  `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

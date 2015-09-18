@@ -14,18 +14,20 @@
   var Header = require('./views/header/header.js'),
       Nav = require('./views/nav/nav.js'),
       Database = require('./views/database/database.js'),
-      Upload = require('./views/upload/upload.js');
+      Upload = require('./views/upload/upload.js'),
+      Types = require('./views/types/types.js');
 
   var App = Backbone.Router.extend({
 
     /**
-     * initialize()
+     * App.initialize()
      * @description: Sets up the application
      */
     initialize: function () {
       var that = this;
 
       this.views = {};
+      this.errorTemplate = _.template($('#error-template').html());
 
       Backbone.history.start();
 
@@ -37,11 +39,12 @@
       }, function (callback) {
         that.nav = new Nav({
           el: $('#nav'),
-          callback: callback
+          callback: callback,
+          router: that
         });
       }], function (error) {
         if (error)
-          $('#content').html(ERROR_TEMPLATE());
+          $('#content').html(this.errorTemplate());
 
         $('#content-wrapper').removeClass('hidden');
         $('#content-wrapper').height($('#content-wrapper').height() - $('#header').height());
@@ -49,19 +52,28 @@
     },
 
     /**
-     * routes
+     * App.routes
      * @description: Declares app view routing
      */
     routes: {
-      '': 'redirectToDatabase',
+      '': 'redirectToUpload',
       'database': 'database',
-      'upload': 'upload'
+      'upload': 'upload',
+      'types': 'types'
     },
 
-    redirectToDatabase: function () {
-      window.location.replace('#/database');
+    /**
+     * App.redirectToUpload()
+     * @description: Redirect to the upload view when no page is specified
+     */
+    redirectToUpload: function () {
+      window.location.replace('#/upload');
     },
 
+    /**
+     * App.database()
+     * @description: Creates the database view or renders it if it already exists
+     */
     database: function () {
       if (!this.views.database)
         this.views.database = new Database({
@@ -71,6 +83,10 @@
         this.views.database.render();
     },
 
+    /**
+     * App.upload()
+     * @description: Creates the upload view or renders it if it already exists
+     */
     upload: function () {
       if (!this.views.upload)
         this.views.upload = new Upload({
@@ -78,6 +94,19 @@
         });
       else
         this.views.upload.render();
+    },
+
+    /**
+     * App.types()
+     * @description: Creates the types view or renders it if it already exists
+     */
+    types: function () {
+      if (!this.views.types)
+        this.views.types = new Types({
+          el: $('#content')
+        });
+      else
+        this.views.types.render();
     }
 
   });
@@ -87,7 +116,130 @@
 })();
 
 
-},{"./views/database/database.js":3,"./views/header/header.js":4,"./views/nav/nav.js":5,"./views/upload/upload.js":6}],2:[function(require,module,exports){
+},{"./views/database/database.js":6,"./views/header/header.js":7,"./views/nav/nav.js":8,"./views/types/types.js":9,"./views/upload/upload.js":10}],2:[function(require,module,exports){
+/**
+ * /public/collections/malwares.js
+ *
+ * @descrpition: Malwares collection
+ * @author: Chris Young (young.c.5690@gmail.com)
+ * @created: September 17th 2015
+ */
+
+var Malware = require('../models/malware.js');
+
+module.exports = Backbone.Collection.extend({
+
+  model: Malware,
+
+  url: 'malwares',
+
+  /**
+   * Malwares.amountOfTypes()
+   * @description: Determines the amount of each classification type
+   * @returns: {Array}
+   */
+  amountOfTypes: function () {
+    var classificationTypes = [];
+
+    _.each(this.models, function (malware) {
+      var classificationType = _.findWhere(classificationTypes, { classificationType: malware.get('classificationType') });
+
+      if (classificationType)
+        classificationType.malwares.push(malware);
+      else
+        classificationTypes.push({
+          classificationType: malware.get('classificationType'),
+          malwares: [malware]
+        });
+    });
+
+    return classificationTypes;
+  }
+
+});
+
+
+},{"../models/malware.js":3}],3:[function(require,module,exports){
+/**
+ * /public/models/malware.js
+ *
+ * @description: Malware model
+ * @author: Chris Young (young.c.5690@gmail.com)
+ * @created: Septmeber 17th 2015
+ */
+
+module.exports = Backbone.Model.extend({
+
+  defaults: {
+    md5: '',
+    classificationName: '',
+    classificationType: '',
+    fileSize: '',
+    fileType: ''
+  }
+
+});
+
+
+},{}],4:[function(require,module,exports){
+/**
+ * modal.js
+ *
+ * @description: Bootstrap modal wrapper class
+ * @author: Chris Young (young.c.5690@gmail.com)
+ * @created: July 14th 2015
+ */
+
+function Modal(options) {
+  _.extend(this, options);
+
+  this.$el = $('#modal');
+  this.$title = $('#modal-title');
+  this.$message = $('#modal-message');
+  this.$buttons = $('#modal-buttons');
+
+  this.render();
+}
+
+/**
+ * Modal.render()
+ * @description: Shows the modal
+ */
+Modal.prototype.render = function () {
+  var that = this;
+
+  this.$title.text(this.title);
+  this.$message.text(this.message);
+
+  if (this.buttons) {
+    this.$buttons.html('');
+
+    _.each(this.buttons, function (button) {
+      var $element = $('<button type="button">' + button.text + '</button>');
+      $element.click(button.callback);
+      that.$buttons.append($element);
+    });
+  } else {
+    var $button = $('<button type="button" data-dismiss="modal">Ok</button>');
+    $button.click(this.callback);
+    this.$buttons.append($button);
+  }
+
+  this.$el.modal('show');
+};
+
+/**
+ * Modal.close()
+ * @description: Hides the modal
+ */
+Modal.prototype.close = function () {
+  this.$el.modal('hide');
+};
+
+module.exports = Modal;
+
+
+},{}],5:[function(require,module,exports){
 /**
  * public/utils/request.js
  *
@@ -108,7 +260,7 @@ function Request(options) {
 }
 
 /**
- * fetch()
+ * Request.fetch()
  * @description: Makes an ajax request using fetch
  */
 Request.prototype.fetch = function () {
@@ -154,7 +306,7 @@ Request.prototype.fetch = function () {
 
 module.exports = Request;
 
-},{}],3:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 /**
  * /public/views/database/database.js
  *
@@ -165,10 +317,12 @@ module.exports = Request;
 
 var Request = require('../../utils/request.js');
 
+var Malwares = require('../../collections/malwares.js');
+
 module.exports = Backbone.View.extend({
 
   /**
-   * initialize()
+   * Database.initialize()
    * @description: Loads view template
    * @param: {Object} options
    */
@@ -176,6 +330,11 @@ module.exports = Backbone.View.extend({
     var that = this;
 
     _.extend(this, options);
+
+    this.malwares = new Malwares();
+
+    this.errorTemplate = _.template($('#error-template').html());
+    this.loadingTemplate = _.template($('#loading-template').html());
 
     new Request({
       url: 'views/database/database.tmpl',
@@ -189,20 +348,46 @@ module.exports = Backbone.View.extend({
   },
 
   /**
-   * render()
+   * Database.render()
    * @description: Draws the view
    */
   render: function () {
-    if (!this.template)
-      return this.$el.html(_.template($('#error-template').html())());
+    var that = this;
 
-    this.$el.html(this.template());
+    if (!this.template)
+      return this.$el.html(this.errorTemplate());
+
+    if (!this.malwares.length)
+      this.$el.html(this.loadingTemplate());
+    else
+      $('#database-page-loading').removeClass('hidden');
+
+    this.malwares.on('sync', function () {
+      that.$el.html(that.template({ malwares: that.malwares }));
+    });
+
+    this.malwares.on('error', function (error) {
+      that.$el.html(that.errorTemplate());
+    });
+
+    this.malwares.fetch();
+
+    this.resize()
+    $(window).resize(this.resize);
+  },
+
+  /**
+   * Database.resize()
+   * @description: Resizes the table wrapper on window resize
+   */
+  resize: function () {
+    $('#database-content div.table-wrapper').css('max-height', $('#content > div.box').height() - 195);
   }
 
 });
 
 
-},{"../../utils/request.js":2}],4:[function(require,module,exports){
+},{"../../collections/malwares.js":2,"../../utils/request.js":5}],7:[function(require,module,exports){
 /**
  * /public/views/header/header.js
  *
@@ -216,7 +401,7 @@ var Request = require('../../utils/request.js');
 module.exports = Backbone.View.extend({
 
   /**
-   * initialize()
+   * Header.initialize()
    * @description: Loads view template
    * @param: {Object} options
    */
@@ -241,7 +426,7 @@ module.exports = Backbone.View.extend({
   },
 
   /**
-   * render()
+   * Header.render()
    * @description: Draws the view
    */
   render: function () {
@@ -253,7 +438,7 @@ module.exports = Backbone.View.extend({
 });
 
 
-},{"../../utils/request.js":2}],5:[function(require,module,exports){
+},{"../../utils/request.js":5}],8:[function(require,module,exports){
 /**
  * /public/views/nav.js
  *
@@ -267,7 +452,7 @@ var Request = require('../../utils/request.js');
 module.exports = Backbone.View.extend({
 
   /**
-   * initialize()
+   * Nav.initialize()
    * @description: Loads view template
    * @param: {Object} options
    */
@@ -293,30 +478,30 @@ module.exports = Backbone.View.extend({
   },
 
   /**
-   * render()
+   * Nav.render()
    * @description: Draws the view
    */
   render: function () {
     this.$el.html(this.template());
 
-    this.toggleNav();
+    this.toggle();
     this.setActive();
   },
 
   /**
-   * events
+   * Nav.events
    * @description: Declares click events
    */
   events: {
-    'click #nav-toggle': 'toggleNav',
+    'click #nav-toggle': 'toggle'
   },
 
   /**
-   * toggleNav()
+   * Nav.toggle()
    * @description: Collpases and expands the navigation view to increase main content width
    * @param: {Object} event
    */
-  toggleNav: function (event) {
+  toggle: function (event) {
     if (event) {
       event.preventDefault();
       this.collapsed = !this.collapsed; 
@@ -332,7 +517,7 @@ module.exports = Backbone.View.extend({
   },
 
   /**
-   * setActive()
+   * Nav.setActive()
    * @description: Highlights the current navigation item
    */
   setActive: function () {
@@ -349,7 +534,88 @@ module.exports = Backbone.View.extend({
 });
 
 
-},{"../../utils/request.js":2}],6:[function(require,module,exports){
+},{"../../utils/request.js":5}],9:[function(require,module,exports){
+/**
+ * /public/views/types/types.js
+ *
+ * @description: Database view
+ * @author: Chris Young (young.c.5690@gmail.com)
+ * @created: September 17th 2015
+ */
+
+var Request = require('../../utils/request.js');
+
+var Malwares = require('../../collections/malwares.js');
+
+module.exports = Backbone.View.extend({
+
+  /**
+   * Types.initialize()
+   * @description: Loads view template
+   * @param: {Object} options
+   */
+  initialize: function (options) {
+    var that = this;
+
+    _.extend(this, options);
+
+    this.malwares = new Malwares();
+
+    this.errorTemplate = _.template($('#error-template').html());
+    this.loadingTemplate = _.template($('#loading-template').html());
+
+    new Request({
+      url: 'views/types/types.tmpl',
+      callback: function (error, body) {
+        if (!error)
+          that.template = _.template(body);
+
+        that.render();
+      }
+    });
+  },
+
+  /**
+   * Types.render()
+   * @description: Draws the view
+   */
+  render: function () {
+    var that = this;
+
+    if (!this.template)
+      return this.$el.html(this.errorTemplate());
+
+    if (!this.malwares.length)
+      this.$el.html(this.loadingTemplate());
+    else
+      $('#type-page-loading').removeClass('hidden');
+
+    this.malwares.on('sync', function () {
+      that.$el.html(that.template({ types: that.malwares.amountOfTypes() }));
+    });
+
+    this.malwares.on('error', function (error) {
+      that.$el.html(that.errorTemplate());
+    });
+
+    this.malwares.fetch();
+
+    this.resize()
+    $(window).resize(this.resize);
+  },
+
+  /**
+   * Types.resize()
+   * @description: Resizes the table wrapper on window resize
+   */
+  resize: function () {
+    $('#type-content div.table-wrapper').css('max-height', $('#content > div.box').height() - 195);
+  }
+
+});
+
+
+},{"../../collections/malwares.js":2,"../../utils/request.js":5}],10:[function(require,module,exports){
 /**
  * /public/views/upload/upload.js
  *
@@ -358,12 +624,15 @@ module.exports = Backbone.View.extend({
  * @created: September 17th 2015
  */
 
-var Request = require('../../utils/request.js');
+var Request = require('../../utils/request.js'),
+    Modal = require('../../utils/modal.js');
+
+var Malwares = require('../../collections/malwares.js');
 
 module.exports = Backbone.View.extend({
 
   /**
-   * initialize()
+   * Upload.initialize()
    * @description: Loads view template
    * @param: {Object} options
    */
@@ -371,6 +640,10 @@ module.exports = Backbone.View.extend({
     var that = this;
 
     _.extend(this, options);
+
+    this.errorTemplate = _.template($('#error-template').html());
+
+    this.malwares = new Malwares();
 
     new Request({
       url: 'views/upload/upload.tmpl',
@@ -384,19 +657,170 @@ module.exports = Backbone.View.extend({
   },
 
   /**
-   * render()
+   * Upload.render()
    * @description: Draws the view
    */
   render: function () {
     if (!this.template)
-      return this.$el.html(_.template($('#error-template').html())());
+      return this.$el.html(this.errorTemplate());
 
     this.$el.html(this.template());
+  },
+
+  /**
+   * Upload.events
+   * @description: Declares view click events
+   */
+  events: {
+    'click #select-file': 'selectFile'
+  },
+
+  /**
+   * Upload.selectFile()
+   * @description: Clicks hidden ugly input and sets change event
+   */
+  selectFile: function () {
+    $('#upload-input').click();
+
+    document.getElementById('upload-input').onchange = _.bind(this.changeFile, this);
+  },
+
+  /**
+   * Upload.changeFile()
+   * @description: Starts the upload if a file was selected
+   */
+  changeFile: function () {
+    var filePath = $('#upload-input').val();
+
+    if (!filePath)
+      return;
+
+    this.getFileData();
+  },
+
+  /**
+   * Upload.getFileData()
+   * @description: Gets uploaded file's contents and checks for validity
+   */
+  getFileData: function () {
+    var that = this,
+        files = $('#upload-input')[0].files,
+        reader = new FileReader();
+
+    function load() {
+      return function (event) {
+        var malwares = that.parseFile(event.target.result);
+
+        that.uploadMalwares(malwares);
+      }
+    }
+
+    _.each(files, function (file) {
+      reader.onload = load();
+      reader.readAsBinaryString(file);
+    });
+  },
+
+  /**
+   * Upload.parseFile()
+   * @description: Converts the file string in to an Array of malware Objects
+   * @param: {String} file
+   * @returns: {Array}
+   */
+  parseFile: function (file) {
+    var rows = file.split('\n'),
+        invalid = false,
+        rowDatas = [],
+        md5s = [];
+
+    function invalidData(message) {
+      that.modal = new Modal({
+        title: 'Error',
+        message: message,
+        buttons: [{ text: 'Ok', callback: function () { that.modal.close(); } }]
+      });
+    }
+
+    if (rows[0] != ["MD5,ClassificationName,ClassificationType,Size,FileType"])
+      return invalidData('The selected CSV file does not contain column headers.');
+
+    rows.shift();
+
+    for (var index = 0; index < rows.length; index++) {
+      if (!rows[index])
+        continue;
+
+      rowDatas.push(rows[index].split(','));
+
+      if (rowDatas[index].length !== 5)
+        return invalidData('The selected CSV file has an invalid number of columns.');
+
+      if (_.contains(md5s, rowDatas[index][0]))
+        return invalidData('The selected CSV file contains a duplicate md5.');
+
+      md5s.push(rowDatas[index][0]);
+    }
+
+    for (var index = 0; index < rowDatas.length; index++) {
+      _.each(rowDatas[index], function (data) {
+        if (data.length > 64) {
+          invalid = true;
+          return invalidData('The selected CSV file contains a value with greater than 64 characters.');
+        }
+      });
+
+      if (invalid)
+        return;
+    }
+
+   return  _.map(rowDatas, function (rowData) {
+      return {
+        md5: rowData[0],
+        classificationName: rowData[1],
+        classificationType: rowData[2],
+        fileSize: rowData[3],
+        fileType: rowData[4]
+      };
+    });
+  },
+
+  /**
+   * Upload.uploadMalwares()
+   * @description: Persists malwares to the server and then displays the total amount of unique classification types
+   * @param: {Array} malwares
+   */
+  uploadMalwares: function (malwares) {
+    var that = this;
+
+    new Request({
+      method: 'post',
+      url: 'malwares',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(malwares),
+      callback: function (error, response) {
+        if (error) {
+          that.modal = new Modal({
+            title: 'Error',
+            message: 'The malwares failed to upload.',
+            buttons: [{ text: 'Ok', callback: function () { that.modal.close(); } }]
+          });
+
+          return;
+        }
+
+        that.modal = new Modal({
+          title: 'Info',
+          message: 'The malwares uploaded successfully. You can now view the amount of each malware type of the Types page.',
+          buttons: [{ text: 'Ok', callback: function () { that.modal.close(); } }]
+        });
+      }
+    });
   }
 
 });
 
-},{"../../utils/request.js":2}]},{},[1])
+
+},{"../../collections/malwares.js":2,"../../utils/modal.js":4,"../../utils/request.js":5}]},{},[1])
 
 
 //# sourceMappingURL=bundle.js.map
