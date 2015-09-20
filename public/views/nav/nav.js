@@ -44,7 +44,8 @@ module.exports = Backbone.View.extend({
   setUiElements: function () {
     this.ui = {
       $tooltips: $('#nav [data-toggle="tooltip"]'),
-      $lis: $('#nav li')
+      $lis: $('#nav li'),
+      $navText: $('#nav span.nav-text')
     };
   },
 
@@ -89,6 +90,8 @@ module.exports = Backbone.View.extend({
       this.$el.removeClass('nav-collapsed').addClass('nav-expanded');
       this.parent.ui.$content.css('width', 'calc(100% - 180px)');
     }
+
+    this.ui.$navText.css('display', 'inline');
   },
 
   /**

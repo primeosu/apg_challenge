@@ -24,14 +24,20 @@ let database = knex({
  * Type.create()
  * @description: Creates a new type entry in the database
  * @param: {String} requestId
- * @param: {Object} type
+ * @param: {String} classificationType
  * @param: {Function} callback
  */
-exports.create = (requestId, type, callback) => {
-  type.id = uuid.v4();
+exports.create = (requestId, classificationType, callback) => {
+  let type = {
+    typeId: uuid.v4(),
+    classificationType: classificationType,
+    amount: 1
+  };
 
-  database.table('type').insert(type).then((data) => {
-    return callback(null, data);
+  database.insert(type).into('type').then(() => {
+    return database.select().from('type').where({ typeId: type.typeId });
+  }).then((rows) => {
+    return callback(null, rows[0]);
   }).catch((error) => {
     console.log(`* [${requestId}] Failed to persist type to the database`, error);
     return callback(500, type.classificationName);
@@ -46,8 +52,8 @@ exports.create = (requestId, type, callback) => {
  * @param: {Function} callback
  */
 exports.read = (requestId, classificationType, callback) => {
-  database.select().table('type').where({ classificationType: classificationType }).then((data) => {
-    return callback(null, data);
+  database.select().from('type').where({ classificationType: classificationType }).then((rows) => {
+    return callback(null, rows[0]);
   }).catch((error) => {
     console.log(`* [${requestId}] Failed to read type from database`, error);
     return callback(500);
@@ -61,8 +67,8 @@ exports.read = (requestId, classificationType, callback) => {
  * @param: {Function} callback
  */
 exports.readAll = (requestId, callback) => {
-  database.select().table('type').then((data) => {
-    return callback(null, data);
+  database.select().from('type').then((rows) => {
+    return callback(null, rows);
   }).catch((error) => {
     console.log(`* [${requestId}] Failed to read types from the database`, error);
     return callback(500);
@@ -78,8 +84,8 @@ exports.readAll = (requestId, callback) => {
  * @param: {Function} callback
  */
 exports.update = (requestId, typeId, amount, callback) => {
-  database.table('type').where({ id: typeId }).update({ amount: amount }).then((data) => {
-    return callback(null, data);
+  database.table('type').update({ amount: amount }).where({ typeId: typeId }).then(() => {
+    return callback();
   }).catch((error) => {
     console.log(`* [${requestId}] Failed to update type`, error);
     return callback(500);
