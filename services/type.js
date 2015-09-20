@@ -8,7 +8,8 @@
 
 let knex = require('knex'),
     uuid = require('node-uuid'),
-    _ = require('underscore');
+    _ = require('underscore'),
+    async = require('async');
 
 let database = knex({
   client: 'mysql',
@@ -30,8 +31,7 @@ let database = knex({
 exports.create = (requestId, classificationType, callback) => {
   let type = {
     typeId: uuid.v4(),
-    classificationType: classificationType,
-    amount: 1
+    classificationType: classificationType
   };
 
   database.insert(type).into('type').then(() => {
@@ -62,32 +62,31 @@ exports.read = (requestId, classificationType, callback) => {
 
 /**
  * Type.readAll()
- * @description: Fetches all type entries from the database
+ * @description: Fetches all type entries from the database and calculates the amount of malware of each type
  * @param: {String} requestId
  * @param: {Function} callback
  */
 exports.readAll = (requestId, callback) => {
   database.select().from('type').then((rows) => {
-    return callback(null, rows);
+    async.each(rows, (row, callback) => {
+
+      database.select().from('malwareType').where({ typeId: row.typeId }).then((rows) => {
+        row.amount = rows.length;
+        callback();
+      }).catch((error) => {
+        console.log(`* [${requestId}] Failed to read malwareType from the database`, error);
+        return callback(error);
+      });
+
+    }, (error) => {
+      if (error) {
+        return callback(500);
+      }
+
+      return callback(null, rows);
+    });
   }).catch((error) => {
     console.log(`* [${requestId}] Failed to read types from the database`, error);
-    return callback(500);
-  });
-};
-
-/**
- * Type.update()
- * @description: Updates the type's amount
- * @param: {String} requestId
- * @param: {String} typeId
- * @param: {Number} amount
- * @param: {Function} callback
- */
-exports.update = (requestId, typeId, amount, callback) => {
-  database.table('type').update({ amount: amount }).where({ typeId: typeId }).then(() => {
-    return callback();
-  }).catch((error) => {
-    console.log(`* [${requestId}] Failed to update type`, error);
     return callback(500);
   });
 };

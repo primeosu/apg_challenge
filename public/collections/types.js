@@ -19,8 +19,8 @@ module.exports = Backbone.Collection.extend({
    * @description: Used by Malwares.comparator() to define how the collection should be sorted
    */
   sortMethod: {
-    key: 'classificationType',
-    direction: -1
+    key: 'amount',
+    direction: 1
   },
 
   /**
