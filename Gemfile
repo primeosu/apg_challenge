@@ -20,4 +20,6 @@ gem 'spring', group: :development
 group :development, :test do
   # rspec for unit testing
   gem 'rspec-rails', '~> 3.0'
+  gem 'factory_girl_rails'
+  gem 'database_cleaner'
 end
