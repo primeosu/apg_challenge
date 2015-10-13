@@ -1,5 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Filetype, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  describe 'validations' do
+    it 'has a valid factory' do
+      expect(build(:filetype)).to be_valid
+    end
+
+    it 'is invalid when extension is nil' do
+      expect(build(:filetype, extension: nil)).not_to be_valid
+    end
+  end
 end
