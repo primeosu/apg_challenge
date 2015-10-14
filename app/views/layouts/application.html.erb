@@ -8,9 +8,24 @@
 </head>
 <body>
 
+<nav class="navbar navbar-default" role="navigation">
+  <div class="navbar-header">
+    <a class="navbar-brand" href="#">Intel APG Challenge</a>
+  </div>
+
+  <div class="collapse navbar-collapse">
+    <ul class="nav navbar-nav">
+     <li class="navbar-text"><em>by David Bassett</em></li>
+    </ul>
+  </div>
+</nav>
+
 <div class="container">
-<%= render 'layouts/error_notices' %>
-<%= yield %>
+
+  <%= render 'layouts/error_notices' %>
+
+  <%= yield %>
+
 </div>
 
 </body>
