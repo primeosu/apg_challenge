@@ -37,6 +37,7 @@ $screen-md-min: 992px;
 
 .has-error > p.help-block {
   color: $brand-error;
+  word-break: break-all;
 }
 
 .navbar-header .navbar-brand {
