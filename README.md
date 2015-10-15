@@ -110,8 +110,13 @@ database, for instance if you accidentally process the same csv twice.
 aren't expecting nils from your database. Instead null is not allowed by db constraint and 'unknown' is set
 to be the default.
 
+  - CSV imports are applied in a database transaction. If some of the data causes
+an exception to be thrown, the database is safely rolled back to it's original
+state.
+
+  - Since 'Import failed' doesn't really help us, an error message is displayed
+with the line number, the entire failing row, and the validation error that
+triggered it.
+
   - Some custom bootstrap widgets and styles. As long as the framework is in there we should do something
 with it right?
-
-
-
