@@ -1,30 +1,24 @@
-# Intel Security Programming Challenge
-Please complete the following programming challenge.  It is used to better assess a candidate's software development skills.   You have as much time as you'd like (though we ask that you not spend more than a few hours) and may use any programming language or framework you'd like.  Feel free to contact the original sender if you have any questions.
+#File Tracker#
 
-## Submission Instructions
-1. First, fork this project on github.  You will need to create an account if you don't already have one.
-1. Next, complete the project as described below within your fork.
-1. Finally, push all of your changes to your fork on github and submit a pull request.
+This is an application that lets you upload a CSV file that assumes the following headers
 
-## Project Description
-Imagine that Intel Security has just acquired a new security company.  Unfortunately, the company has never stored their data in a database and instead uses plain text files.  We need to create a way for the new subsidiary to import their malware data into a database.  Your task is to create a web interface that accepts file uploads, normalizes the data, and then stores it in a relational database - design is up to you.
+* MD5
+* ClassificationName
+* ClassificationType
+* Size
+* FileType
 
-Here's what your web-based application must do:
+It then takes that info and stores it in the database.  As you upload CSVs you can see how many
+of each Classification Type exist by navigating to the homepage.
 
-1. Your app must accept (via a form) a CSV file with the following columns: MD5, ClassificationName, ClassificationType, Size, FileType.  You can assume the columns will always be in that order, that there will always be data in each column, that there will always be a header line, and that there will never be a duplicate MD5.  An example input file named example_input.csv is included in this repo.
-1. Your app must parse the given file, normalize the data, and store the information in a relational database.
-1. After each upload, your application should display the total amount of each different ClassificationType in the database.
+This application is built on 'rails 4.24' a popular tutorial on how to do install it is [here](http://railsapps.github.io/installing-rails.html).
 
-Your application does not need to:
+Next clone down the application.  Navigate to the folder in your terminal then type in 'bundle' to install the gems.
 
-1. be written with any particular language or framework
-1. be aesthetically pleasing (bonus points if it does, extra bonus points for using Bootstrap)
+Next in your terminal type in 'rake db:create db:migrate' to create the DB.  I hope you have postgres installed!
 
-Your application should be easy to set up and should run on Linux.  It also should not require any for-pay software.
+To upload a CSV boot up a local rails server by typing in 'rails s' then use your favorite browser and go to 'localhost:3000'
+then click on CSV uploader to upload that CSV.
 
-## Evaluation
-Evaluation of your submission will be based on the following criteria:
-
-1. Did your application fulfill the basic requirements?
-1. Did you document the method for setting up and running your application?
-1. Did you follow the instructions for submission?
+Finally upload a CSV that uses the headers above.  Under 'spec/example_csvs' there is a file named 'example_file.csv'
+you can use that as an example upload.  As you upload CSVs and you keep visiting the homepage you can see how many of each file there are by classification type.    
