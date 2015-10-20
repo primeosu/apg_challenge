@@ -58,8 +58,9 @@ Evaluation of your submission will be based on the following criteria:
         bundle install
         # ...more magic...
 
-5. Run migrations
+5. Set up the database
 
+        rake db:create
         rake db:migrate
 
 6. Launch the server
