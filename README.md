@@ -34,7 +34,7 @@ Evaluation of your submission will be based on the following criteria:
 
 ## Setup
 
-To setup and start the application follow the steps below. You can also find a live version of it running at [54.69.84.138:8421/apg_challenge](http://54.69.84.138:8421/apg_challenge)
+To setup and start the application follow the steps below. You can also find a live version of it running at [www.chrisyou.ng:8421/apg_challenge](http://www.chrisyou.ng:8421/apg_challenge)
 
 0. Clone in to this repository
 
