@@ -44,7 +44,8 @@ module.exports = Backbone.View.extend({
   setUiElements: function () {
     this.ui = {
       $tooltips: $('#nav [data-toggle="tooltip"]'),
-      $lis: $('#nav li')
+      $lis: $('#nav li'),
+      $navText: $('#nav span.nav-text')
     };
   },
 
@@ -71,7 +72,7 @@ module.exports = Backbone.View.extend({
 
   /**
    * Nav.toggle()
-   * @description: Collpases and expands the navigation view to increase main content width
+   * @description: Collpases and expands the navigation view and resized the main content div
    * @param: {Object} event
    */
   toggle: function (event) {
@@ -82,11 +83,15 @@ module.exports = Backbone.View.extend({
 
     if (this.collapsed) {
       this.$el.removeClass('nav-expanded').addClass('nav-collapsed');
+      this.parent.ui.$content.css('width', 'calc(100% - 57px)');
       this.ui.$tooltips.tooltip();
     } else {
       this.ui.$tooltips.tooltip('destroy');
       this.$el.removeClass('nav-collapsed').addClass('nav-expanded');
+      this.parent.ui.$content.css('width', 'calc(100% - 180px)');
     }
+
+    this.ui.$navText.css('display', 'inline');
   },
 
   /**
@@ -97,6 +102,7 @@ module.exports = Backbone.View.extend({
     var $a = $('#nav a[href="' + window.location.hash + '"]');
 
     this.ui.$lis.removeClass('active');
+    this.ui.$tooltips.tooltip('hide');
 
     if ($a.hasClass('nav-sub-level')) {
       $a.parents('li').addClass('active');

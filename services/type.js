@@ -8,7 +8,8 @@
 
 let knex = require('knex'),
     uuid = require('node-uuid'),
-    _ = require('underscore');
+    _ = require('underscore'),
+    async = require('async');
 
 let database = knex({
   client: 'mysql',
@@ -24,14 +25,19 @@ let database = knex({
  * Type.create()
  * @description: Creates a new type entry in the database
  * @param: {String} requestId
- * @param: {Object} type
+ * @param: {String} classificationType
  * @param: {Function} callback
  */
-exports.create = (requestId, type, callback) => {
-  type.id = uuid.v4();
+exports.create = (requestId, classificationType, callback) => {
+  let type = {
+    typeId: uuid.v4(),
+    classificationType: classificationType
+  };
 
-  database.table('type').insert(type).then((data) => {
-    return callback(null, data);
+  database.insert(type).into('type').then(() => {
+    return database.select().from('type').where({ typeId: type.typeId });
+  }).then((rows) => {
+    return callback(null, rows[0]);
   }).catch((error) => {
     console.log(`* [${requestId}] Failed to persist type to the database`, error);
     return callback(500, type.classificationName);
@@ -46,8 +52,8 @@ exports.create = (requestId, type, callback) => {
  * @param: {Function} callback
  */
 exports.read = (requestId, classificationType, callback) => {
-  database.select().table('type').where({ classificationType: classificationType }).then((data) => {
-    return callback(null, data);
+  database.select().from('type').where({ classificationType: classificationType }).then((rows) => {
+    return callback(null, rows[0]);
   }).catch((error) => {
     console.log(`* [${requestId}] Failed to read type from database`, error);
     return callback(500);
@@ -56,32 +62,31 @@ exports.read = (requestId, classificationType, callback) => {
 
 /**
  * Type.readAll()
- * @description: Fetches all type entries from the database
+ * @description: Fetches all type entries from the database and calculates the amount of malware of each type
  * @param: {String} requestId
  * @param: {Function} callback
  */
 exports.readAll = (requestId, callback) => {
-  database.select().table('type').then((data) => {
-    return callback(null, data);
+  database.select().from('type').then((rows) => {
+    async.each(rows, (row, callback) => {
+
+      database.select().from('malwareType').where({ typeId: row.typeId }).then((rows) => {
+        row.amount = rows.length;
+        callback();
+      }).catch((error) => {
+        console.log(`* [${requestId}] Failed to read malwareType from the database`, error);
+        return callback(error);
+      });
+
+    }, (error) => {
+      if (error) {
+        return callback(500);
+      }
+
+      return callback(null, rows);
+    });
   }).catch((error) => {
     console.log(`* [${requestId}] Failed to read types from the database`, error);
-    return callback(500);
-  });
-};
-
-/**
- * Type.update()
- * @description: Updates the type's amount
- * @param: {String} requestId
- * @param: {String} typeId
- * @param: {Number} amount
- * @param: {Function} callback
- */
-exports.update = (requestId, typeId, amount, callback) => {
-  database.table('type').where({ id: typeId }).update({ amount: amount }).then((data) => {
-    return callback(null, data);
-  }).catch((error) => {
-    console.log(`* [${requestId}] Failed to update type`, error);
     return callback(500);
   });
 };
