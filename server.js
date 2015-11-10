@@ -14,7 +14,7 @@ let Malware = require(`${__dirname}/controllers/malware`),
     Type = require(`${__dirname}/controllers/type`);
 
 let app = express(),
-    port = 8421;
+    port = (process.env.APG_PORT) ? process.env.APG_PORT : 8421;
 
 app.use(express.static(`${__dirname}/public`));
 app.use(bodyParser.urlencoded({ extended: false }));
