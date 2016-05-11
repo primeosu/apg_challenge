@@ -1,30 +1,63 @@
-# Intel Security Programming Challenge
-Please complete the following programming challenge.  It is used to better assess a candidate's software development skills.   You have as much time as you'd like (though we ask that you not spend more than a few hours) and may use any programming language or framework you'd like.  Feel free to contact the original sender if you have any questions.
+# CSV Parser
 
-## Submission Instructions
-1. First, fork this project on github.  You will need to create an account if you don't already have one.
-1. Next, complete the project as described below within your fork.
-1. Finally, push all of your changes to your fork on github and submit a pull request.
+The project is part of [Intel Security Programming Challenge](https://github.com/primeosu/apg_challenge).
+**It is not intended to be a general csv parser.**
 
-## Project Description
-Imagine that Intel Security has just acquired a new security company.  Unfortunately, the company has never stored their data in a database and instead uses plain text files.  We need to create a way for the new subsidiary to import their malware data into a database.  Your task is to create a web interface that accepts file uploads, normalizes the data, and then stores it in a relational database - design is up to you.
+The application takes in a csv file with following headers : 
 
-Here's what your web-based application must do:
+MD5, ClassificationName, ClassificationType, Size, FileType
 
-1. Your app must accept (via a form) a CSV file with the following columns: MD5, ClassificationName, ClassificationType, Size, FileType.  You can assume the columns will always be in that order, that there will always be data in each column, that there will always be a header line, and that there will never be a duplicate MD5.  An example input file named example_input.csv is included in this repo.
-1. Your app must parse the given file, normalize the data, and store the information in a relational database.
-1. After each upload, your application should display the total amount of each different ClassificationType in the database.
 
-Your application does not need to:
+## Install
 
-1. be written with any particular language or framework
-1. be aesthetically pleasing (bonus points if it does, extra bonus points for using Bootstrap)
+Have a web server (e.g. Apache) and mysql running. Installing [XAMPP](https://www.apachefriends.org/index.html) is recommended. Clone the repo to the server directory and navigate to http://localhost/path-to-files in your browser.
 
-Your application should be easy to set up and should run on Linux.  It also should not require any for-pay software.
+The script assumes that mysql is running, *demo* database exists, and *Malware_d* table exists.
 
-## Evaluation
-Evaluation of your submission will be based on the following criteria:
+```sql
+CREATE TABLE Malware_d (
+	md5 varchar(35) NOT NULL,   
+	ClassificationName varchar(20) NOT NULL, 
+	ClassificationType varchar(20) NOT NULL,   
+	Size int(11) NOT NULL,   
+	FileType varchar(20) NOT NULL,   
+	PRIMARY KEY (md5) 
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+```
 
-1. Did your application fulfill the basic requirements?
-1. Did you document the method for setting up and running your application?
-1. Did you follow the instructions for submission?
+Open handler.php and change the database settings.
+```
+define("HOST", "localhost");
+define("USER", "root");
+define("PASS", "root");
+```
+
+## [Demo](http://www.sangminlee.me/demo/intel/)
+I have uploaded the project to my personal website.
+Click on the header to view.
+
+
+## Uses
+
+Users can simply drag & drop a csv file to the form or click on the form to choose a file. 
+
+The table that displays the total amount of different ClassificationType will be updated automatically if the correctly csv file is given.
+
+
+## Libraries Used
+
+Several libraries were used to speed up the development process including :
+
+- JQuery
+- Dropzone
+- Bootstrap
+
+No additional frameworks were used, since the application serves a very simple purpose.
+
+
+## Other
+The uploaded csv file does not get saved in the server. The information is parsed and stored in the database but not the file itself.
+
+This project is for demonstration purpose only.
+
+
