@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+	<head>
+	 	<meta charset="utf-8">
+	 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	  	<title>CSV Parser</title>
+	  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	  	<link rel="stylesheet" href="dropzone.min.css";
+	</head>
+	<style>
+		body {background-color: #2c3e50; color: #fff; font-family: "Avenir", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;}
+		.dropzone,.dz-message,.needsclick {cursor: auto !important;}
+		.pointer { cursor: pointer; }
+		.drop-form {border:3px dashed #fff; height:240px; text-align: center;}
+		form.dropzone {background-color: #2c3e50; overflow: auto;}
+		table.table tr:nth-child(even) { background-color: #34495e;}
+	</style>
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+			 	<div class="col-md-6 col-md-offset-3">
+			 		<div class="enter-block"><br><br>
+			 			<h4>CVS Parser for Intel Security Programming Challenge</h4>
+			 			<p style="font-size:0.8em">Sang Lee 2016</p>
+			 			<br><br>
+						<form action="handler.php" class="dropzone drop-form" id="filedrop">
+							<div class="dz-message needsclick" style="padding-top: 50px">
+								<strong class="pointer" style="color:#3498db">Choose a file</strong> or drag & drop
+							</div>
+				     	</form>
+			 		</div>
+			 	</div>
+			 	<div class="col-md-6 col-md-offset-3">
+			 		<br>
+			 		<button type="button" class="clear btn btn-primary">Clear Table</button><br><br>
+			 		<table class="table">
+					  <thead>
+					    <tr>
+					      <th>Classification Type</th>
+					      <th>Amount</th>
+					    </tr>
+					  </thead>
+					  <tbody class="data">
+					  </tbody>
+					</table>
+			 	</div>
+			</div>
+		</div>
+	</body>
+ 	<script src="dropzone.min.js"></script>
+ 	<script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous">
+	</script>
+	<script>
+		$(function() {
+			/* Initial load */
+			tableReload();
+
+			/* Gets data from the table and appends it to the DOM */
+		    function tableReload() {
+		    	$.get( "handler.php", {"reload":"1"})
+				  .done(function(data) {
+				  	if(data){
+					  	data = JSON.parse(data);
+					  	$(".data").empty();
+					  	var html = "";
+					  	for(var i = 0; i < data.length; i++) {
+					  		html += "<tr><td>"+data[i]["ClassificationType"]+"</td><td>"+data[i]["Amount"]+"</td></tr>";
+					  	}
+					  	$(".data").append(html);
+				  	}
+				  })
+				  .fail(function() {
+				    console.log("Load Error");
+				  });
+			}
+
+			/* Clear Table Button */
+			$(".clear").on("click", function(){
+				if (confirm('This will clear the table. Data will be lost')) {
+				    $.post( "handler.php", {"delete":"1"});
+		    		location.reload();
+				}
+			});
+
+			var drop = Dropzone.forElement("#filedrop");
+
+			drop.on("queuecomplete", function (file) {
+			    tableReload();
+			});
+
+		});
+	</script>
+</html>
