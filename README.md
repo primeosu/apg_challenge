@@ -8,56 +8,56 @@
 sudo apt-get install virtualbox
 ```
 
-1. Install [Docker](https://docs.docker.com/engine/installation/linux/)
+2. Install [Docker](https://docs.docker.com/engine/installation/linux/)
 
-1. Create a Docker machine
+3. Create a Docker machine
 
 ```bash
 docker-machine create --driver virtualbox default
 ```
 
-1. Connect shell to new machine
+4. Connect shell to new machine
 
 ```
 eval "$(docker-machine env default)"
 ```
 
-1. Clone this repo
+5. Clone this repo
 
 ```
 git clone https://github.com/andrewoconnor/apg_challenge.git
 ```
 
-1. cd into the apg_challenge directory
+6. cd into the apg_challenge directory
 
-1. Build the Docker container (this step may take a few minutes)
+7. Build the Docker container (this step may take a few minutes)
 
 ```bash
 docker-compose build
 ```
 
-1. Create the database
+8. Create the database
 
 ```bash
 docker-compose run app rake db:create
 ```
 
-1. Migrate the database
+9. Migrate the database
 
 ```bash
 docker-compose run app rake db:migrate
 ```
 
-1. Look up Docker machine IP
+10. Look up Docker machine IP
 
 ```bash
 docker-machine ip default
 ```
 
-1. Run the container
+11. Run the container
 
 ```bash
 docker-compose up
 ```
 
-1. Open your browser and navigate to DOCKER_MACHINE_IP:3000
+12. Open your browser and navigate to DOCKER_MACHINE_IP:3000
