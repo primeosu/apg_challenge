@@ -14,6 +14,8 @@ gem 'jquery-rails'
 # views
 gem 'slim'
 gem 'slim-rails'
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'formtastic-bootstrap'
 
 # storage
 gem 'pg'
@@ -21,8 +23,13 @@ gem 'pg'
 # servers
 gem 'thin'
 
-#CLI
+# cli
 gem 'pry-rails'
+
+# utils
+gem 'counter_culture', '~> 0.1.33'
+gem 'refile', require: 'refile/rails'
+gem 'smarter_csv'
 
 group :doc do
   gem 'sdoc', '~> 0.4.0', require: false

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160514152711) do
+ActiveRecord::Schema.define(version: 20160514183947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,8 +20,10 @@ ActiveRecord::Schema.define(version: 20160514152711) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "malware_count", default: 0
   end
 
+  add_index "classification_types", ["malware_count"], name: "index_classification_types_on_malware_count", using: :btree
   add_index "classification_types", ["name"], name: "index_classification_types_on_name", using: :btree
 
   create_table "classifications", force: :cascade do |t|
@@ -49,8 +51,17 @@ ActiveRecord::Schema.define(version: 20160514152711) do
     t.integer  "file_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "malware_import_id"
   end
 
   add_index "malware", ["classification_id"], name: "index_malware_on_classification_id", using: :btree
+  add_index "malware", ["malware_import_id"], name: "index_malware_on_malware_import_id", using: :btree
+
+  create_table "malware_imports", force: :cascade do |t|
+    t.string   "file_id"
+    t.boolean  "imported",   default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
