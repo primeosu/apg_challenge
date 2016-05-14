@@ -28,10 +28,18 @@ group :doc do
   gem 'sdoc', '~> 0.4.0', require: false
 end
 
+gem 'faker', github: 'stympy/faker'
+
 group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
   gem 'byebug'
 end
 
 group :development do
   gem 'spring'
+end
+
+group :test do
+  gem 'shoulda-matchers'
 end
