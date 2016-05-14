@@ -10,12 +10,15 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'jquery-datatables-rails'
 
 # views
 gem 'slim'
 gem 'slim-rails'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'formtastic-bootstrap'
+gem 'kaminari'
 
 # storage
 gem 'pg'

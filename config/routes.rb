@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   resources :classification_types, only: [:index]
 
+  get 'classification_types/datatable_ajax'
+
   resources :malware_imports, only: [:new, :create]
 
 end
