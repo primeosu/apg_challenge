@@ -1,8 +1,11 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: postgres
   pool: 5
+  timeout: 5000
+  username: postgres
+  host: postgres
+  port: 5432
 
 development:
   <<: *default

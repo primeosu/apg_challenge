@@ -2,7 +2,7 @@ FROM alpine:3.2
 
 RUN apk update && apk --update add ruby ruby-irb ruby-json ruby-rake \
     ruby-bigdecimal ruby-io-console libstdc++ tzdata postgresql-client nodejs \
-    libxml2-dev libxslt-dev
+    libxml2-dev libxslt-dev git
 
 ADD Gemfile /app/
 ADD Gemfile.lock /app/
