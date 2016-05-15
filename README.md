@@ -36,7 +36,7 @@
     docker-compose build
     ```
 
-1. Create the database
+1. Create the database (you may have to run this step twice if it fails the first time)
 
     ```bash
     docker-compose run app rake db:create
