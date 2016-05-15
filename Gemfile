@@ -36,21 +36,15 @@ gem 'smarter_csv'
 gem 'faker', github: 'stympy/faker'
 gem 'diff-lcs'
 
+# testing
+gem 'rspec-rails'
+gem 'factory_girl_rails'
+gem 'shoulda-matchers'
+
+# development
+
+gem 'spring'
+
 group :doc do
   gem 'sdoc', '~> 0.4.0', require: false
-end
-
-
-
-group :development, :test do
-  gem 'rspec-rails'
-  gem 'factory_girl_rails'
-end
-
-group :development do
-  gem 'spring'
-end
-
-group :test do
-  gem 'shoulda-matchers'
 end
