@@ -39,7 +39,6 @@ group :doc do
 end
 
 gem 'faker', github: 'stympy/faker'
-gem 'byebug'
 
 group :development, :test do
   gem 'rspec-rails'
