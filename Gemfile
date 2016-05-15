@@ -33,12 +33,14 @@ gem 'pry-rails'
 gem 'counter_culture', '~> 0.1.33'
 gem 'refile', require: 'refile/rails'
 gem 'smarter_csv'
+gem 'faker', github: 'stympy/faker'
+gem 'diff-lcs'
 
 group :doc do
   gem 'sdoc', '~> 0.4.0', require: false
 end
 
-gem 'faker', github: 'stympy/faker'
+
 
 group :development, :test do
   gem 'rspec-rails'
