@@ -39,11 +39,11 @@ group :doc do
 end
 
 gem 'faker', github: 'stympy/faker'
+gem 'byebug'
 
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
-  gem 'byebug'
 end
 
 group :development do
