@@ -1,0 +1,24 @@
+.row
+  .container = bootstrap_flash
+.row
+  .col-sm-3.col-md-2.sidebar
+    = link_to 'Import from CSV', new_malware_import_path, class: 'btn btn-primary'
+  .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main.classification_types_dash
+    h1 Listing classification types
+    br
+    - if @classification_types.any?
+      = form_tag classification_types_path, method: 'get' do
+        table.table.table-striped#classification_types_table
+          thead
+            tr
+              th Name
+              th Number of threats
+          tbody
+            tr
+              td
+              td
+    - else
+      .alert.alert-info No malware data has been imported yet :-(
+
+javascript:
+  $(document).ready(IntelAPG.classification_types_data_table());
