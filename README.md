@@ -13,6 +13,14 @@ I created a web application that accepts a CSV file through a form file input at
 7. There's no mention of how the data is supposed to be sorted so I am sorting by MD5.
 8. There are no restrictions on the number of languages or frameworks to be used **(GIVEN)**. However, I only used the technologies listed for the position.
 
+## How to Run
+1. git clone https://github.com/AbhishekNose/apg_challenge.git
+2. cd apg_challenge
+3. bundle install
+4. bundle exec rails server
+	* Use whatever command you use to start the server.
+
+
 ## Tools
 I will utilize the tools that are listed in the job description which are:
 * **HTML5** (for the skeleton of my application)
@@ -34,16 +42,14 @@ Noteworthy Gems:
 
 ## Sources
 1. https://stackoverflow.com/questions/11924526/rails-generate-model
-* Generating the model from the CLI.
+    * Generating the model from the CLI.
 2. https://getbootstrap.com/components/
-* Table, navbar, alert messages.
+    * Table, navbar, alert messages.
 3. https://github.com/rweng/jquery-datatables-rails
-* Gem for table filtering, searching, sorting, and pagination.
+    * Gem for table filtering, searching, sorting, and pagination.
 4. http://www.mattmorgante.com/technology/?offset=1428324390100
-* Working with CSV files in Rails.
+    * Working with CSV files in Rails.
 5. http://ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV.html
-* More info on CSV in Ruby.
+    * More info on CSV in Ruby.
 6. http://www.unsplash.com
-* Copyright-free images.
-
-
+    * Copyright-free images.
