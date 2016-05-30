@@ -2,7 +2,7 @@
 
 ## Introduction
 I created a web application that accepts a CSV file through a form file input attribute and stores the file's malware data in a relational database. The application also displays the total amount of each different class type in the database and shows this information above the table. The information is updated after each successful import. My application does NOT require any for-pay software to function.
-
+ 
 ## Assumptions
 1. Columns will always be in the given order (MD5, ClassificationName, ClassificationType, Size, FileType) and more columns should not be added **(GIVEN)**.
 2. There will always be data in each column **(GIVEN)**.
