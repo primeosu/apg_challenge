@@ -1,0 +1,52 @@
+<section class="container-fluid" id="section1">
+  <div class="v-center" id="title-block-positioning">
+    <h1 class="text-center" id="homepage-title">Watch_Dog</h1>
+    <h2 class="text-center lato" id="homepage-subtitle">Join the team in keeping the Internet safe.</h2>
+    <br>
+  </div>
+  <div class="container">
+    
+    <% if flash[:notice]%>
+      <div class="alert alert-info">
+        <%= flash[:notice] %>
+      </div>
+    <%end%>
+    
+    <h2>
+      <%= @classified_data.collect{|chunk| "#{chunk.first["ClassificationType"]}: #{chunk.length}"}.join(" | ").titleize %>
+    </h2>
+    
+    <table class="table table-responsive datatable">
+      
+      <thead>
+        <tr>
+          <th>MD5</th>
+          <th>ClassificationName</th>
+          <th>ClassificationType</th>
+          <th>Size</th>
+          <th>FileType</th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        <% @tabledata.order("MD5").each do |table| %>
+          <tr>
+            <td><%= table.MD5 %></td>
+            <td><%= table.ClassificationName %></td>
+            <td class="class-type"><%= table.ClassificationType %></td>
+            <td><%= table.Size %></td>
+            <td><%= table.FileType %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    
+    <div>
+      <h4>Import Data</h4>
+      <%= form_tag import_tablemd5s_path, multipart: true do %>
+        <%= file_field_tag :file, :accept => 'text/csv', class: "choose-file"%>
+        <%= submit_tag "Import CSV", class: "submit-btn" %>
+      <% end %>  
+    </div>
+  </div>
+</section>

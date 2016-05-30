@@ -1,0 +1,94 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+@import url(https://fonts.googleapis.com/css?family=Questrial);
+
+html,body {
+	height:100%;
+    background:center no-repeat fixed url('watch.jpg');
+    background-size: cover;
+    color:#444;
+    font-family: 'Questrial', sans-serif;
+}
+
+@media (min-width:768px) {
+    h1 {
+        font-size:68px;
+    }
+}
+
+a {
+    color:#999;
+}
+
+section {
+  padding-top:70px;  
+  padding-bottom:50px;
+  min-height:100%;
+  min-height:calc(100% - 0);
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+@media (min-width:768px) {
+    .v-center {
+        display:table;
+        height:90%;
+        width:100%;
+        vertical-align:middle;
+    }
+}
+
+.navbar-brand {
+    position: absolute;
+    left: 45%;
+    margin-top: -0.9em;
+    margin-left: -50px !important;  /* 50% of your logo width */
+    display: inline-block;
+}
+
+.intel-logo {
+    width: 70%;
+    height: auto;
+}
+
+.main-logo {
+    margin-top: 1.5em;
+    padding-left: 4.3em;
+    width: 70%;
+    height: auto;
+}
+
+.navbar.navbar-default.navbar-fixed-top {
+    height: 5em;
+    background: #0071C5;
+    border-color: #0071C5;
+}
+
+#section1 {
+	background-color: rgba(0,0,0,0.6);
+	color:#fff;
+}
+
+.title-image {
+    width: 80%;
+    height: auto;
+}
+
+#homepage-title {
+    font-family: "Audiowide";
+    font-size: 8em;
+}
+
+#title-block-positioning {
+    margin-top: 2em;
+}
+
+.submit-btn {
+    margin-top: 0.8em;
+    border-radius: 25%;
+    background: #0071C5;
+    border: none;
+}

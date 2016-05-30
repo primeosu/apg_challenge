@@ -1,30 +1,55 @@
-# Intel Security Programming Challenge
-Please complete the following programming challenge.  It is used to better assess a candidate's software development skills.   You have as much time as you'd like (though we ask that you not spend more than a few hours) and may use any programming language or framework you'd like.  Feel free to contact the original sender if you have any questions.
+# Watch_Dog: A CSV Data Import Application
 
-## Submission Instructions
-1. First, fork this project on github.  You will need to create an account if you don't already have one.
-1. Next, complete the project as described below within your fork.
-1. Finally, push all of your changes to your fork on github and submit a pull request.
+## Introduction
+I created a web application that accepts a CSV file through a form file input attribute and stores the file's malware data in a relational database. The application also displays the total amount of each different class type in the database and shows this information above the table. The information is updated after each successful import. My application does NOT require any for-pay software to function.
+ 
+## Assumptions
+1. Columns will always be in the given order (MD5, ClassificationName, ClassificationType, Size, FileType) and more columns should not be added **(GIVEN)**.
+2. There will always be data in each column **(GIVEN)**.
+3. There will always be a header line in the CSV file **(GIVEN)**.
+4. There will never be a duplicate MD5 **(GIVEN)**.
+5. The ClassificationTypes in the example CSV are clean, trojan, virus, unknown, and pup. However, it is assumed that more types can be added so the application must dynamically keep a count of each type.
+6. Since the directions only mention CSV imports, I needed to come up with a way to ensure that only CSV files were uploaded. If a user tries to upload a txt or anything else, the application should redirect the user to the homescreen.
+7. There's no mention of how the data is supposed to be sorted so I am sorting by MD5.
+8. There are no restrictions on the number of languages or frameworks to be used **(GIVEN)**. However, I only used the technologies listed for the position.
 
-## Project Description
-Imagine that Intel Security has just acquired a new security company.  Unfortunately, the company has never stored their data in a database and instead uses plain text files.  We need to create a way for the new subsidiary to import their malware data into a database.  Your task is to create a web interface that accepts file uploads, normalizes the data, and then stores it in a relational database - design is up to you.
+## How to Run
+1. git clone https://github.com/AbhishekNose/apg_challenge.git
+2. cd apg_challenge
+3. bundle install
+4. bundle exec rails server
+	* Use whatever command you use to start the server.
 
-Here's what your web-based application must do:
 
-1. Your app must accept (via a form) a CSV file with the following columns: MD5, ClassificationName, ClassificationType, Size, FileType.  You can assume the columns will always be in that order, that there will always be data in each column, that there will always be a header line, and that there will never be a duplicate MD5.  An example input file named example_input.csv is included in this repo.
-1. Your app must parse the given file, normalize the data, and store the information in a relational database.
-1. After each upload, your application should display the total amount of each different ClassificationType in the database.
+## Tools
+I will utilize the tools that are listed in the job description which are:
+* **HTML5** (for the skeleton of my application)
+* **CSS3** (to style my application)
+* **JavaScript** (for DOM manipulation)
+* **jQuery** (DOM manipulation, gem prerequisites, & general debugging/testing)
+* **Bootstrap** (my frontend framework for the navbar and table)
+* **SQLite** (not listed, but is the default database in Rails)
+* **Ruby** & **Ruby on Rails** (where the fun stuff begins)
 
-Your application does not need to:
+Other Noteworthy Tools:
+* **Cloud9 IDE**
+* **Google Fonts**
+* **Unsplash** (for copyright-free images)
 
-1. be written with any particular language or framework
-1. be aesthetically pleasing (bonus points if it does, extra bonus points for using Bootstrap)
+Noteworthy Gems:
+* **Autoprefixer** (automatically makes CSS cross-platform)
+* **jQuery Datatables** (allow filtering, sorting, search, and pagination)
 
-Your application should be easy to set up and should run on Linux.  It also should not require any for-pay software.
-
-## Evaluation
-Evaluation of your submission will be based on the following criteria:
-
-1. Did your application fulfill the basic requirements?
-1. Did you document the method for setting up and running your application?
-1. Did you follow the instructions for submission?
+## Sources
+1. https://stackoverflow.com/questions/11924526/rails-generate-model
+    * Generating the model from the CLI.
+2. https://getbootstrap.com/components/
+    * Table, navbar, alert messages.
+3. https://github.com/rweng/jquery-datatables-rails
+    * Gem for table filtering, searching, sorting, and pagination.
+4. http://www.mattmorgante.com/technology/?offset=1428324390100
+    * Working with CSV files in Rails.
+5. http://ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV.html
+    * More info on CSV in Ruby.
+6. http://www.unsplash.com
+    * Copyright-free images.
