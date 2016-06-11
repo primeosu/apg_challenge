@@ -1,3 +1,5 @@
+CREATE DATABASE db;
+USE db;
 CREATE TABLE threats(MD5 VARCHAR(36) NOT NULL,
     ClassificationName VARCHAR(20) NOT NULL,
     ClassificationType VARCHAR(20) NOT NULL, 
