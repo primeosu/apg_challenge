@@ -29,7 +29,7 @@ app.get('/', function(req, res) {
 // Get the count of the unique classification names
 app.get('/data.json', function(req, res) {
 
-    sql = "SELECT ClassificationName, COUNT(*) FROM threats GROUP BY ClassificationName"; 
+    sql = "SELECT ClassificationType, COUNT(*) FROM threats GROUP BY ClassificationType"; 
     queryDB(sql, con, [], function(err, result) {
         if(err) {
             res.json(err);
