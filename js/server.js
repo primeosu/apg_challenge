@@ -47,8 +47,7 @@ app.post('/parse', upload.single('theFile'), function(req, res, next) {
         return;
     }
     
-    console.log(res);
-    // Read the buffer and put it into a comma seperated file
+    // Read the buffer and hand it off to the parser 
     var csv = fs.readFileSync(req.file.path, {encoding: 'binary'});
     var parsed = Baby.parse(csv);
 
@@ -80,8 +79,8 @@ app.post('/parse', upload.single('theFile'), function(req, res, next) {
     if(values.length > 0) {
         queryDB(sql, con, values, nope);
     }
-
-    // Send the results of this sql statement as a JSON object
+    
+    // Reload the page with the new data
     res.render(__dirname + "/views/index.html");
 });
 
@@ -100,7 +99,7 @@ function queryDB(sql, con, values, callback) {
 
         con.query(sql, [values], function(err,result) {
             if(err) {
-                console.log("blah");
+                console.log(err);
             } else {
                 // Used for getting the results of the query
                 if(values.length == 0) {
@@ -113,6 +112,6 @@ function queryDB(sql, con, values, callback) {
 }
 
 app.listen(3030, function() {
-    console.log("Server Running");
+    console.log("Server Running on http://127.0.0.1:3030");
 });
 
