@@ -1,6 +1,8 @@
 # Intel Security Programming Challenge
 To set up the program you must first have mysql installed. Depening on your Linux distro the command for installing it may vary, but in most RedHat distros you can enter `sudo yum install mysql -y`
 
+The other requirement is Nodejs. The installation varies from each distro, but the following site has guides for multiple distros. `http://www.liquidweb.com/kb/how-to-install-node-js-on-fedora-23/`
+
 Now all you need to do is run the setup script by typing the following:
 `sudo ./setup.sh`
 
