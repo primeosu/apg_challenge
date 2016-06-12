@@ -3,9 +3,14 @@ var mysql = require('mysql');
 var Baby = require('babyparse');
 var fs = require('fs');
 var multer = require('multer');
-
+var html = require('html');
+var ejs = require('ejs');
 var upload = multer({dest: '/tmp'});
+
 var app = express();
+app.set('json spaces', 2);
+app.set('views', __dirname + '../views');
+app.engine('html', require('ejs').renderFile);
 
 var tableWidth = 5;
 var batchMax = 10;
@@ -16,13 +21,33 @@ var con = mysql.createPool({
     database: "db"
 });
 
-app.post('/', upload.single('theFile'), function(req, res, next) {
+// Get the home page
+app.get('/', function(req, res) {
+    res.render(__dirname + "/views/index.html");
+});
+
+// Get the count of the unique classification names
+app.get('/data.json', function(req, res) {
+
+    sql = "SELECT ClassificationName, COUNT(*) FROM threats GROUP BY ClassificationName"; 
+    queryDB(sql, con, [], function(err, result) {
+        if(err) {
+            res.json(err);
+        } else {
+            res.json(result);
+        }
+    });
+});
+
+// Parse the csv file and store it in database
+app.post('/parse', upload.single('theFile'), function(req, res, next) {
     // The user tried to upload nothing
     if(!req.file) {
         console.log("Null req.file");
         return;
     }
-
+    
+    console.log(res);
     // Read the buffer and put it into a comma seperated file
     var csv = fs.readFileSync(req.file.path, {encoding: 'binary'});
     var parsed = Baby.parse(csv);
@@ -46,23 +71,25 @@ app.post('/', upload.single('theFile'), function(req, res, next) {
 
         // Batch the queries
         if(i % batchMax == 0) {
-            queryDB(sql, con, values)
+            queryDB(sql, con, values, nope)
             values = [];
         }
     }
 
     // Send the last batch
     if(values.length > 0) {
-        ret = queryDB(sql, con, values);
+        queryDB(sql, con, values, nope);
     }
 
-    res.writeHead(200, "OK",{'Content-Type': 'text/html'});
-    res.status(200).end("CSV added to database!"); 
+    // Send the results of this sql statement as a JSON object
+    res.render(__dirname + "/views/index.html");
 });
 
-// Write to the database
-function queryDB(sql, con, values) {
+// Dummy callback 
+function nope() {}
 
+// Write to the database
+function queryDB(sql, con, values, callback) {
     // Set up the connection the MYSQL DB
     con.getConnection(function(err) {
         if(err) {
@@ -73,9 +100,13 @@ function queryDB(sql, con, values) {
 
         con.query(sql, [values], function(err,result) {
             if(err) {
-                console.log(err.code);
+                console.log("blah");
             } else {
-                console.log(result);
+                // Used for getting the results of the query
+                if(values.length == 0) {
+                    callback(err, result);
+                }
+                console.log("All good");
             }
         });
     });

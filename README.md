@@ -4,8 +4,7 @@ To set up the program you must first have mysql installed. Depening on your Linu
 Now all you need to do is run the setup script by typing the following:
 `sudo ./setup.sh`
 
-The script automatically builds the mysql table, adds the user, installs all node dependencies, starts the server, and opens the webpage.
-If you do not have the command `open` installed in your terminal than you will have to open index.html manually or using another command like `google-chrome`
+The script automatically builds the mysql table, adds the user, installs all node dependencies, and starts the server. After the script finishes executing open your browser and navigate to `http://127.0.0.1:3030`
 
 ## Submission Instructions
 1. First, fork this project on github.  You will need to create an account if you don't already have one.
