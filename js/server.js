@@ -90,7 +90,7 @@ function nope() {}
 // Write to the database
 function queryDB(sql, con, values, callback) {
     // Set up the connection the MYSQL DB
-    con.getConnection(function(err) {
+    con.getConnection(function(err, connection) {
         if(err) {
             console.log("Error in connecting");
         } else {
@@ -108,6 +108,7 @@ function queryDB(sql, con, values, callback) {
                 console.log("All good");
             }
         });
+        connection.release();
     });
 }
 
