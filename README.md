@@ -12,9 +12,9 @@ Tested with the following configuration
  * `cd apg_challenge && ./setup-centos7.sh`
 
 ### Start WebApp
- * `rails s -b 0.0.0.0`
+ * `bin/rails s -b 0.0.0.0`
 
- * (optional) `sudo rails -s -b 0.0.0.0 -p 80`
+ * (optional) `sudo bin/'rails -s -b 0.0.0.0 -p 80`
   * root privilege required to bind to tcp/80
 
 ### Access via Web Browser
@@ -24,8 +24,8 @@ Tested with the following configuration
 
 ## Reset Database
  * stop server
- * `rake db:drop`
- * `rake db:setup`
+ * `bin/rake db:drop`
+ * `bin/rake db:setup`
  * start server
 
 
