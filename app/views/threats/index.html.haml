@@ -1,0 +1,111 @@
+.row.space20
+  .col-xs-3
+    %a.thumbnail
+      =image_tag "http://www.malwareinvestigator.gov/images/logoFooter.png"
+  %h2.page-title Malware Data Import Tool
+  %p Malware is the chief instrument of cyber attacks today. Following the exponential growth of malware variants in the past ten years, organizations dedicated to reducing cyber incidents must have a means to quickly understand the functionality and characteristics of suspicious files, and also have the ability to collaborate these results with others.
+  %span.small http://www.malwareinvestigator.gov/why_important.html
+.row.tabs
+  #tabs.container
+    %ul.nav.nav-pills
+      %li.active
+        %a{"data-toggle" => "tab", :href => "#import_malware_data"} Import Malware Data
+      %li
+        %a{"data-toggle" => "tab", :href => "#threat_database"} Threat Database
+      %li
+        %a{"data-toggle" => "tab", :href => "#threat_stats"} Threat Statistics
+
+    .tab-content.clearfix
+      #import_malware_data.tab-pane.active
+        .col-xs-6
+          %h3 Import Malware Data
+          = form_tag import_threats_path, multipart: true do
+            %fieldset.form-group
+          %input#input-1.file-loading{:multiple => "", :name => "file", :type => "file", :class => "file-loading"}
+          %small.text-muted
+            Download a
+            = link_to "'sample CSV template'",'example_input.csv'
+            to see an example of the format required.
+        .col-xs-6
+          %h3 Threats by Classification Type
+          %table.table.table-bordered.table-striped.table-hover.sortable.table-condensed.threat-table
+            %thead
+              %tr
+                %th Classification Type
+                %th Amount of Threats
+            %tbody
+              - @threat_classification_type_counts.each do |type,count|
+                %tr
+                  %td= type
+                  %td= count
+          = pie_chart @threat_classification_type_counts, library: { pieSliceText: "value" }
+
+      #threat_database.tab-pane
+        .col-xs-12
+          %h3 Threat Database
+          %p.mute-text Click header to sort columns
+          %table.table.table-bordered.table-striped.table-hover.sortable.table-condensed.threat-table
+            %thead
+              %tr
+                %th MD5
+                %th Classification Name
+                %th Classification Type
+                %th Size
+                %th File Type
+            %tbody
+              - @threats.each do |threat|
+                %tr
+                  %td= threat.md5
+                  %td= threat.classification_name.name
+                  %td= threat.classification_type.name
+                  %td= threat.size
+                  %td= threat.file_type.name
+      #threat_stats.tab-pane
+        .col-xs-12
+          %h3 Threats by Classification Type
+          .col-xs-6
+            %table.table.table-bordered.table-striped.table-hover.sortable.table-condensed.threat-table
+              %thead
+                %tr
+                  %th Classification Type
+                  %th Amount of Threats
+              %tbody
+                - @threat_classification_type_counts.each do |type,count|
+                  %tr
+                    %td= type
+                    %td= count
+          .col-xs-6
+            = pie_chart @threat_classification_type_counts, library: { pieSliceText: "value" }
+        .col-xs-12
+          %h3 Threats by Classification Name
+          .col-xs-6
+            %table.table.table-bordered.table-striped.table-hover.sortable.table-condensed.threat-table
+              %thead
+                %tr
+                  %th Classification Name
+                  %th Amount of Threats
+              %tbody
+                - @threat_classification_name_counts.each do |type,count|
+                  %tr
+                    %td= type
+                    %td= count
+          .col-xs-6
+            = pie_chart @threat_classification_name_counts, library: { pieSliceText: "value" }
+        .col-xs-12
+          %h3 Threats by File Type
+          .col-xs-6
+            %table.table.table-bordered.table-striped.table-hover.sortable.table-condensed.threat-table
+              %thead
+                %tr
+                  %th File Type
+                  %th Amount of Threats
+              %tbody
+                - @threat_file_type_counts.each do |type,count|
+                  %tr
+                    %td= type
+                    %td= count
+          .col-xs-6
+            = pie_chart @threat_file_type_counts, library: { pieSliceText: "value" }
+
+
+.row.bottom-spacer

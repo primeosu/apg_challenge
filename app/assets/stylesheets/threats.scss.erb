@@ -1,0 +1,145 @@
+/* Colors
+-------------------------------------------------- */
+$light-blue: #0071c5;
+$dark-blue: rgb(0, 66, 127);
+$footer-gray: #52555a;
+$footer-font-gray: #E6E7E8;
+$nav-gray: #52555a;
+$header-red: #aa0828;
+
+/* Default Font
+-------------------------------------------------- */
+body {
+  font-family: Open Sans;
+  font-weight: 100;
+}
+
+div.row.space20 {
+  margin-top: 20px;
+}
+/* Navbar
+-------------------------------------------------- */
+.navbar {
+  border: none;
+  margin: 0px;
+}
+.navbar-brand{ 
+  height: 86px;
+  width: 200px;
+}
+.navbar-header {
+  background-color: #fff;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+.navbar-collapse {
+  //background-color: $light-blue;
+}
+.navbar-nav {
+  //background-color: $dark-blue;
+}
+.nav > li > a, .nav > li > a:hover, .nav > li > a:focus {
+  color: $nav-gray;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 16px;
+  font-weight: 100px;
+  line-height: 1.1em;
+}
+
+.nav-pills > li.active > a {
+  background-color: $light-blue;
+}
+.navbar-toggle {
+  padding: 10px;
+  margin: 25px 15px 25px 0;
+}
+
+.breadcrumbs-spacer {
+  width: 100%;
+  padding-top: 29px;
+  background-color: $dark-blue;
+}
+
+/* Headers
+-------------------------------------------------- */
+h2.page-title {
+  font-size: 30px;
+  line-height: 35px;
+  font-weight: 100;
+  color: $header-red;
+}
+h3 {
+  //color: $header-red;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding-top: 15px;
+  /* Set the fixed height of the footer here */
+  height: auto;
+  background-color: $footer-gray;
+  color: #fff;
+}
+
+.footer .text-muted {
+  color: $footer-font-gray;
+}
+
+span.disclaimer {
+  font-size: 10px;
+  font-weight: normal;
+  color: $footer-font-gray;
+}
+
+/* Tab Panels
+-------------------------------------------------- */
+.tabs {
+  background-color: $light-blue;
+}
+.tab-content {
+  background-color: #fff;
+  padding : 5px 15px;
+  margin: 20px;
+}
+.nav-pills > li > a, .nav-pills > li > a:hover, .nav-pills > li > a:focus {
+  margin: 0;
+  border-radius: 0;
+  background-color: $dark-blue;
+  font-size: 20px;
+  font-weight: 100;
+  color: #fff;
+}
+
+/* remove vertical separator between tabs */
+.nav-pills > li + li {
+  margin-left: 0px;
+}
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+  background-color: $light-blue;
+}
+
+.threat-table {
+  margin: 20px;
+  background-color: #fff
+}
+
+.bottom-spacer {
+  margin: 20px;
+}
+
