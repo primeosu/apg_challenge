@@ -8,7 +8,7 @@ Tested with the following configuration
 
 ### Install Prerequisite Packages
  * `yum install -y git`
- * Checkout Repo: `git clone git@github.com:sstovall/apg_challenge.git`
+ * Checkout Repo: `git clone https://github.com/sstovall/apg_challenge.git`
  * `cd apg_challenge && ./setup-centos7.sh`
 
 ### Start WebApp
