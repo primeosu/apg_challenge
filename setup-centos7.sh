@@ -15,4 +15,4 @@ gem install bundler
 bundle install
 
 # initialize database
-rake db:setup
+bin/rake db:setup
