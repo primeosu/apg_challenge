@@ -1,0 +1,32 @@
+
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}
+      %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}
+        %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
+          / The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
+          %meta{:content => "", :name => "description"}
+            %meta{:content => "", :name => "author"}
+              %link{:href => "../../favicon.ico", :rel => "icon"}
+                %title Threat Intelligence
+                = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+                = stylesheet_link_tag    'threats'
+                = stylesheet_link_tag    'file-input'
+                = javascript_include_tag 'application', 'data-turbolinks-track' => true
+                = javascript_include_tag "http://www.google.com/jsapi", "chartkick"
+                = favicon_link_tag
+                = csrf_meta_tags
+  %body
+    = render 'layouts/navigation'
+    .container.breadcrumbs-spacer
+    .container
+      / Static navbar
+      = render 'layouts/messages'
+      / Begin page content
+      = yield
+
+    %footer.footer
+      .container
+        %p.text-muted &copy; 2016
+        %span.disclaimer DEMO WEB PROJECT: Not affiliated with Intel Corporation. Intel Security and all other Intel product names are trademarks or registered trademarks of Intel Corporation. All other company and product names are trademarks or registered trademarks of their respective companies.
