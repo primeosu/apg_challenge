@@ -56,8 +56,8 @@
               - @threats.each do |threat|
                 %tr
                   %td= threat.md5
-                  %td= threat.classification.name
-                  %td= threat.classification_category
+                  %td= threat.classification_name.name
+                  %td= threat.classification_type.name
                   %td= threat.size
                   %td= threat.file_type.name
       #threat_stats.tab-pane

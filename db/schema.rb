@@ -13,9 +13,14 @@
 
 ActiveRecord::Schema.define(version: 20160617224022) do
 
-  create_table "classifications", force: :cascade do |t|
+  create_table "classification_names", force: :cascade do |t|
     t.string   "name"
-    t.string   "category"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "classification_types", force: :cascade do |t|
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -29,10 +34,11 @@ ActiveRecord::Schema.define(version: 20160617224022) do
   create_table "threats", force: :cascade do |t|
     t.string   "md5"
     t.integer  "size"
-    t.integer  "classification_id"
+    t.integer  "classification_name_id"
+    t.integer  "classification_type_id"
     t.integer  "file_type_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
 end

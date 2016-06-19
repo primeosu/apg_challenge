@@ -28,13 +28,13 @@ class ThreatsController < ApplicationController
 
   def count_threats_by_classification_type
     types=[]
-    Threat.all.map { |t| types.push(t.classification.category) }
+    Threat.all.map { |t| types.push(t.classification_type.name) }
     types.inject(Hash.new(0)) { |total, e| total[e] += 1 ;total}
   end
 
   def count_threats_by_classification_name
     names=[]
-    Threat.all.map { |t| names.push(t.classification.name) }
+    Threat.all.map { |t| names.push(t.classification_name.name) }
     names.inject(Hash.new(0)) { |total, e| total[e] += 1 ;total}
   end
 
