@@ -28,13 +28,6 @@ Tested with the following configuration
  * `rake db:setup`
  * start server
 
-## Features
-
-###
-### Show Threat Database
-
-### Display Threat Statistics
-
 
 Features
 --------
