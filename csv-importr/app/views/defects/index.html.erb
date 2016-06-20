@@ -1,0 +1,39 @@
+<div class="header">
+  <h1> CSV Importr</h1>
+</div>
+
+<table class="table table-hover table-responsive">
+  <thead>
+    <tr>
+      <th>MD5</th>
+      <th>Classification Name</th>
+      <th>Classification Type</th>
+      <th>Size</th>
+      <th>FileType</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @defects.each do |defect| %>
+    <tr>
+      <td><%= defect.MD5 %></td>
+      <td><%= defect.ClassificationName %></td>
+      <td><%= defect.ClassificationType %></td>
+      <td><%= defect.Size %></td>
+      <td><%= defect.FileType %></td>
+    </tr>
+    <%end%>
+  </tbody>
+</table>
+
+<div class="import-title">
+  <h3>Import Info</h3>
+</div>
+
+<hr>
+
+<div class="import-file">
+<%= form_tag import_defects_path, multipart: true do %>
+<%= file_field_tag :file %>
+</div>
+<%= submit_tag "Upload CSV" %>
+<% end %>
