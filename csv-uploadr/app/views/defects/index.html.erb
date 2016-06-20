@@ -13,8 +13,18 @@
   <tbody>
     <% @defects.each do |defect| %>
       <tr>
-        <td>malwaredata.MD5</td>
+        <td><%= defect.md5 %></td>
+        <td><%= defect.classicationname %></td>
+        <td><%= defect.classicationtype %></td>
+        <td><%= defect.size %></td>
+        <td><%= defect.filetype %></td>
       </tr>
     <%end%>
   </tbody>
 </table>
+
+<h3>Upload Info</h3>
+<%= form_tag upload_defects_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Upload CSV" %>
+<% end %>

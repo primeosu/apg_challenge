@@ -17,11 +17,11 @@ ActiveRecord::Schema.define(version: 20160620051121) do
   enable_extension "plpgsql"
 
   create_table "defects", force: :cascade do |t|
-    t.string  "MD5"
-    t.string  "ClassificationName"
-    t.string  "ClassificationType"
-    t.integer "Size"
-    t.string  "FileType"
+    t.string  "md5"
+    t.string  "classificationname"
+    t.string  "classificationtype"
+    t.integer "size"
+    t.string  "filetype"
   end
 
 end
