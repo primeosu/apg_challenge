@@ -1,5 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
+#enables the use of CSV library
+require 'csv'
 require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
