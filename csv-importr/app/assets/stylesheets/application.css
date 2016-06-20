@@ -1,5 +1,5 @@
 /* Title styling */
-.header h1{
+.header{
   margin-bottom: 40px;
   text-align: center;
   color: #ff9966;
@@ -22,7 +22,7 @@ table{
   margin-left: 30px;
 }
 
-hr.style{
+.hr-style{
   border: 0;
   height: 1px;
   background: #333;
