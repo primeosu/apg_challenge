@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
-  root to: 'viruses#index'
-  resources :viruses
+  root to: 'defects#index'
+  resources :defects
 end
