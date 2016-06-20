@@ -8,7 +8,7 @@ class DefectsController < ApplicationController
   # Upload method for CSV files
   def import
    Defect.import(params[:file])
-   redirect_to root_url, notice: "Import Successful"
+   redirect_to root_url, notice: "Data Successfully Imported!"
   end
 
 end
