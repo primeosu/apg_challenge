@@ -2,13 +2,13 @@
 .header{
   margin-bottom: 40px;
   text-align: center;
-  color: #ff9966;
+  color: #005ce6;
 }
 
 /* Table header styling */
 th{
   font-size: 15px;
-  background-color: #ff9966;
+  background-color: #005ce6;
   color: white;
 }
 
