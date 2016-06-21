@@ -1,7 +1,9 @@
+<!-- Title -->
 <div class="header">
   <h1> CSV Importr</h1>
 </div>
 
+<!-- Data Table -->
 <table class="table table-hover table-responsive">
   <thead>
     <tr>
@@ -25,6 +27,8 @@
   </tbody>
 </table>
 
+
+<!-- Import Functionality -->
 <div class="import-title">
   <h3>Import Info</h3>
 </div>
@@ -32,10 +36,11 @@
 <hr class="hr-style">
 
 <div class="import-file">
-<%= form_tag import_defects_path, multipart: true do %>
-<%= file_field_tag :file %>
+  <%= form_tag import_defects_path, multipart: true do %>
+  <%= file_field_tag :file %>
 </div>
+
 <div class="submit">
-<%= submit_tag "Import", :class => "btn btn-primary btn-sm" %>
-<% end %>
+  <%= submit_tag "Import", :class => "btn btn-primary btn-sm" %>
+  <% end %>
 </div>
