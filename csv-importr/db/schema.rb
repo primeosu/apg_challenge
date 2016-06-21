@@ -11,17 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160620051121) do
+ActiveRecord::Schema.define(version: 20160621132515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "defects", force: :cascade do |t|
-    t.string  "MD5"
-    t.string  "ClassificationName"
-    t.string  "ClassificationType"
-    t.integer "Size"
-    t.string  "FileType"
+    t.string  "md5"
+    t.string  "classificationname"
+    t.string  "classificationtype"
+    t.integer "size"
+    t.string  "filetype"
   end
 
 end
