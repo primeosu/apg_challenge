@@ -17,11 +17,11 @@
   <tbody>
     <% @defects.each do |defect| %>
     <tr>
-      <td><%= defect.MD5 %></td>
-      <td><%= defect.ClassificationName %></td>
-      <td><%= defect.ClassificationType %></td>
-      <td><%= defect.Size %></td>
-      <td><%= defect.FileType %></td>
+      <td><%= defect.md5 %></td>
+      <td><%= defect.classificationname %></td>
+      <td><%= defect.classificationtype %></td>
+      <td><%= defect.size %></td>
+      <td><%= defect.filetype %></td>
     </tr>
     <%end%>
   </tbody>
@@ -43,4 +43,14 @@
 <div class="submit">
   <%= submit_tag "Import", :class => "btn btn-primary btn-sm" %>
   <% end %>
+</div>
+
+<!-- Column Chart -->
+
+<div class="chart-title">
+  <h2> Classification Types</h2>
+</div>
+
+<div id="chart">
+  <%= column_chart Defect.group(:classificationtype).count%>
 </div>
