@@ -1,9 +1,11 @@
 $(document).ready(function() {
-
+	
+	// Loads table with given classification type data
 	function updateTable(data) {
 		$('#table').bootstrapTable("load", data);
 	}
-
+	
+	// Bootstrap Table boilerplate
 	$('#table').bootstrapTable({
 	    columns: [{
 	        field: 'ClassificationType',
@@ -15,6 +17,7 @@ $(document).ready(function() {
 	    data: [{}]
 	});
   
+  	// Populate table with data on document ready
   	$.ajax({
 	    url: "/api/classificationType",
 	    type: 'GET',
@@ -24,6 +27,7 @@ $(document).ready(function() {
 	    }
 	});
 
+	// Submit file data to server on form submission
 	$("#uploadForm").submit(function(e) {
 		resetAlerts();
 	    $.ajax({
@@ -34,13 +38,14 @@ $(document).ready(function() {
 		     contentType: false,
 		     success: function(data)
 		     {
+		     	// Get newly uploaded data and update table
 		        $.ajax({
-	            url: "/api/classificationType",
-	            type: 'GET',
-	            success: function(res) {
-	                updateTable(res);
-	                alertSuccess();
-	            }
+		            url: "/api/classificationType",
+		            type: 'GET',
+		            success: function(res) {
+		                updateTable(res);
+		                alertSuccess();
+		            }
 	        	});
 		     },
 		     error: function(err)
