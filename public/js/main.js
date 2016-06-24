@@ -66,7 +66,7 @@ $(document).ready(function() {
 	    $('.alert-success').show();
 	}
 
-	/* Show success alert */
+	/* Reset alerts */
 	function resetAlerts() {
 	    $('.alert-success').hide();
 	    $('.alert-danger').hide();
