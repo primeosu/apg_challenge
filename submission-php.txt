@@ -14,8 +14,8 @@
 /**
  * Created by PhpStorm.
  * User: michaelcordero
- * Date: 6/23/16
- * Time: 12:49 AM
+ * Date: 6/26/16
+ * Time: 12:35 PM
  */
 /*
 Template Name: Results
@@ -39,6 +39,20 @@ get_header();
 <br/>
 
 <?php
+
+// Clear Data Functionality
+
+if(isset($_POST["Clear"])){
+    try {
+        $link = mysqli_connect("localhost", "root", "Qqq#1080", "wordpress");
+        mysqli_query($link, 'TRUNCATE TABLE IntelChallenge');
+        echo "Data succesfully cleared.";
+    } catch (mysqli_sql_exception $e) {
+        echo "<h2>" . $e->getMessage() . "</h2>";
+    }
+}
+
+
 global $wpdb;  //wordpress global variable that interacts with Database
 $results = $wpdb->get_results("SELECT * FROM wordpress.IntelChallenge", ARRAY_N);
 
@@ -96,7 +110,7 @@ if ($_FILES[csv][size] > 0) {
         $csvfile = $_FILES[csv][tmp_name];
     }
 
-
+//  Execute Insert Query
     try {
         $databasehost = "localhost";
         $databasename = "wordpress";
@@ -129,6 +143,7 @@ if ($_FILES[csv][size] > 0) {
         echo "<h2>" . $e->getMessage() . "</h2>";
     }
 
+
 } ?>
 
 <!--Form to take user input of CSV-->
@@ -143,9 +158,9 @@ if ($_FILES[csv][size] > 0) {
     <h1>Choose your file: </h1> <br />
     <input name="csv" type="file" id="csv" accept=".csv" />
     <input type="submit" name="Submit" value="Submit"  />
+    <input type="submit" name="Clear" value="Clear Data" />
 </form>
 </body>
 </html>
-
-
 <?php get_footer(); ?>
+
