@@ -44,7 +44,7 @@ get_header();
 
 if(isset($_POST["Clear"])){
     try {
-        $link = mysqli_connect("localhost", "root", "Qqq#1080", "wordpress");
+        $link = mysqli_connect("localhost", "root", "password", "wordpress");
         mysqli_query($link, 'TRUNCATE TABLE IntelChallenge');
         echo "Data succesfully cleared.";
     } catch (mysqli_sql_exception $e) {
