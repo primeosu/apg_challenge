@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>APG Challenge</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <nav class="navbar navbar-dark bg-inverse">
+    <a class="navbar-brand" href="/">APG Challenge</a>
+    <ul class="nav navbar-nav pull-xs-right">
+      <li class="navbar-item active">
+        <%= link_to "Report", page_results_path, class: "nav-link" %>
+      </li>
+    </ul>
+  </nav>
+  <div class="container">
+    <% if !flash[:error].nil? %>
+    <br>
+    <div class="alert alert-danger" role="alert"><strong>Error!</strong> <%= flash[:error] %></div>
+    <% end %>
+    <% if !flash[:info].nil? %>
+    <br>
+    <div class="alert alert-success" role="alert"><strong>Success!</strong> <%= flash[:info] %></div>
+    <% end %>
+    <br>
+    <%= yield %>
+  </div>
+</body>
+</html>
