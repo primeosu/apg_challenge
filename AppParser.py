@@ -1,17 +1,14 @@
-__author__ = 'DMcHale'
+__author__ = "DMcHale"
+
+import csv
+from sqlite3 import connect
 
 from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap
-import csv
-import sqlite3
 
 app = Flask(__name__)
 Bootstrap(app)
 
-try:
-    c.execute('''CREATE TABLE definitions(md5 text, classificationName text, classificationType text, size real, fileType text)''')
-except Exception as e:
-    print("Table Definitions already exists.")
 
 @app.route('/')
 def index():
@@ -19,7 +16,7 @@ def index():
     classificationTypes = []
 
     try:
-        conn = sqlite3.connect('example.db', check_same_thread=False)
+        conn = connect('example.db', check_same_thread=False)
     except Exception as e:
         print "Unable to connect to 'example.db'"
 
@@ -33,7 +30,8 @@ def index():
         print(e)
 
     try:
-        for row in c.execute('SELECT classificationType, COUNT(classificationType) FROM definitions GROUP BY classificationType'):
+        for row in c.execute(
+                'SELECT classificationType, COUNT(classificationType) FROM definitions GROUP BY classificationType'):
             classificationTypes.append(row)
     except Exception as e:
         print(e)
@@ -53,7 +51,7 @@ def handle_upload():
         classificationTypes = []
 
         try:
-            conn = sqlite3.connect('example.db', check_same_thread=False)
+            conn = connect('example.db', check_same_thread=False)
         except Exception as e:
             print "Unable to connect to 'example.db'"
 
@@ -66,7 +64,8 @@ def handle_upload():
                 definitions.append(row)
 
         for entry in definitions:
-            definitionsList.append((entry['MD5'], entry['ClassificationName'], entry['ClassificationType'], entry['Size'], entry['FileType']))
+            definitionsList.append((entry['MD5'], entry['ClassificationName'], entry['ClassificationType'],
+                                    entry['Size'], entry['FileType']))
 
         try:
             c.executemany('INSERT INTO definitions VALUES (?,?,?,?,?)', definitionsList)
@@ -83,7 +82,8 @@ def handle_upload():
             print(e)
 
         try:
-            for row in c.execute('SELECT classificationType, COUNT(classificationType) FROM definitions GROUP BY classificationType'):
+            for row in c.execute(
+                    'SELECT classificationType, COUNT(classificationType) FROM definitions GROUP BY classificationType'):
                 classificationTypes.append(row)
         except Exception as e:
             print(e)
@@ -93,6 +93,7 @@ def handle_upload():
                                classificationTypes=classificationTypes)
     else:
         return render_template('index.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
