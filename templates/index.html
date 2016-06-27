@@ -13,7 +13,7 @@
   <link href="/static/css/base-app.css" rel="stylesheet">
 
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-  <link href="static/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+  <link href="/static/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
@@ -41,10 +41,10 @@
     <div class="container" style="margin-top: 20px;">
       <div class="row">
         <div class="col-lg-6 col-sm-6 col-12">
-          <label class="col-md-4 control-label" for="uploadFile">
-            Select Definitions CSV...
-          </label> <br/>
-          <div class="input-group">
+          <label style="text-align:left;" class="col-md-6 control-label" for="uploadFile">
+            Select Definitions CSV :
+          </label> <br/> <br/>
+          <div class="input-group col-md-6">
             <label class="input-group-btn">
                 <span class="btn btn-primary">
                   Browse&hellip;
@@ -56,17 +56,15 @@
           <input type="submit" class="btn btn-primary" value="Upload">
         </div>
         <div class="col-lg-6 col-sm-6 col-12">
-        {% for classification in classificationTypes %}
+          {% for classification in classificationTypes %}
           <h4> Classification Type: {{classification[0]}}
             <span class="label label-default"> {{classification[1]}} </span>
           </h4>
-        {% endfor %}
-      </div>
+          {% endfor %}
+        </div>
       </div>
 
       <br/> <br/>
-
-
 
       <div class="row">
         <div style="height:400px; width:100%; overflow:auto;" class="col-lg-6 col-sm-6 col-12">
@@ -76,13 +74,13 @@
               <th>MD5</th>
               <th>Classification Name</th>
               <th>Classification Type</th>
-              <th>Size</th>
+              <th>Size (bytes)</th>
               <th>File Type</th>
             </tr>
             </thead>
             <tbody>
 
-             {% for definition in definitionsList %}
+            {% for definition in definitionsList %}
 
             <tr class="info">
               <td>{{definition[0]}}</td>
@@ -92,7 +90,7 @@
               <td>{{definition[4]}}</td>
             </tr>
 
-             {% endfor %}
+            {% endfor %}
 
             </tbody>
           </table>

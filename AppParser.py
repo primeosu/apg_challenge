@@ -17,6 +17,7 @@ def index():
 
     try:
         conn = connect('example.db', check_same_thread=False)
+
     except Exception as e:
         print "Unable to connect to 'example.db'"
 
