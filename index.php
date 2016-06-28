@@ -3,19 +3,30 @@
 /*Connecting to mysql database.*/
 $conn = mysql_connect("localhost", "root", "") or die("Unable to Connect");
     mysql_select_db("apg_challenge", $conn);
+
 /*When csv file is uploaded.*/
 if(isset($_POST['submit'])){  
     $i=0; 
-    $handle = fopen($_FILES['file']['tmp_name'], "r");                  //Opens CSV file
-    /* Once file is opened, fgetcsv function to parse the file row by row and uploads the data into relational database. */
-    while (($fileop = fgetcsv($handle, 1000, ",")) !== false) {
-      if($i>0){
-          $sql = mysql_query("INSERT INTO malware (MD5, ClassificationName, ClassificationType, Size, FileType) 
-                  VALUES ('$fileop[0]','$fileop[1]','$fileop[2]','$fileop[3]','$fileop[4]')");   
-        }
-        $i++;       
-   }
-       fclose($handle);
+    $file = $_FILES['file']['tmp_name'];
+    if(!$file)
+            {
+              echo '<div class="alert alert-warning" role="alert">
+                    <a href="#" class="alert-link"><strong>Warning!</strong> Make sure to upload csv file, then click Submit.</a>
+                  </div>';
+            }
+    else{
+          $handle = fopen($file, "r");  //Opens CSV file
+
+          /* Once file is opened, fgetcsv function to parse the file row by row and uploads the data into relational database. */
+          while (($fileop = fgetcsv($handle, 1000, ",")) !== false) {
+            if($i>0){
+                $sql = mysql_query("INSERT INTO malware (MD5, ClassificationName, ClassificationType, Size, FileType) 
+                        VALUES ('$fileop[0]','$fileop[1]','$fileop[2]','$fileop[3]','$fileop[4]')");   
+              }
+              $i++;       
+            }
+             fclose($handle);
+      }
 }
 ?>
 
