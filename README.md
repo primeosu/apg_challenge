@@ -1,3 +1,4 @@
+
 # Intel Security Programming Challenge
 Please complete the following programming challenge.  It is used to better assess a candidate's software development skills.   You have as much time as you'd like (though we ask that you not spend more than a few hours) and may use any programming language or framework you'd like.  Feel free to contact the original sender if you have any questions.
 
@@ -28,3 +29,24 @@ Evaluation of your submission will be based on the following criteria:
 1. Did your application fulfill the basic requirements?
 1. Did you document the method for setting up and running your application?
 1. Did you follow the instructions for submission?
+
+
+<******************************************************************************************************************>
+
+#apg_challenge by Vivek Menon
+
+##Instructions to run the web app.
+
+##Download, install and run XAMPP
+1. Go to "https://www.apachefriends.org/index.html" and download XAMPP for linux (or respective operating system).
+2. Open XAMPP Control Panel and Click "Start" under "Actions" for Module "Apache" and "MySQL".
+
+##Cloning the project
+1. Make sure to clone the project in xampp folder, inside htdocs.
+	path to the project should look like xampp\htdocs\apg_challenge\ ...
+
+## Creating Database and MySQL table
+1. (First time use only) type http://localhost/apg_challenge/setup_db.php in web browser.
+
+##Run the Web app "apg_challenge"
+1. open web browser and type http://localhost/apg_challenge/index.php 
