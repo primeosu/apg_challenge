@@ -3,7 +3,7 @@ Please complete the following programming challenge.  It is used to better asses
 
 ## Submission Installation Instructions
 1. First, install the latest distribution of Python 2.7.
-1. Next, use easy_install or pip to install the following dependencies: flask, flask-bootstrap (pip install flask flask-bootstrap).
+1. Next, use easy_install or pip to install the following dependencies: flask, flask-bootstrap, and werkzeug (pip install flask flask-bootstrap werkzeug).
 1. Next, run AppParser.py (python AppParser.py) to start the application.
 1. Finally, navigate to 127.0.0.1:5000 to use the application.
 

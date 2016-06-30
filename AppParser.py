@@ -1,13 +1,25 @@
 __author__ = "DMcHale"
-
+import os
 import csv
 from sqlite3 import connect
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash
 from flask_bootstrap import Bootstrap
+from werkzeug import secure_filename
+
+UPLOAD_FOLDER = './uploads/'
+ALLOWED_EXTENSIONS = set(['csv'])
 
 app = Flask(__name__)
 Bootstrap(app)
+app.secret_key = 'baseKey64'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+        filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
 
 @app.route('/')
@@ -46,7 +58,7 @@ def index():
 def handle_upload():
     error = None
     if request.method == 'POST':
-        upload_file = request.files['file']
+        file = request.files['file']
         definitions = []
         definitionsList = []
         classificationTypes = []
@@ -58,12 +70,19 @@ def handle_upload():
 
         c = conn.cursor()
 
-        with open(upload_file.filename, 'rb') as csvfile:
-            reader = csv.DictReader(csvfile)
-            for row in reader:
-                if row.has_key(''):
-                    row.pop('')
-                definitions.append(row)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            with open('./uploads/' + file.filename, 'rb') as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    if row.has_key(''):
+                        row.pop('')
+                    definitions.append(row)
+                flash('Definitions successfully ingested.')
+
+        else:
+            flash('Invalid file type, please upload a .csv file.')
 
         for entry in definitions:
             definitionsList.append((entry['MD5'], entry['ClassificationName'], entry['ClassificationType'],
