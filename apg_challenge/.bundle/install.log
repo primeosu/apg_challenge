@@ -1,0 +1,300 @@
+# Logfile created on 2016-06-25 19:28:18 -0400 by logger.rb/44203
+I, [2016-06-25T19:28:18.366263 #37958]  INFO -- : 0:  rake (11.2.2) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/rake-11.2.2.gemspec
+I, [2016-06-25T19:28:18.366816 #37958]  INFO -- : 0:  i18n (0.7.0) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/i18n-0.7.0.gemspec
+I, [2016-06-25T19:28:18.367215 #37958]  INFO -- : 0:  json (1.8.3) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/json-1.8.3.gemspec
+I, [2016-06-25T19:28:18.367807 #37958]  INFO -- : 0:  minitest (5.9.0) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/minitest-5.9.0.gemspec
+I, [2016-06-25T19:28:18.368234 #37958]  INFO -- : 0:  thread_safe (0.3.5) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/thread_safe-0.3.5.gemspec
+I, [2016-06-25T19:28:18.368647 #37958]  INFO -- : 0:  tzinfo (1.2.2) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/tzinfo-1.2.2.gemspec
+I, [2016-06-25T19:28:18.369115 #37958]  INFO -- : 0:  activesupport (4.2.5.1) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/activesupport-4.2.5.1.gemspec
+I, [2016-06-25T19:28:18.369521 #37958]  INFO -- : 0:  builder (3.2.2) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/builder-3.2.2.gemspec
+I, [2016-06-25T19:28:18.369949 #37958]  INFO -- : 0:  erubis (2.7.0) from /Users/pbatigne/.rvm/gems/ruby-2.1.0@global/specifications/erubis-2.7.0.gemspec
+I, [2016-06-25T19:28:18.370274 #37958]  INFO -- : 0:  mini_portile2 (2.1.0) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/mini_portile2-2.1.0.gemspec
+I, [2016-06-25T19:28:18.370559 #37958]  INFO -- : 0:  pkg-config (1.1.7) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/pkg-config-1.1.7.gemspec
+E, [2016-06-25T19:28:38.194953 #37958] ERROR -- : Gem::Ext::BuildError: ERROR: Failed to build gem native extension.
+
+    /Users/pbatigne/.rvm/rubies/ruby-2.1.0/bin/ruby extconf.rb 
+Using pkg-config version 1.1.7
+checking if the C compiler accepts ... yes
+checking if the C compiler accepts -Wno-error=unused-command-line-argument-hard-error-in-future... no
+Building nokogiri using packaged libraries.
+Using mini_portile version 2.1.0
+checking for iconv.h... yes
+checking for gzdopen() in -lz... yes
+checking for iconv... yes
+************************************************************************
+IMPORTANT NOTICE:
+
+Building Nokogiri with a packaged version of libxml2-2.9.4.
+
+Team Nokogiri will keep on doing their best to provide security
+updates in a timely manner, but if this is a concern for you and want
+to use the system library instead; abort this installation process and
+reinstall nokogiri as follows:
+
+    gem install nokogiri -- --use-system-libraries
+        [--with-xml2-config=/path/to/xml2-config]
+        [--with-xslt-config=/path/to/xslt-config]
+
+If you are using Bundler, tell it to use the option:
+
+    bundle config build.nokogiri --use-system-libraries
+    bundle install
+
+Note, however, that nokogiri is not fully compatible with arbitrary
+versions of libxml2 provided by OS/package vendors.
+************************************************************************
+Extracting libxml2-2.9.4.tar.gz into tmp/x86_64-apple-darwin12.5.0/ports/libxml2/2.9.4... OK
+Running 'configure' for libxml2 2.9.4... OK
+Running 'compile' for libxml2 2.9.4... ERROR, review '/Users/pbatigne/.rvm/gems/ruby-2.1.0/gems/nokogiri-1.6.8/ext/nokogiri/tmp/x86_64-apple-darwin12.5.0/ports/libxml2/2.9.4/compile.log' to see what happened. Last lines are:
+========================================================================
+    unsigned short* in = (unsigned short*) inb;
+                         ^~~~~~~~~~~~~~~~~~~~~
+encoding.c:815:27: warning: cast from 'unsigned char *' to 'unsigned short *' increases required alignment from 1 to 2 [-Wcast-align]
+    unsigned short* out = (unsigned short*) outb;
+                          ^~~~~~~~~~~~~~~~~~~~~~
+4 warnings generated.
+  CC       error.lo
+  CC       parserInternals.lo
+  CC       parser.lo
+  CC       tree.lo
+  CC       hash.lo
+  CC       list.lo
+  CC       xmlIO.lo
+xmlIO.c:1450:52: error: use of undeclared identifier 'LZMA_OK'
+    ret =  (__libxml2_xzclose((xzFile) context) == LZMA_OK ) ? 0 : -1;
+                                                   ^
+1 error generated.
+make[2]: *** [xmlIO.lo] Error 1
+make[1]: *** [all-recursive] Error 1
+make: *** [all] Error 2
+========================================================================
+*** extconf.rb failed ***
+Could not create Makefile due to some reason, probably lack of necessary
+libraries and/or headers.  Check the mkmf.log file for more details.  You may
+need configuration options.
+
+Provided configuration options:
+	--with-opt-dir
+	--without-opt-dir
+	--with-opt-include
+	--without-opt-include=${opt-dir}/include
+	--with-opt-lib
+	--without-opt-lib=${opt-dir}/lib
+	--with-make-prog
+	--without-make-prog
+	--srcdir=.
+	--curdir
+	--ruby=/Users/pbatigne/.rvm/rubies/ruby-2.1.0/bin/ruby
+	--help
+	--clean
+	--use-system-libraries
+	--enable-static
+	--disable-static
+	--with-zlib-dir
+	--without-zlib-dir
+	--with-zlib-include
+	--without-zlib-include=${zlib-dir}/include
+	--with-zlib-lib
+	--without-zlib-lib=${zlib-dir}/lib
+	--enable-cross-build
+	--disable-cross-build
+/Users/pbatigne/.rvm/gems/ruby-2.1.0/gems/mini_portile2-2.1.0/lib/mini_portile2/mini_portile.rb:366:in `block in execute': Failed to complete compile task (RuntimeError)
+	from /Users/pbatigne/.rvm/gems/ruby-2.1.0/gems/mini_portile2-2.1.0/lib/mini_portile2/mini_portile.rb:337:in `chdir'
+	from /Users/pbatigne/.rvm/gems/ruby-2.1.0/gems/mini_portile2-2.1.0/lib/mini_portile2/mini_portile.rb:337:in `execute'
+	from /Users/pbatigne/.rvm/gems/ruby-2.1.0/gems/mini_portile2-2.1.0/lib/mini_portile2/mini_portile.rb:111:in `compile'
+	from /Users/pbatigne/.rvm/gems/ruby-2.1.0/gems/mini_portile2-2.1.0/lib/mini_portile2/mini_portile.rb:150:in `cook'
+	from extconf.rb:364:in `block (2 levels) in process_recipe'
+	from extconf.rb:257:in `block in chdir_for_build'
+	from extconf.rb:256:in `chdir'
+	from extconf.rb:256:in `chdir_for_build'
+	from extconf.rb:363:in `block in process_recipe'
+	from extconf.rb:262:in `tap'
+	from extconf.rb:262:in `process_recipe'
+	from extconf.rb:555:in `<main>'
+
+extconf failed, exit code 1
+
+Gem files will remain installed in /Users/pbatigne/.rvm/gems/ruby-2.1.0/gems/nokogiri-1.6.8 for inspection.
+Results logged to /Users/pbatigne/.rvm/gems/ruby-2.1.0/extensions/x86_64-darwin-12/2.1.0-static/nokogiri-1.6.8/gem_make.out
+
+/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/site_ruby/2.1.0/rubygems/ext/builder.rb:89:in `run'  \n/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/site_ruby/2.1.0/rubygems/ext/ext_conf_builder.rb:37:in `block in build'  \n/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/2.1.0/tempfile.rb:324:in `open'  \n/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/site_ruby/2.1.0/rubygems/ext/ext_conf_builder.rb:17:in `build'  \n/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/site_ruby/2.1.0/rubygems/ext/builder.rb:161:in `block (2 levels) in build_extension'  \n/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/site_ruby/2.1.0/rubygems/ext/builder.rb:160:in `chdir'  \n/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/site_ruby/2.1.0/rubygems/ext/builder.rb:160:in `block in build_extension'  \n/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/site_ruby/2.1.0/rubygems/ext/builder.rb:159:in `synchronize'  \n/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/site_ruby/2.1.0/rubygems/ext/builder.rb:159:in `build_extension'  \n/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/site_ruby/2.1.0/rubygems/ext/builder.rb:198:in `block in build_extensions'  \n/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/site_ruby/2.1.0/rubygems/ext/builder.rb:195:in `each'  \n/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/site_ruby/2.1.0/rubygems/ext/builder.rb:195:in `build_extensions'  \n/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/site_ruby/2.1.0/rubygems/installer.rb:677:in `build_extensions'  \n/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/site_ruby/2.1.0/rubygems/installer.rb:232:in `install'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/source/rubygems.rb:101:in `block in install'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/rubygems_integration.rb:118:in `preserve_paths'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/source/rubygems.rb:94:in `install'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/installer.rb:111:in `block in install_gem_from_spec'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/rubygems_integration.rb:150:in `with_build_args'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/installer.rb:110:in `install_gem_from_spec'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/installer.rb:295:in `block in install_sequentially'  \n/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/2.1.0/forwardable.rb:183:in `each'  \n/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/2.1.0/forwardable.rb:183:in `each'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/installer.rb:294:in `install_sequentially'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/installer.rb:97:in `run'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/installer.rb:15:in `install'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/cli.rb:257:in `install'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/vendor/thor/command.rb:27:in `run'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/vendor/thor/invocation.rb:120:in `invoke_command'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/vendor/thor.rb:363:in `dispatch'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/vendor/thor/base.rb:438:in `start'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/cli.rb:10:in `start'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/bin/bundle:22:in `block in <top (required)>'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/friendly_errors.rb:5:in `with_friendly_errors'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/bin/bundle:22:in `<top (required)>'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/bin/bundle:23:in `load'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/bin/bundle:23:in `<main>'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0/bin/ruby_executable_hooks:15:in `eval'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0/bin/ruby_executable_hooks:15:in `<main>'
+I, [2016-06-25T22:15:35.632568 #43742]  INFO -- : 0:  rake (11.2.2) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/rake-11.2.2.gemspec
+I, [2016-06-25T22:15:35.633067 #43742]  INFO -- : 0:  i18n (0.7.0) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/i18n-0.7.0.gemspec
+I, [2016-06-25T22:15:35.633387 #43742]  INFO -- : 0:  json (1.8.3) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/json-1.8.3.gemspec
+I, [2016-06-25T22:15:35.633679 #43742]  INFO -- : 0:  minitest (5.9.0) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/minitest-5.9.0.gemspec
+I, [2016-06-25T22:15:35.633976 #43742]  INFO -- : 0:  thread_safe (0.3.5) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/thread_safe-0.3.5.gemspec
+I, [2016-06-25T22:15:35.634261 #43742]  INFO -- : 0:  tzinfo (1.2.2) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/tzinfo-1.2.2.gemspec
+I, [2016-06-25T22:15:35.634538 #43742]  INFO -- : 0:  activesupport (4.2.5.1) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/activesupport-4.2.5.1.gemspec
+I, [2016-06-25T22:15:35.634808 #43742]  INFO -- : 0:  builder (3.2.2) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/builder-3.2.2.gemspec
+I, [2016-06-25T22:15:35.635080 #43742]  INFO -- : 0:  erubis (2.7.0) from /Users/pbatigne/.rvm/gems/ruby-2.1.0@global/specifications/erubis-2.7.0.gemspec
+I, [2016-06-25T22:15:35.635352 #43742]  INFO -- : 0:  mini_portile2 (2.1.0) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/mini_portile2-2.1.0.gemspec
+I, [2016-06-25T22:15:35.635620 #43742]  INFO -- : 0:  pkg-config (1.1.7) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/pkg-config-1.1.7.gemspec
+E, [2016-06-25T22:15:53.468098 #43742] ERROR -- : Gem::Ext::BuildError: ERROR: Failed to build gem native extension.
+
+    /Users/pbatigne/.rvm/rubies/ruby-2.1.0/bin/ruby extconf.rb 
+Using pkg-config version 1.1.7
+checking if the C compiler accepts ... yes
+checking if the C compiler accepts -Wno-error=unused-command-line-argument-hard-error-in-future... no
+Building nokogiri using packaged libraries.
+Using mini_portile version 2.1.0
+checking for iconv.h... yes
+checking for gzdopen() in -lz... yes
+checking for iconv... yes
+************************************************************************
+IMPORTANT NOTICE:
+
+Building Nokogiri with a packaged version of libxml2-2.9.4.
+
+Team Nokogiri will keep on doing their best to provide security
+updates in a timely manner, but if this is a concern for you and want
+to use the system library instead; abort this installation process and
+reinstall nokogiri as follows:
+
+    gem install nokogiri -- --use-system-libraries
+        [--with-xml2-config=/path/to/xml2-config]
+        [--with-xslt-config=/path/to/xslt-config]
+
+If you are using Bundler, tell it to use the option:
+
+    bundle config build.nokogiri --use-system-libraries
+    bundle install
+
+Note, however, that nokogiri is not fully compatible with arbitrary
+versions of libxml2 provided by OS/package vendors.
+************************************************************************
+Extracting libxml2-2.9.4.tar.gz into tmp/x86_64-apple-darwin12.5.0/ports/libxml2/2.9.4... OK
+Running 'configure' for libxml2 2.9.4... OK
+Running 'compile' for libxml2 2.9.4... ERROR, review '/Users/pbatigne/.rvm/gems/ruby-2.1.0/gems/nokogiri-1.6.8/ext/nokogiri/tmp/x86_64-apple-darwin12.5.0/ports/libxml2/2.9.4/compile.log' to see what happened. Last lines are:
+========================================================================
+    unsigned short* in = (unsigned short*) inb;
+                         ^~~~~~~~~~~~~~~~~~~~~
+encoding.c:815:27: warning: cast from 'unsigned char *' to 'unsigned short *' increases required alignment from 1 to 2 [-Wcast-align]
+    unsigned short* out = (unsigned short*) outb;
+                          ^~~~~~~~~~~~~~~~~~~~~~
+4 warnings generated.
+  CC       error.lo
+  CC       parserInternals.lo
+  CC       parser.lo
+  CC       tree.lo
+  CC       hash.lo
+  CC       list.lo
+  CC       xmlIO.lo
+xmlIO.c:1450:52: error: use of undeclared identifier 'LZMA_OK'
+    ret =  (__libxml2_xzclose((xzFile) context) == LZMA_OK ) ? 0 : -1;
+                                                   ^
+1 error generated.
+make[2]: *** [xmlIO.lo] Error 1
+make[1]: *** [all-recursive] Error 1
+make: *** [all] Error 2
+========================================================================
+*** extconf.rb failed ***
+Could not create Makefile due to some reason, probably lack of necessary
+libraries and/or headers.  Check the mkmf.log file for more details.  You may
+need configuration options.
+
+Provided configuration options:
+	--with-opt-dir
+	--without-opt-dir
+	--with-opt-include
+	--without-opt-include=${opt-dir}/include
+	--with-opt-lib
+	--without-opt-lib=${opt-dir}/lib
+	--with-make-prog
+	--without-make-prog
+	--srcdir=.
+	--curdir
+	--ruby=/Users/pbatigne/.rvm/rubies/ruby-2.1.0/bin/ruby
+	--help
+	--clean
+	--use-system-libraries
+	--enable-static
+	--disable-static
+	--with-zlib-dir
+	--without-zlib-dir
+	--with-zlib-include
+	--without-zlib-include=${zlib-dir}/include
+	--with-zlib-lib
+	--without-zlib-lib=${zlib-dir}/lib
+	--enable-cross-build
+	--disable-cross-build
+/Users/pbatigne/.rvm/gems/ruby-2.1.0/gems/mini_portile2-2.1.0/lib/mini_portile2/mini_portile.rb:366:in `block in execute': Failed to complete compile task (RuntimeError)
+	from /Users/pbatigne/.rvm/gems/ruby-2.1.0/gems/mini_portile2-2.1.0/lib/mini_portile2/mini_portile.rb:337:in `chdir'
+	from /Users/pbatigne/.rvm/gems/ruby-2.1.0/gems/mini_portile2-2.1.0/lib/mini_portile2/mini_portile.rb:337:in `execute'
+	from /Users/pbatigne/.rvm/gems/ruby-2.1.0/gems/mini_portile2-2.1.0/lib/mini_portile2/mini_portile.rb:111:in `compile'
+	from /Users/pbatigne/.rvm/gems/ruby-2.1.0/gems/mini_portile2-2.1.0/lib/mini_portile2/mini_portile.rb:150:in `cook'
+	from extconf.rb:364:in `block (2 levels) in process_recipe'
+	from extconf.rb:257:in `block in chdir_for_build'
+	from extconf.rb:256:in `chdir'
+	from extconf.rb:256:in `chdir_for_build'
+	from extconf.rb:363:in `block in process_recipe'
+	from extconf.rb:262:in `tap'
+	from extconf.rb:262:in `process_recipe'
+	from extconf.rb:555:in `<main>'
+
+extconf failed, exit code 1
+
+Gem files will remain installed in /Users/pbatigne/.rvm/gems/ruby-2.1.0/gems/nokogiri-1.6.8 for inspection.
+Results logged to /Users/pbatigne/.rvm/gems/ruby-2.1.0/extensions/x86_64-darwin-12/2.1.0-static/nokogiri-1.6.8/gem_make.out
+
+/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/site_ruby/2.1.0/rubygems/ext/builder.rb:89:in `run'  \n/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/site_ruby/2.1.0/rubygems/ext/ext_conf_builder.rb:37:in `block in build'  \n/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/2.1.0/tempfile.rb:324:in `open'  \n/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/site_ruby/2.1.0/rubygems/ext/ext_conf_builder.rb:17:in `build'  \n/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/site_ruby/2.1.0/rubygems/ext/builder.rb:161:in `block (2 levels) in build_extension'  \n/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/site_ruby/2.1.0/rubygems/ext/builder.rb:160:in `chdir'  \n/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/site_ruby/2.1.0/rubygems/ext/builder.rb:160:in `block in build_extension'  \n/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/site_ruby/2.1.0/rubygems/ext/builder.rb:159:in `synchronize'  \n/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/site_ruby/2.1.0/rubygems/ext/builder.rb:159:in `build_extension'  \n/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/site_ruby/2.1.0/rubygems/ext/builder.rb:198:in `block in build_extensions'  \n/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/site_ruby/2.1.0/rubygems/ext/builder.rb:195:in `each'  \n/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/site_ruby/2.1.0/rubygems/ext/builder.rb:195:in `build_extensions'  \n/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/site_ruby/2.1.0/rubygems/installer.rb:677:in `build_extensions'  \n/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/site_ruby/2.1.0/rubygems/installer.rb:232:in `install'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/source/rubygems.rb:101:in `block in install'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/rubygems_integration.rb:118:in `preserve_paths'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/source/rubygems.rb:94:in `install'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/installer.rb:111:in `block in install_gem_from_spec'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/rubygems_integration.rb:150:in `with_build_args'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/installer.rb:110:in `install_gem_from_spec'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/installer.rb:295:in `block in install_sequentially'  \n/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/2.1.0/forwardable.rb:183:in `each'  \n/Users/pbatigne/.rvm/rubies/ruby-2.1.0/lib/ruby/2.1.0/forwardable.rb:183:in `each'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/installer.rb:294:in `install_sequentially'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/installer.rb:97:in `run'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/installer.rb:15:in `install'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/cli.rb:257:in `install'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/vendor/thor/command.rb:27:in `run'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/vendor/thor/invocation.rb:120:in `invoke_command'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/vendor/thor.rb:363:in `dispatch'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/vendor/thor/base.rb:438:in `start'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/cli.rb:10:in `start'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/bin/bundle:22:in `block in <top (required)>'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/lib/bundler/friendly_errors.rb:5:in `with_friendly_errors'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/gems/bundler-1.5.1/bin/bundle:22:in `<top (required)>'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/bin/bundle:23:in `load'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0@global/bin/bundle:23:in `<main>'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0/bin/ruby_executable_hooks:15:in `eval'  \n/Users/pbatigne/.rvm/gems/ruby-2.1.0/bin/ruby_executable_hooks:15:in `<main>'
+I, [2016-06-25T22:42:14.435025 #60472]  INFO -- : 0:  rake (11.2.2) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/rake-11.2.2.gemspec
+I, [2016-06-25T22:42:14.435420 #60472]  INFO -- : 0:  i18n (0.7.0) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/i18n-0.7.0.gemspec
+I, [2016-06-25T22:42:14.435721 #60472]  INFO -- : 0:  json (1.8.3) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/json-1.8.3.gemspec
+I, [2016-06-25T22:42:14.436019 #60472]  INFO -- : 0:  minitest (5.9.0) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/minitest-5.9.0.gemspec
+I, [2016-06-25T22:42:14.436318 #60472]  INFO -- : 0:  thread_safe (0.3.5) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/thread_safe-0.3.5.gemspec
+I, [2016-06-25T22:42:14.436602 #60472]  INFO -- : 0:  tzinfo (1.2.2) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/tzinfo-1.2.2.gemspec
+I, [2016-06-25T22:42:14.436875 #60472]  INFO -- : 0:  activesupport (4.2.5.1) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/activesupport-4.2.5.1.gemspec
+I, [2016-06-25T22:42:14.437155 #60472]  INFO -- : 0:  builder (3.2.2) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/builder-3.2.2.gemspec
+I, [2016-06-25T22:42:14.437423 #60472]  INFO -- : 0:  erubis (2.7.0) from /Users/pbatigne/.rvm/gems/ruby-2.1.0@global/specifications/erubis-2.7.0.gemspec
+I, [2016-06-25T22:42:14.437706 #60472]  INFO -- : 0:  mini_portile2 (2.1.0) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/mini_portile2-2.1.0.gemspec
+I, [2016-06-25T22:42:14.437997 #60472]  INFO -- : 0:  pkg-config (1.1.7) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/pkg-config-1.1.7.gemspec
+I, [2016-06-25T22:42:14.438277 #60472]  INFO -- : 0:  nokogiri (1.6.8) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/nokogiri-1.6.8.gemspec
+I, [2016-06-25T22:42:14.438548 #60472]  INFO -- : 0:  rails-deprecated_sanitizer (1.0.3) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/rails-deprecated_sanitizer-1.0.3.gemspec
+I, [2016-06-25T22:42:14.438817 #60472]  INFO -- : 0:  rails-dom-testing (1.0.7) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/rails-dom-testing-1.0.7.gemspec
+I, [2016-06-25T22:42:14.439834 #60472]  INFO -- : 0:  loofah (2.0.3) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/loofah-2.0.3.gemspec
+I, [2016-06-25T22:42:14.440315 #60472]  INFO -- : 0:  rails-html-sanitizer (1.0.3) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/rails-html-sanitizer-1.0.3.gemspec
+I, [2016-06-25T22:42:14.440680 #60472]  INFO -- : 0:  actionview (4.2.5.1) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/actionview-4.2.5.1.gemspec
+I, [2016-06-25T22:42:14.441041 #60472]  INFO -- : 0:  rack (1.6.4) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/rack-1.6.4.gemspec
+I, [2016-06-25T22:42:14.441382 #60472]  INFO -- : 0:  rack-test (0.6.3) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/rack-test-0.6.3.gemspec
+I, [2016-06-25T22:42:14.441681 #60472]  INFO -- : 0:  actionpack (4.2.5.1) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/actionpack-4.2.5.1.gemspec
+I, [2016-06-25T22:42:14.441950 #60472]  INFO -- : 0:  globalid (0.3.6) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/globalid-0.3.6.gemspec
+I, [2016-06-25T22:42:14.442235 #60472]  INFO -- : 0:  activejob (4.2.5.1) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/activejob-4.2.5.1.gemspec
+I, [2016-06-25T22:42:15.212403 #60472]  INFO -- : 0:  mime-types-data (3.2016.0521) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/mime-types-data-3.2016.0521.gemspec
+I, [2016-06-25T22:42:15.843296 #60472]  INFO -- : 0:  mime-types (3.1) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/mime-types-3.1.gemspec
+I, [2016-06-25T22:42:15.844023 #60472]  INFO -- : 0:  mail (2.6.4) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/mail-2.6.4.gemspec
+I, [2016-06-25T22:42:15.844596 #60472]  INFO -- : 0:  actionmailer (4.2.5.1) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/actionmailer-4.2.5.1.gemspec
+I, [2016-06-25T22:42:15.845120 #60472]  INFO -- : 0:  activemodel (4.2.5.1) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/activemodel-4.2.5.1.gemspec
+I, [2016-06-25T22:42:15.845670 #60472]  INFO -- : 0:  arel (6.0.3) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/arel-6.0.3.gemspec
+I, [2016-06-25T22:42:15.846169 #60472]  INFO -- : 0:  activerecord (4.2.5.1) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/activerecord-4.2.5.1.gemspec
+I, [2016-06-25T22:42:16.482727 #60472]  INFO -- : 0:  execjs (2.7.0) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/execjs-2.7.0.gemspec
+I, [2016-06-25T22:42:17.185886 #60472]  INFO -- : 0:  autoprefixer-rails (6.3.6.2) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/autoprefixer-rails-6.3.6.2.gemspec
+I, [2016-06-25T22:42:17.186369 #60472]  INFO -- : 0:  debug_inspector (0.0.2) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/debug_inspector-0.0.2.gemspec
+I, [2016-06-25T22:42:17.186713 #60472]  INFO -- : 0:  binding_of_caller (0.7.2) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/binding_of_caller-0.7.2.gemspec
+I, [2016-06-25T22:42:17.187084 #60472]  INFO -- : 0:  sass (3.4.22) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/sass-3.4.22.gemspec
+I, [2016-06-25T22:42:17.888502 #60472]  INFO -- : 0:  bootstrap (4.0.0.alpha3) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/bootstrap-4.0.0.alpha3.gemspec
+I, [2016-06-25T22:42:17.888884 #60472]  INFO -- : 0:  bundler (1.5.1) from /Users/pbatigne/.rvm/gems/ruby-2.1.0@global/specifications/bundler-1.5.1.gemspec
+I, [2016-06-25T22:42:19.456204 #60472]  INFO -- : 0:  byebug (9.0.5) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/byebug-9.0.5.gemspec
+I, [2016-06-25T22:42:19.456957 #60472]  INFO -- : 0:  coderay (1.1.0) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/coderay-1.1.0.gemspec
+I, [2016-06-25T22:42:19.457677 #60472]  INFO -- : 0:  coffee-script-source (1.10.0) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/coffee-script-source-1.10.0.gemspec
+I, [2016-06-25T22:42:19.458296 #60472]  INFO -- : 0:  coffee-script (2.4.1) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/coffee-script-2.4.1.gemspec
+I, [2016-06-25T22:42:19.458857 #60472]  INFO -- : 0:  thor (0.19.1) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/thor-0.19.1.gemspec
+I, [2016-06-25T22:42:19.459379 #60472]  INFO -- : 0:  railties (4.2.5.1) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/railties-4.2.5.1.gemspec
+I, [2016-06-25T22:42:19.459907 #60472]  INFO -- : 0:  coffee-rails (4.1.1) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/coffee-rails-4.1.1.gemspec
+I, [2016-06-25T22:42:20.092684 #60472]  INFO -- : 0:  concurrent-ruby (1.0.2) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/concurrent-ruby-1.0.2.gemspec
+I, [2016-06-25T22:42:20.649040 #60472]  INFO -- : 0:  multi_json (1.12.1) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/multi_json-1.12.1.gemspec
+I, [2016-06-25T22:42:21.239245 #60472]  INFO -- : 0:  jbuilder (2.5.0) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/jbuilder-2.5.0.gemspec
+I, [2016-06-25T22:42:21.239969 #60472]  INFO -- : 0:  jquery-rails (4.1.1) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/jquery-rails-4.1.1.gemspec
+I, [2016-06-25T22:42:21.240524 #60472]  INFO -- : 0:  method_source (0.8.2) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/method_source-0.8.2.gemspec
+I, [2016-06-25T22:42:21.241073 #60472]  INFO -- : 0:  slop (3.6.0) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/slop-3.6.0.gemspec
+I, [2016-06-25T22:42:21.241530 #60472]  INFO -- : 0:  pry (0.10.3) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/pry-0.10.3.gemspec
+I, [2016-06-25T22:42:21.995162 #60472]  INFO -- : 0:  sprockets (3.6.2) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/sprockets-3.6.2.gemspec
+I, [2016-06-25T22:42:21.995573 #60472]  INFO -- : 0:  sprockets-rails (3.0.4) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/sprockets-rails-3.0.4.gemspec
+I, [2016-06-25T22:42:21.995873 #60472]  INFO -- : 0:  rails (4.2.5.1) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/rails-4.2.5.1.gemspec
+I, [2016-06-25T22:42:21.996174 #60472]  INFO -- : 0:  rdoc (4.2.2) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/rdoc-4.2.2.gemspec
+I, [2016-06-25T22:42:22.824815 #60472]  INFO -- : 0:  tilt (2.0.5) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/tilt-2.0.5.gemspec
+I, [2016-06-25T22:42:22.825477 #60472]  INFO -- : 0:  sass-rails (5.0.4) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/sass-rails-5.0.4.gemspec
+I, [2016-06-25T22:42:22.825928 #60472]  INFO -- : 0:  sdoc (0.4.1) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/sdoc-0.4.1.gemspec
+I, [2016-06-25T22:42:22.826327 #60472]  INFO -- : 0:  sqlite3 (1.3.11) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/sqlite3-1.3.11.gemspec
+I, [2016-06-25T22:42:22.826738 #60472]  INFO -- : 0:  turbolinks (2.5.3) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/turbolinks-2.5.3.gemspec
+I, [2016-06-25T22:42:22.827139 #60472]  INFO -- : 0:  uglifier (3.0.0) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/uglifier-3.0.0.gemspec
+I, [2016-06-25T22:42:22.827518 #60472]  INFO -- : 0:  web-console (2.3.0) from /Users/pbatigne/.rvm/gems/ruby-2.1.0/specifications/web-console-2.3.0.gemspec

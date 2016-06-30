@@ -1,0 +1,15 @@
+<table class="table table-striped table-hover table-bordered">
+  <thead>
+    <th>
+      Classification Type
+    </th>
+    <th>
+      Amount Found
+    </th>
+  </thead>
+<% @types.each_key { |t| %>
+  <tr>
+    <td><%= t %></td> <td><%= @types[t] %></td>
+  </tr>
+<%  } %>
+</table>

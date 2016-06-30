@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-md-4 col-md-offset-4" style="background:#ddd;">
+    <h1>Submit Malware File</h1>
+    <p>Upload a CSV file with your malware data to be uploaded to our databases.</p>
+    <%= form_tag({:action => 'upload'}, multipart: true) do %>
+      <%= file_field_tag 'csvFile' %>
+      <br>
+      <%= submit_tag 'Submit', class: "btn btn-primary", style: "float: right;" %>
+      <div style="clear:both"></div>
+    <% end %>
+    <br>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+    <%= link_to "Reset Database", page_clear_path, class: "btn btn-danger", style: "width: 100%", data: { confirm: "Are you sure?" } %>
+  </div>
+</div>
