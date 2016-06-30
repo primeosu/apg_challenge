@@ -25,6 +25,7 @@ class PageController < ApplicationController
       redirect_to page_index_path
     elsif true
       #save the file
+      #time = Time.now.to_i+"_"
       File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'wb') do |file|
         file.write(uploaded_io.read)
       end
@@ -35,11 +36,11 @@ class PageController < ApplicationController
       index = 0;
       csv.each do |row|
         begin
-          attributes = {:md5 => row["MD5"],
-            :className => row["ClassificationName"],
-            :classType => row["ClassificationType"],
-            :size => row["Size"],
-            :fileType => row["FileType"]}
+          attributes = {:md5 => row[0],
+            :className => row[1],
+            :classType => row[2,
+            :size => row[3],
+            :fileType => row[4]}
             index += 1
           createMalware attributes
         rescue => e #in the event it errors out, we'll at least capture that.
@@ -72,21 +73,21 @@ class PageController < ApplicationController
     size = attributes[:size]
     fileType = attributes[:fileType]
 
-    cName = ClassificationName.find_by name: className
+    cName = ClassificationName.find_by name: className.to_s
     if cName.nil?
-      cName = ClassificationName.new name: className
+      cName = ClassificationName.new name: className.to_s
       cName.save
     end
 
-    cType = ClassificationType.find_by name: classType
+    cType = ClassificationType.find_by name: classType.to_s
     if cType.nil?
-      cType = ClassificationType.new name: classType
+      cType = ClassificationType.new name: classType.to_s
       cType.save
     end
 
-    fType = FileType.find_by name: fileType
+    fType = FileType.find_by name: fileType.to_s
     if fType.nil?
-      fType = FileType.new name: fileType
+      fType = FileType.new name: fileType.to_s
       fType.save
     end
 
