@@ -61,7 +61,8 @@ def handle_upload():
         with open(upload_file.filename, 'rb') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
-                row.pop('')
+                if row.has_key(''):
+                    row.pop('')
                 definitions.append(row)
 
         for entry in definitions:
