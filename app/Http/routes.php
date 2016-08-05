@@ -15,9 +15,9 @@ Route::get('/', function () {
     return view('dashboard');
 });
 
-Route::get('upload', 'UploadController@index');
-Route::post('upload/delete', 'UploadController@deleteAll');
-Route::post('upload', 'UploadController@store');
+Route::post('upload/delete',  'MalwareController@deleteUploads');
+Route::post('upload',         'MalwareController@store');
 
-Route::get('malware', 'MalwareController@index');
-Route::get('malware/{id}', 'MalwareController@show');
+Route::get('upload',          'MalwareController@uploadsIndex');
+Route::get('malware',         'MalwareController@index');
+Route::get('malware/{id}',    'MalwareController@show');
