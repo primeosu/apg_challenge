@@ -49,3 +49,7 @@ To setup this server, you must do the following.
 Once the above is setup, run 'composer update' and 'composer install.' This updates and installs the dependancies for Laravel.
 
 After the above finishes, run 'php artisan serve' in this directory to start a server on localhost:8000
+
+## Heroku
+This app is currently hosted on Heroku available to anyone that doesn't want to set it up on their own machines.
+It is available here: https://apg-challenge.herokuapp.com/
