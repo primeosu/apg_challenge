@@ -32,8 +32,8 @@ Evaluation of your submission will be based on the following criteria:
 ## Setup
 To setup this server, you must do the following.
 
-* Setup an .env file at the root of this project.  An example is included.
-* Have the following installed on the machine
+* Setup an .env file at the root of this project. This is included, but should not normally be included in version control.
+* Have the following installed on the machine:
  * PHP 5.5.9+
  * OpenSSL PHP Extension
   * http://php.net/manual/en/openssl.installation.php
@@ -43,5 +43,9 @@ To setup this server, you must do the following.
   * http://php.net/manual/en/mbstring.installation.php
  * Tokenizer PHP Extension  
   * http://php.net/manual/en/tokenizer.installation.php
+ * Composer
+  * https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx
 
-Once the above is setup.  Run 'php artisan serve' in this directory to start a server on localhost:8000
+Once the above is setup, run 'composer update' and 'composer install.' This updates and installs the dependancies for Laravel.
+
+After the above finishes, run 'php artisan serve' in this directory to start a server on localhost:8000

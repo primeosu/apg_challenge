@@ -16,7 +16,9 @@ Route::get('/', function () {
 });
 
 Route::post('upload/delete',  'MalwareController@deleteUploads');
+Route::post('malware/delete', 'MalwareController@deleteAll');
 Route::post('upload',         'MalwareController@store');
+Route::post('malware/rebuild','MalwareController@rebuildFromBackup');
 
 Route::get('upload',          'MalwareController@uploadsIndex');
 Route::get('malware',         'MalwareController@index');
