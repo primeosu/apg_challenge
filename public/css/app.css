@@ -1,0 +1,16 @@
+.titanic {
+	float: none;
+}
+
+.navbar-default {
+	background-color: #417FA3;
+	border-color: #417FA3;
+}
+
+.navbar-default .navbar-brand {
+	color: white;
+}
+
+.navbar-default .navbar-nav>li>a {
+	color: white;
+}

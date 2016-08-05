@@ -34,7 +34,8 @@ foreach ($files as $file) {
         <h4 class="modal-title">Are you sure?</h4>
       </div>
       <div class="modal-body">
-				This deletes the SQL database and rebuilds it from ONLY CSV files listed on this page.
+				<p>This deletes the SQL database and rebuilds it from ONLY CSV files listed on this page.</p>
+				<small>&nbsp;&nbsp;* This may take a few minutes to complete depending on the size of the files.</small>
       </div>
       <div class="modal-footer">
 				<form action="/malware/rebuild" method="post" enctype="multipart/form-data">
