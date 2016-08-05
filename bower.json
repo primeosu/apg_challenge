@@ -1,0 +1,12 @@
+{
+  "name": "apg_challenge",
+  "description": "Intel Security Programming Challenge",
+  "main": "index.js",
+  "authors": [
+    "Kraig Halfpap <kehalfpap@gmail.com>"
+  ],
+  "private": true,
+  "dependencies": {
+    "bootstrap": "~3.3.7"
+  }
+}
