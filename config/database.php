@@ -4,7 +4,7 @@ $url = parse_url(env("DB_URL"));
 $port = $url['port'];
 $host = $url["host"];
 $username = $url["user"];
-$password = $url["pass"];
+$password = env("DB_PASS");
 $database = substr($url["path"], 1);
 
 return [
@@ -33,7 +33,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'pgsql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -75,7 +75,7 @@ return [
             'driver'   => 'pgsql',
             'host'     => $host,
             'database' => $database,
-            'username' => $user,
+            'username' => $username,
             'password' => $password,
             'port'     => $port,
             'charset'  => 'utf8',

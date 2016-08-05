@@ -16,9 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('upload', 'UploadController@index');
-Route::get('upload/create', 'UploadController@create');
-Route::get('upload/{id}', 'UploadController@show');
-Route::get('upload/delete', 'UploadController@deleteAll');
+Route::post('upload/delete', 'UploadController@deleteAll');
 Route::post('upload', 'UploadController@store');
 
 Route::get('malware', 'MalwareController@index');
