@@ -1,5 +1,5 @@
 # File Definition Importer
-This is a solution for the [Intel Security Programming Challange](https://github.com/primeosu/apg_challenge).
+This is a solution for the [Intel Security Programming Challenge](https://github.com/primeosu/apg_challenge).
 
 ## Dependencies
 * [node](https://nodejs.org/en/) version v0.12.0 or later

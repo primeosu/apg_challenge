@@ -5,7 +5,7 @@ var Promise = require('bluebird');
 var _ = require('lodash');
 
 var multer = require('multer');
-var storage = multer.memoryStorage()
+var storage = multer.memoryStorage();
 var upload = multer({storage: storage});
 
 var FileDescriptor = require('../models/file');
@@ -13,20 +13,22 @@ var FileDescriptor = require('../models/file');
 module.exports = function (app) {
 
     app.get('/', function (req, res) {
-        var errorMessage = req.session.errorMessage;
-        req.session.errorMessage = undefined;
+        var error = req.session.error;
+        req.session.error = undefined;
         var successMessage = req.session.successMessage;
         req.session.successMessage = undefined;
         FileDescriptor.getTypeCounts().then(function (typeCounts) {
-            res.render('index', {
-                errorMessage: errorMessage,
-                successMessage: successMessage,
-                typeCounts: typeCounts
-            });
+            res.status(error && error.statusCode || 200)
+                .render('index', {
+                    errorMessage: error && error.message,
+                    successMessage: successMessage,
+                    typeCounts: typeCounts
+                });
         }, function () {
-            res.render('index', {
-                errorMessage: '500 Database Error'
-            });
+            res.status(500)
+                .render('index', {
+                    errorMessage: '500 Database Error'
+                });
         });
     });
 
@@ -65,9 +67,8 @@ module.exports = function (app) {
 };
 
 function redirectWithError(error, req, res) {
-    req.session.errorMessage = error.message;
-    res.status(error.statusCode)
-        .redirect('/');
+    req.session.error = error;
+    res.redirect('/');
 }
 
 function internalServerError() {
@@ -108,8 +109,8 @@ function createFileDescriptors(rawFileDescriptors) {
 
 function saveFileDescriptors(fileDescriptors, req, res) {
     Promise.all(_.map(fileDescriptors, function (fileDescriptor) {
-        return fileDescriptor.save();
-    }))
+            return fileDescriptor.save();
+        }))
         .then(function () {
             req.session.successMessage = 'Successfully imported ' + String(fileDescriptors.length) + ' file definitions.';
             res.redirect('/');
