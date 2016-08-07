@@ -38,7 +38,7 @@ This web application features two views:
 
   The first page allows text/csv files to be uploaded via a form. File validation is performed on the client side via `input type='text/csv'`, as well as on the server-side via PHP in [`app/helpers/processFile.php`](https://github.com/kylesb/apg_challenge/blob/master/app/helpers/processFile.php).
 
-  * [/app/views/display.php](https://github.com/kylesb/donorsearch/blob/master/app/views/display.php)
+  * [/app/views/display.php](https://github.com/kylesb/apg_challenge/blob/master/app/views/display.php)
 
   The second page will display data in the view.
 
