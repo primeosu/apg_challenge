@@ -4,23 +4,27 @@
   <head>
       <meta charset="utf-8">
       <meta name="author" content="Kyle Belanger">
-      <title>Intel Security Programming Challenge</title>
+      <title>Intel Security Challenge</title>
       <link rel="stylesheet" type="text/css" href="app/assets/css/style.css">
     </head>
 
   <body>
-      <h2>Intel Security</h2>
-      <p>Web development example for normalizing data in a CSV file.</p>
+      <header>
+          <h2>Intel Security</h2>
+          <p>Web development example for normalizing data in a CSV file.</p>
+      </header>
 
       <hr>
 
-      <p>Please upload the file below:</p>
+      <section>
+          <p>Please upload the file below:</p>
 
-      <form action="app/helpers/processFile.php" onsubmit="processFile(this)" method="post" enctype="multipart/form-data">
-          <input id="file" type="file" name="file" accept="text/plain">
-          <input id="submit" type="submit">
-          <small id="processing"></small>
-      </form>
+          <form action="app/helpers/processFile.php" onChange="processFile(this, 'change')" onSubmit="processFile(this, 'submit')" method="post" enctype="multipart/form-data">
+              <input id="file" type="file" name="file" accept="text/plain">
+              <input id="submit" type="submit">
+              <small id="processing"></small>
+          </form>
+      </section>
 
   </body>
 

@@ -25,7 +25,7 @@ if(fileValidation($_FILES["file"]) == true) {
 }
 else {
     // return error
-    echo "File is invalid";
+    echo "File is invalid. Please upload a .CSV file.";
 }
 
 /*  fileValidation
@@ -88,6 +88,11 @@ function processFile($file) {
           }
     }
 
+    // redirect message
+    echo("Upload complete... Redirecting.");
+
+    // Complete? Re-direct to display page
+    header("Location: ../views/display.php");
 }
 
 /*  insertMalwareRecord
@@ -124,7 +129,7 @@ function insertMalwareRecord($line, $foreignKeys) {
             $foreignKeys['FileType'] = getForeignKeys('filetype', $line['FileType']);
       }
 
-      // set variables for insert statement
+      // set variables for insert statement below
       $MD5 = $line['MD5'];
       $ClassificationName = $foreignKeys['ClassificationName'];
       $ClassificationType = $foreignKeys['ClassificationType'];

@@ -1,0 +1,13 @@
+header {
+    opacity: .5;
+}
+
+section {
+    margin: 25px 0;
+}
+
+section #file {
+    width: 35%;
+    min-width: 250px;
+    border-bottom: thin dotted #dcdcdc;
+}
