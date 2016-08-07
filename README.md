@@ -45,9 +45,7 @@ This web application features two views:
 
 ### Workflow
 
-1. The uploaded file is sent to the server via a post request, and processed via a helper in [`app/helpers/processFile.php`](https://github.com/kylesb/apg_challenge/blob/master/app/helpers/processFile.php). The uploaded file is checked for validation.
-
-2. Once the upload is complete, the helper file [`app/helpers/processFile.php`](https://github.com/kylesb/apg_challenge/blob/master/app/helpers/processFile.php) redirects to a view [`app/views/display.php`](https://github.com/kylesb/apg_challenge/blob/master/app/views/display.php) to display the data.
+1. The uploaded file is sent to the server via a post request, and processed via a helper in [`app/helpers/processFile.php`](https://github.com/kylesb/apg_challenge/blob/master/app/helpers/processFile.php). The uploaded file is checked for validation, and normalized for insertion into the database.
 
 
 ## Stack
