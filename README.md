@@ -22,6 +22,8 @@ This is a solution for the [Intel Security Programming Challenge](https://github
 ```bash
 npm install
 ```
+This command should not be run as a superuser or administrator.  Doing so will prevent
+the ```"postinstall"``` script (defined in ```package.json```) from running.
 
 ## Run App
 ```bash
