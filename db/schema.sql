@@ -31,6 +31,7 @@ CREATE TABLE filetype (
 -- Create table: malware
 CREATE TABLE malware (
       id			                  INT			PRIMARY KEY		AUTO_INCREMENT,
+      MD5                       VARCHAR(50),
       classification_name_fk    INT,
       classification_type_fk    INT,
       size                      INT,
