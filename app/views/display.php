@@ -21,6 +21,4 @@
       </section>
   </body>
 
-  </script>
-
 </html>
