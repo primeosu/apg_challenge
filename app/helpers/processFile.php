@@ -124,15 +124,19 @@ function insertMalwareRecord($line, $foreignKeys) {
             $foreignKeys['FileType'] = getForeignKeys('filetype', $line['FileType']);
       }
 
-      print_r($foreignKeys);
-      echo "<br> <br>";
+      // set variables for insert statement
+      $MD5 = $line['MD5'];
+      $ClassificationName = $foreignKeys['ClassificationName'];
+      $ClassificationType = $foreignKeys['ClassificationType'];
+      $Size = $line['Size'];
+      $FileType = $foreignKeys['FileType'];
 
-/*
-      $sql = "LOAD DATA INFILE '$file_contents' INTO TABLE organization FIELDS TERMINATED BY '|'
-                        LINES TERMINATED BY '\n' IGNORE 2 LINES
-                        (ein, legal_name, city_name, state_name, country_name, description);";
+      // sql statement
+      $sql = "INSERT INTO malware (MD5, classification_name_fk, classification_type_fk, size, filetype_fk)
+              VALUES ('$MD5', '$ClassificationName', '$ClassificationType', '$Size', '$FileType')";
+
       // Run SQL query
-      $DB->execute($SQL_statement);*/
+      $DB->execute($sql);
 }
 
 /*  insertForeignKeyRecord
