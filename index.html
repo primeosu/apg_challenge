@@ -20,7 +20,7 @@
           <p>Please upload the file below:</p>
 
           <form action="app/helpers/processFile.php" onChange="processFile(this, 'change')" onSubmit="processFile(this, 'submit')" method="post" enctype="multipart/form-data">
-              <input id="file" type="file" name="file" accept="text/plain">
+              <input id="file" type="file" name="file" accept="text/csv">
               <input id="submit" type="submit">
               <small id="processing"></small>
           </form>

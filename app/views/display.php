@@ -17,8 +17,20 @@
       <hr>
 
       <section>
-          <p>Upload complete.</p>
+          <p>Upload complete. Please use the option below to filter the data.</p>
+
+          <form>
+                <input oninput="queryData(this.value)" type="text" placeholder="Filter data">
+          </form>
+
+          <section id="malware">
+              <!-- parsed data -->
+          </section>
+
       </section>
   </body>
+
+  <script src="../assets/js/actions.js">
+  </script>
 
 </html>
