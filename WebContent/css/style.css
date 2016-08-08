@@ -1,0 +1,97 @@
+/* 	Author: Kyle Berger
+	Date: 8/8/2016
+	Email: Kyle.msn@live.com */
+
+
+/* Main Styling */
+
+.content{
+	padding-top: 5%;
+	padding-left: 10%;
+	padding-right: 10%;
+}
+.panel-body{
+	overflow: auto;
+}
+.panel-top{
+	margin-bottom: 5%;
+}
+.panel.panel-quadrant{
+	height: 400px;
+}
+.panel-default>.panel-heading{
+	color: #fff;
+}
+.panel-quadrant>.panel-body{
+	height: 360px;
+}
+.panel-heading.summary-heading{
+	background-color: #1b658c;
+	border-color: #1b658c;
+}
+.panel-heading.table-heading{
+	background-color: #62973e;
+	border-color: #62973e;
+}
+.panel-heading.bar-heading{
+	background-color: #8f242c;
+	border-color: #8f242c;
+}
+.panel-heading.pie-heading{
+	background-color: #49357a;
+	border-color: #49357a;
+}
+.progress{
+	height: 30px;
+	width: 90%;
+	margin-left: 5%;
+}
+.progress-bar{
+	min-width: 2em;
+	height: 30px;
+}
+.progress-text{
+	margin-top: 5px;
+	font-size: 14px;
+}
+.btn.btn-primary.btn-upload{
+	float: right;
+	margin: 10px;
+}
+.upload-input{
+	display: inline-flex;
+}
+/* Chartist CSS */
+
+.ct-series-a .ct-bar {
+	stroke: #B32E37;
+  stroke-width: 20px;
+}
+.ct-chart .ct-label.ct-horizontal {
+  text-align: center;
+}
+.ct-label {
+    fill: rgba(0,0,0,1);
+    color: rgba(0,0,0,1);
+    font-size: 14px;
+    line-height: 1;
+}
+
+.ct-series-a .ct-slice-pie {
+    fill: #227FB0;
+}
+.ct-series-b .ct-slice-pie {
+    fill: #7CB854;
+}
+.ct-series-c .ct-slice-pie {
+    fill: #F2B701;
+}
+.ct-series-d .ct-slice-pie {
+    fill: #E57D04;
+}
+.ct-series-e .ct-slice-pie {
+    fill: #B32E37;
+}
+.ct-series-f .ct-slice-pie {
+    fill: #5C4399;
+}
