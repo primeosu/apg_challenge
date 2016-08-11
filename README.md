@@ -4,7 +4,7 @@ Web development example for normalizing data in a CSV file.
 
 ## Description
 
-Included below is a brief overview of the project structure and workflow. This project uses the LAMP web stack to handle file processing and data normalization. The helper files that are used to perform database operations utilize an object orientated architecture.
+Included below is a brief overview of the project structure and workflow. This project uses the LAMP web stack to handle file processing and data normalization.
 
 ### Structure
 
