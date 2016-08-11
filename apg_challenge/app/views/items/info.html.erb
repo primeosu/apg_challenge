@@ -1,2 +1,26 @@
-<h1>Items#info</h1>
-<p>Find me in app/views/items/info.html.erb</p>
+<h1>File Info</h1>
+
+<%= form_tag items_import_path, multipart: true do %>
+    <%= file_field_tag :csv %>
+    <%= submit_tag "Upload" %>
+<% end %>
+
+<% if @items_hash.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Classification Type</th>
+        <th>Quantity</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @items_hash.each do |key,value| %>
+        <tr>
+          <td><%= key.capitalize %></td>
+          <td><%= value %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
