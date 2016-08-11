@@ -1,5 +1,5 @@
-header {
-    opacity: .5;
+header h2 {
+    color: #266195
 }
 
 section {
@@ -34,6 +34,7 @@ table tr td {
     background-color: #efefef;
 }
 
-.blueHighlight {
-    background-color: #d8ebfb;
+input.filter {
+    width: 20%;
+    min-width: 200px;
 }

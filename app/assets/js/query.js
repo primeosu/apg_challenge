@@ -20,7 +20,7 @@ function queryData(data) {
       };
 
       // Send the GET request
-      xmlhttp.open("GET","../helpers/actions.php?q=" + JSON.stringify(data), true);
+      xmlhttp.open("GET","../helpers/query.php?q=" + JSON.stringify(data), true);
       xmlhttp.send();
 }
 

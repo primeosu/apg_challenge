@@ -20,7 +20,7 @@
           <p>Upload complete. Please use the option below to filter the data.</p>
 
           <form>
-                <input oninput="queryData(this.value)" type="text" placeholder="Filter data">
+                Filter: <input class="filter" oninput="queryData(this.value)" type="text" placeholder="Filter data">
           </form>
 
           <section id="malware">
@@ -30,7 +30,7 @@
       </section>
   </body>
 
-  <script src="../assets/js/actions.js">
+  <script src="../assets/js/query.js">
   </script>
 
 </html>
