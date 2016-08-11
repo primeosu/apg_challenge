@@ -51,7 +51,7 @@ This web application features two views:
 
 3. Upon successful completion of data normalization, [`app/helpers/processFile.php`](https://github.com/kylesb/apg_challenge/blob/master/app/helpers/processFile.php) redirects the http header to [`app/views/display.php`](https://github.com/kylesb/apg_challenge/blob/master/app/views/display.php) to display the data in the view.
 
-4. Display.php provides the data in an accessible table format, and allows for asynchronous data filtering on the MD5 and filesize columns. 
+4. Display.php provides the data in an accessible table format, and allows for asynchronous data filtering on the MD5 and filesize columns.
 
 ## Stack
 
@@ -72,6 +72,9 @@ Debugging and testing was performed via XAMPP.
 
 ## Cloning / Viewing
 
-To run this application...
+To run this application - use XAMPP to start a local server.
 
-1. git clone
+1. git clone https://github.com/kylesb/apg_challenge
+2. mv apg_challenge # to the path of XAMPP htdocs directory
+3. Start XAMPP server
+4. Visit http://localhost:8004/apg_challenge/
