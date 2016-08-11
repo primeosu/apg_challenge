@@ -4,7 +4,7 @@ Web development example for normalizing data in a CSV file.
 
 ## Description
 
-Included below is a brief overview of the project structure and workflow. This project uses the LAMP web stack to handle file processing and data normalization, as I felt that using Ruby on Rails would be a bit heavy for the application purpose.
+Included below is a brief overview of the project structure and workflow. This project uses the LAMP web stack to handle file processing and data normalization. The helper files that are used to perform database operations utilize an object orientated architecture.
 
 ### Structure
 
@@ -40,13 +40,18 @@ This web application features two views:
 
   * [/app/views/display.php](https://github.com/kylesb/apg_challenge/blob/master/app/views/display.php)
 
-  The second page will display data in the view.
+  The second page displays data in the view, in the form of a table. This view features an input field that performs asynchronous data filtering on the MD5 and filesize columns (as they are string fields, and do not reference foreign keys).
 
 
 ### Workflow
 
-1. The uploaded file is sent to the server via a post request, and processed via a helper in [`app/helpers/processFile.php`](https://github.com/kylesb/apg_challenge/blob/master/app/helpers/processFile.php). The uploaded file is checked for validation, and normalized for insertion into the database.
+1. The uploaded file is sent to the server via a post request, and processed via a helper in [`app/helpers/processFile.php`](https://github.com/kylesb/apg_challenge/blob/master/app/helpers/processFile.php). The uploaded file is checked for validation.
 
+2. The helper performs data validation, and upon success, creates an object from the [`app/helpers/queries.class.php`](https://github.com/kylesb/apg_challenge/blob/master/app/helpers/queries.class.php) to perform data operations. The queries class provides various functions, including getting foreign key references, and inserting records for any table.
+
+3. Upon successful completion of data normalization, [`app/helpers/processFile.php`](https://github.com/kylesb/apg_challenge/blob/master/app/helpers/processFile.php) redirects the http header to [`app/views/display.php`](https://github.com/kylesb/apg_challenge/blob/master/app/views/display.php) to display the data in the view.
+
+4. Display.php provides the data in an accessible table format, and allows for asynchronous data filtering on the MD5 and filesize columns. 
 
 ## Stack
 
@@ -57,10 +62,6 @@ This web application is built on the LAMP web stack.
 * JavaScript
 * HTML/CSS
 
-## Estimated timeline
-
-I am currently completing this project on weekend time. Estimated timeline of completion is Sunday, August 14th.
-
 ## Acknowledgements
 
 This project uses an open-source PHP/MySQL PDO connection class, available [here](https://github.com/a1phanumeric/PHP-MySQL-Class).
@@ -68,3 +69,9 @@ This project uses an open-source PHP/MySQL PDO connection class, available [here
 ## Debugging / Testing
 
 Debugging and testing was performed via XAMPP.
+
+## Cloning / Viewing
+
+To run this application...
+
+1. git clone
