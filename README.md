@@ -33,9 +33,12 @@ Evaluation of your submission will be based on the following criteria:
 
 #### Specifications:
 Ruby 2.2.4
+
 Rails 5.0.0
 
 #### Database Configuration:
+In config/database.yml
+
 Remove username and password lines, or set to your postgreSQL role and password
 
 #### Configure app:
