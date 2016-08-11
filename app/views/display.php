@@ -20,7 +20,7 @@
           <p>Upload complete. Please use the option below to filter the data.</p>
 
           <form>
-                Filter: <input class="filter" oninput="queryData(this.value)" type="text" placeholder="Filter data">
+                Filter: <input class="filter" oninput="queryData(this.value)" type="text" placeholder="MD5, or Size">
           </form>
 
           <section id="malware">

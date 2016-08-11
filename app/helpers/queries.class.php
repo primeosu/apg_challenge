@@ -49,6 +49,7 @@ class queries {
             $this->records = $this->DB->fetchAll("SELECT * FROM malware
                                                     WHERE MD5 LIKE '%$this->filter%'
                                                     OR size LIKE '%$this->filter%'");
+
             return $this->records;
       }
 
