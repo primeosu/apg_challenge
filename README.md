@@ -28,3 +28,23 @@ Evaluation of your submission will be based on the following criteria:
 1. Did your application fulfill the basic requirements?
 1. Did you document the method for setting up and running your application?
 1. Did you follow the instructions for submission?
+
+## Set up
+
+#### Specifications:
+Ruby 2.2.4
+Rails 5.0.0
+
+#### Database Configuration:
+Remove username and password lines, or set to your postgreSQL role and password
+
+#### Configure app:
+```
+cd apg_challenge/apg_challenge
+bundle install
+rails db:create
+rails db:migrate
+rails s
+```
+
+Visit http://localhost:3000
