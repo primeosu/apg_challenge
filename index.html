@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+      <meta charset="utf-8">
+      <meta name="author" content="Kyle Belanger">
+      <title>Intel Security Challenge</title>
+      <link rel="stylesheet" type="text/css" href="app/assets/css/style.css">
+    </head>
+
+  <body>
+      <header>
+          <h2>Intel Security</h2>
+          <p>Web development example for normalizing data in a CSV file.</p>
+      </header>
+
+      <hr>
+
+      <section>
+          <p>Please upload the file below:</p>
+
+          <form action="app/helpers/processFile.php" onChange="processFile(this, 'change')" onSubmit="processFile(this, 'submit')" method="post" enctype="multipart/form-data">
+              <input id="file" type="file" name="file" accept="text/csv">
+              <input id="submit" type="submit">
+              <small id="processing"></small>
+          </form>
+      </section>
+
+  </body>
+
+  <script src="app/assets/js/events.js">
+  </script>
+
+</html>

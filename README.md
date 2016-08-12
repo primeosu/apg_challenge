@@ -1,30 +1,80 @@
-# Intel Security Programming Challenge
-Please complete the following programming challenge.  It is used to better assess a candidate's software development skills.   You have as much time as you'd like (though we ask that you not spend more than a few hours) and may use any programming language or framework you'd like.  Feel free to contact the original sender if you have any questions.
+# Intel Security Coding Challenge
 
-## Submission Instructions
-1. First, fork this project on github.  You will need to create an account if you don't already have one.
-1. Next, complete the project as described below within your fork.
-1. Finally, push all of your changes to your fork on github and submit a pull request.
+Web development example for normalizing data in a CSV file.
 
-## Project Description
-Imagine that Intel Security has just acquired a new security company.  Unfortunately, the company has never stored their data in a database and instead uses plain text files.  We need to create a way for the new subsidiary to import their malware data into a database.  Your task is to create a web interface that accepts file uploads, normalizes the data, and then stores it in a relational database - design is up to you.
+## Description
 
-Here's what your web-based application must do:
+Included below is a brief overview of the project structure and workflow. This project uses the LAMP web stack to handle file processing and data normalization.
 
-1. Your app must accept (via a form) a CSV file with the following columns: MD5, ClassificationName, ClassificationType, Size, FileType.  You can assume the columns will always be in that order, that there will always be data in each column, that there will always be a header line, and that there can be duplicate MD5s.  An example input file named example_input.csv is included in this repo.
-1. Your app must parse the given file, normalize the data, and store the information in a relational database.
-1. After each upload, your application should display the total amount of each different ClassificationType in the database.
+### Structure
 
-Your application does not need to:
+The directory tree of the project is outlined below with comments. The directory layout is based on Ruby on Rails convention.
 
-1. be written with any particular language or framework
-1. be aesthetically pleasing (bonus points if it does, extra bonus points for using Bootstrap)
+  ```sql
+  -- contains core application files
+  - app
+        -- application assets - php class files, views, javascripts, and stylesheets
+        - assets
+              - css
+              - data
+              - js
+              - php
+        -- helper files for processing files and server-side logic
+        - helpers
+        -- views for displaying data
+        - views
+  -- contains database schema file for creating the database
+  - db
+        -- database build queries in mysql
+        - sql
+  -- index
+  index.html
+  -- readme
+  readme.md
+  ```
 
-Your application should be easy to set up and should run on Linux.  It also should not require any for-pay software.
+This web application features two views:
+  * [index.html](https://github.com/kylesb/apg_challenge/blob/master/index.html)
 
-## Evaluation
-Evaluation of your submission will be based on the following criteria:
+  The first page allows text/csv files to be uploaded via a form. File validation is performed on the client side via `input type='text/csv'`, as well as on the server-side via PHP in [`app/helpers/processFile.php`](https://github.com/kylesb/apg_challenge/blob/master/app/helpers/processFile.php).
 
-1. Did your application fulfill the basic requirements?
-1. Did you document the method for setting up and running your application?
-1. Did you follow the instructions for submission?
+  * [/app/views/display.php](https://github.com/kylesb/apg_challenge/blob/master/app/views/display.php)
+
+  The second page displays data in the view, in the form of a table. This view features an input field that performs asynchronous data filtering on the MD5 and filesize columns (as they are string fields, and do not reference foreign keys).
+
+
+### Workflow
+
+1. The uploaded file is sent to the server via a post request, and processed via a helper in [`app/helpers/processFile.php`](https://github.com/kylesb/apg_challenge/blob/master/app/helpers/processFile.php). The uploaded file is checked for validation.
+
+2. The helper performs data validation, and upon success, creates an object from the [`app/helpers/queries.class.php`](https://github.com/kylesb/apg_challenge/blob/master/app/helpers/queries.class.php) to perform data operations. The queries class provides various functions, including getting foreign key references, and inserting records for any table.
+
+3. Upon successful completion of data normalization, [`app/helpers/processFile.php`](https://github.com/kylesb/apg_challenge/blob/master/app/helpers/processFile.php) redirects the http header to [`app/views/display.php`](https://github.com/kylesb/apg_challenge/blob/master/app/views/display.php) to display the data in the view.
+
+4. Display.php provides the data in an accessible table format, and allows for asynchronous data filtering on the MD5 and filesize columns.
+
+## Stack
+
+This web application is built on the LAMP web stack.
+
+* PHP 5.6
+* MySQL
+* JavaScript
+* HTML/CSS
+
+## Acknowledgements
+
+This project uses an open-source PHP/MySQL PDO connection class, available [here](https://github.com/a1phanumeric/PHP-MySQL-Class).
+
+## Debugging / Testing
+
+Debugging and testing was performed via XAMPP.
+
+## Cloning / Viewing
+
+To run this application - use XAMPP to start a local server.
+
+1. git clone https://github.com/kylesb/apg_challenge
+2. mv apg_challenge # to the path of XAMPP htdocs directory
+3. Start XAMPP server
+4. Visit http://localhost:8004/apg_challenge/
