@@ -11,7 +11,7 @@ Imagine that Intel Security has just acquired a new security company.  Unfortuna
 
 Here's what your web-based application must do:
 
-1. Your app must accept (via a form) a CSV file with the following columns: MD5, ClassificationName, ClassificationType, Size, FileType.  You can assume the columns will always be in that order, that there will always be data in each column, that there will always be a header line, and that there can be duplicate MD5s.  An example input file named example_input.csv is included in this repo.
+1. Your app must accept (via a form) a CSV file with the following columns: MD5, ClassificationName, ClassificationType, Size, FileType.  You can assume the columns will always be in that order, that there will always be data in each column, that there will always be a header line, and that the CSVs could potentially have duplicate MD5s.  An example input file named example_input.csv is included in this repo.
 1. Your app must parse the given file, normalize the data, and store the information in a relational database.
 1. After each upload, your application should display the total amount of each different ClassificationType in the database.
 
