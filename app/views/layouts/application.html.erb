@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Malware Upload Tool</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+
+<div class="jumbotron text-center" style="background-color: #3F729B; color: #FFFFFF">
+	<h2>Intel Security Malware Upload Tool</h2>
+	<p>Please upload your CSV record(s) using the form below.</p>
+</div>
+
+<% if flash[:notice] %>
+    <div class="text-center alert alert-success fade in">
+    	<strong>Success! </strong>
+    	<%= flash[:notice] %>
+    	<a href="<%= root_url %>">Want to Add More Records?</a>
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	</div>
+<% end %>
+
+<% if flash[:danger] %>
+    <div class="text-center alert alert-danger fade in">
+    	<strong>Oops! </strong>
+    	<%= flash[:danger] %>
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	</div>
+<% end %>
+
+
+<%= yield %>
+  </body>
+</html>

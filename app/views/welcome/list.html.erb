@@ -1,0 +1,33 @@
+<% if @malwares.blank? %>
+<p class="text-center"> No Records to display! Please add some from <%= link_to "Home", root_url %></p>
+<% else %>
+<%= button_to "Home", welcome_index_path, :method => :get, :class =>"btn btn-default btn-lg navbar-left" %>
+<h3 class="text-center"><strong>Total Unique Classification Types: 
+<%= Malware.distinct.count('classificationType')%></strong>
+</h3>
+<hr/>
+<table class="table"">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>MD5</th>
+      <th>Classification Name</th>
+      <th>Classification Type</th>
+      <th>Size</th>
+      <th>File Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @malwares.each do |malware| %>
+      <tr>
+        <td><%= malware.id %></td>
+        <td><%= malware.md5 %></td>
+        <td><%= malware.classificationName %></td>
+        <td><%= malware.classificationType %></td>
+        <td><%= malware.size %></td>
+        <td><%= malware.filetype %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
