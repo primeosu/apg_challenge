@@ -1,11 +1,36 @@
-<% if @malwares.blank? %>
-<p class="text-center"> No Records to display! Please add some from <%= link_to "Home", root_url %></p>
-<% else %>
 <%= button_to "Home", welcome_index_path, :method => :get, :class =>"btn btn-default btn-lg navbar-left" %>
 <h3 class="text-center"><strong>Total Unique Classification Types: 
 <%= Malware.distinct.count('classificationType')%></strong>
 </h3>
 <hr/>
+<% if not @uniqueTypes.blank? %>
+<h3 class="text-center"><strong>Total Unique Classification Types: 
+<%= Malware.distinct.count('classificationType')%></strong>
+</h3>
+<hr/>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Classification Type</th>
+      <th>Total Entries</th>
+    </tr>
+    </thead>
+    <tbody>
+      <% @uniqueTypes.each do |key, value| %>
+        <tr>
+          <td><%= key %></td>
+          <td><%= value %></td>
+        </tr>
+      <% end %>
+      </tbody>
+      </table>
+
+<% end %>
+
+<% if @malwares.blank? %>
+<p class="text-center"> No Records to display! Please add some from <%= link_to "Home", root_url %></p>
+<% else %>
+<h3 class="text-center">Information stored in the database:</h3>
 <table class="table"">
   <thead>
     <tr>
