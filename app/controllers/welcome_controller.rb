@@ -3,6 +3,7 @@ class WelcomeController < ApplicationController
   end
 
   def list
+   @uniqueTypes = Malware.group(:classificationType).count
    @malwares = Malware.all
   end
 
