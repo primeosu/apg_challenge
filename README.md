@@ -13,14 +13,14 @@ Here's what your web-based application must do:
 
 1. Your app must accept (via a form) a CSV file with the following columns: MD5, ClassificationName, ClassificationType, Size, FileType.  You can assume the columns will always be in that order, that there will always be data in each column, that there will always be a header line, and that the CSVs could potentially have duplicate MD5s.  An example input file named example_input.csv is included in this repo.
 1. Your app must parse the given file, normalize the data, and store the information in a relational database.
-1. After each upload, your application should display the total amount of each different ClassificationType in the database.
+1. After each upload, your application should display the total amount of each different ClassificationType in the database.  So for example: trojan -> 3, pup -> 2, unknown -> 1, etc.
 
 Your application does not need to:
 
 1. be written with any particular language or framework
 1. be aesthetically pleasing (bonus points if it does, extra bonus points for using Bootstrap)
 
-Your application should be easy to set up and should run on Linux.  It also should not require any for-pay software.
+Your application should be easy to set up and should run on Linux.  It also should not require any for-pay software.  If you are unfamiliar with what an MD5 is, it may be helpful to read: https://en.wikipedia.org/wiki/MD5
 
 ## Evaluation
 Evaluation of your submission will be based on the following criteria:
