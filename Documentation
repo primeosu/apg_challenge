@@ -1,0 +1,30 @@
+**********************
+*Jack Lopez     
+*Intel Interview Submission
+*8-30-16
+************************
+Method for running the Application:
+
+1) In order to run this application you are going to have to connect to my database. The code to connect is already before the header in the PHP file on csv-upload.php. 
+
+2) You will need to provide the IP address that you are using so that I can manually add that address to the allowed list on the DB. This will allow you to connect. 
+
+3) if this fails you can view the application live http://jport1992.com/intelchallenge.php
+
+4) These files are both saved at extension .php, so you will need a server to run these files.
+
+5) Do not place these files in seperate folders, as there mapped out to be in the same directory.
+
+6) You should be good to go from here, just make sure that you are uploading a CSV file with the exact columns and headers expected in the document details that were given.
+
+7) You will not be able to see the DB structure so I will place the table structure below.
+
+    CREATE TABLE IF NOT EXISTS `csv_import` (
+      `ID` int(25) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      `MD5` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+      `ClassificationName` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+      `ClassificationType` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+      `Size` int(25) NOT NULL,
+      `FileType` varchar(5) COLLATE utf8_unicode_ci NOT NULL
+    )
+    
