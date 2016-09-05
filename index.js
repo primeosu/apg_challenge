@@ -104,7 +104,7 @@ function parse (lines) {
         json.md5 = line[0];
         json.classification_name = line[1];
         json.classification_type = line[2];
-        json.size = line[3];
+        json.size = parseInt(line[3]);
         json.file_type = line[4];
         
         data.push(json);
