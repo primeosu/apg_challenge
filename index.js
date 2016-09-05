@@ -2,6 +2,7 @@ var express = require("express");
 var path = require("path");
 var formidable = require("formidable");
 var fs = require("fs");
+var pg = require('pg');
 var app = express();
 
 app.set("port", (process.env.PORT || 3000));
@@ -12,6 +13,19 @@ app.use(express.static(__dirname + "/public"));
 // root route
 app.get("/", function(req, res) {
     res.sendFile("index.html", {root: path.join(__dirname, "./")});
+});
+
+// db test route to load entire table
+app.get('/db', function (request, response) {
+  pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+    client.query('SELECT * FROM malware_table', function(err, result) {
+      done();
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+       { response.render('pages/db', {results: result.rows} ); }
+    });
+  });
 });
 
 // load csv route
@@ -37,9 +51,23 @@ app.post("/load", function(req, res) {
             
             var lines = data.trim().split("\n");
             var input = parse(lines);
-            for (var i = 0; i < input.length; i++) {
-                console.log(input[i].md5);
-            }
+            
+            // connect to database and execute query
+            pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+                
+                for (var i = 0; i < input.length; i++) {
+                    
+                    client.query("INSERT INTO malware_table(text, text, text, integer, text) values('" + input.md5 + "', '"  + input.classification_name + "', '" + input.classification_type + "', " + input.size + ", '" + input.file_type + "')", function(err, result) {
+                        done();
+                        if (err) { 
+                            console.error(err); 
+                            response.send("Error " + err); 
+                        }
+                        
+                        console.log("query result: " + result);
+                    });
+                }
+            });
         });
     });
     
