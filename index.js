@@ -57,7 +57,7 @@ app.post("/load", function(req, res) {
                 
                 for (var i = 0; i < input.length; i++) {
                     
-                    client.query("INSERT INTO malware_table(text, text, text, integer, text) values('" + input.md5 + "', '"  + input.classification_name + "', '" + input.classification_type + "', " + input.size + ", '" + input.file_type + "')", function(err, result) {
+                    client.query("INSERT INTO malware_table(md5, classificationname, classification, size, filetype) values('" + input.md5 + "', '"  + input.classification_name + "', '" + input.classification_type + "', " + input.size + ", '" + input.file_type + "')", function(err, result) {
                         done();
                         if (err) { 
                             console.error(err); 
