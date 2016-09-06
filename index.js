@@ -43,6 +43,7 @@ app.post("/load", function(req, res) {
             for (var i = 0; i < input.length; i++) {
                 console.log(input[i].md5);
             }
+            
             pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                 client.query('insert into malware_table values ($1, $2, $3, $4, $5)', [input[0], input[1], input[2], input[3], input[4],], function(err, result) {
                     done();
@@ -91,7 +92,7 @@ function parse (lines) {
         json.md5 = line[0];
         json.classification_name = line[1];
         json.classification_type = line[2];
-        json.size = line[3];
+        json.size = parseInt(line[3]);
         json.file_type = line[4];
         
         data.push(json);
