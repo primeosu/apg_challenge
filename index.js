@@ -51,14 +51,14 @@ app.post("/load", function(req, res) {
             
             var lines = data.trim().split("\n");
             var input = parse(lines);
-            console.log(input[0].md5);
-            console.log(input.length);
+            
             for (var i = 0; i < input.length; i++) {
                 
                 // connect to database and execute query
                 pg.connect(process.env.DATABASE_URL, function(err, client, done) {
 
-
+console.log(input[0].md5);
+            console.log(input.length);
                         var query_str = "INSERT INTO malware_table values (" + input[i].md5 + ", "  + input[i].classification_name + ", " + input[i].classification_type + ", " + input[i].size + ", " + input[i].file_type + ")";
                         console.log("STIRNG IS: " + query_str);
                         client.query(query_str, function(err, result) {
@@ -105,7 +105,6 @@ function parse (lines) {
     for (var i = 1; i < lines.length; i++) {
         
         var line = lines[i].split(",");
-        console.log(line.length);
         var json = {};
         
         json.md5 = line[0];
