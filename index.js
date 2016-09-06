@@ -59,7 +59,7 @@ app.post("/load", function(req, res) {
 
 console.log(input[0].md5);
             console.log(input.length);
-                        var query_str = "INSERT INTO malware_table values (" + input[i].md5 + ", "  + input[i].classification_name + ", " + input[i].classification_type + ", " + input[i].size + ", " + input[i].file_type + ")";
+                        var query_str = "INSERT INTO malware_table values (" + input[0].md5 + ", "  + input[0].classification_name + ", " + input[0].classification_type + ", " + input[0].size + ", " + input[0].file_type + ")";
                         console.log("STIRNG IS: " + query_str);
                         client.query(query_str, function(err, result) {
                             done();
