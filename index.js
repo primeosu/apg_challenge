@@ -2,6 +2,7 @@ var express = require("express");
 var path = require("path");
 var formidable = require("formidable");
 var fs = require("fs");
+var pg = require('pg');
 var app = express();
 
 app.set("port", (process.env.PORT || 3000));
@@ -12,6 +13,19 @@ app.use(express.static(__dirname + "/public"));
 // root route
 app.get("/", function(req, res) {
     res.sendFile("index.html", {root: path.join(__dirname, "./")});
+});
+
+// db test route to load entire table
+app.get('/db', function (request, response) {
+  pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+    client.query('SELECT * FROM malware_table', function(err, result) {
+      done();
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+       { response.render('pages/db', {results: result.rows} ); }
+    });
+  });
 });
 
 // load csv route
@@ -37,8 +51,28 @@ app.post("/load", function(req, res) {
             
             var lines = data.trim().split("\n");
             var input = parse(lines);
+            
             for (var i = 0; i < input.length; i++) {
-                console.log(input[i].md5);
+                
+                // connect to database and execute query
+                pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+
+console.log(input[0].md5);
+            console.log(input.length);
+                        var query_str = "INSERT INTO malware_table values (" + input[0].md5 + ", "  + input[0].classification_name + ", " + input[0].classification_type + ", " + input[0].size + ", " + input[0].file_type + ")";
+                        console.log("STIRNG IS: " + query_str);
+                        client.query(query_str, function(err, result) {
+                            done();
+                            if (err) { 
+                                console.log("THERE WAS A GRAND ERROR");
+                                console.error("WHATTT " + err); 
+                                res.send("Error " + err); 
+                            }
+
+                            console.log("query result: " + result);
+                        });
+
+                });
             }
         });
     });
@@ -76,7 +110,7 @@ function parse (lines) {
         json.md5 = line[0];
         json.classification_name = line[1];
         json.classification_type = line[2];
-        json.size = line[3];
+        json.size = parseInt(line[3]);
         json.file_type = line[4];
         
         data.push(json);
