@@ -2,6 +2,7 @@ var express = require("express");
 var path = require("path");
 var formidable = require("formidable");
 var fs = require("fs");
+var pg = require("pg");
 var app = express();
 
 app.set("port", (process.env.PORT || 3000));
@@ -13,6 +14,8 @@ app.use(express.static(__dirname + "/public"));
 app.get("/", function(req, res) {
     res.sendFile("index.html", {root: path.join(__dirname, "./")});
 });
+
+
 
 // load csv route
 app.post("/load", function(req, res) {
@@ -40,6 +43,18 @@ app.post("/load", function(req, res) {
             for (var i = 0; i < input.length; i++) {
                 console.log(input[i].md5);
             }
+            pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+                client.query('insert into malware_table values (2, 2, 2, 2, 2)', function(err, result) {
+                    done();
+                    if (err) { 
+                        console.error("Error while post query: " + err); 
+                    }
+                  
+                    else { 
+                        console.log("Successful Query!");
+                    }
+                });
+            });
         });
     });
     
