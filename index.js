@@ -29,6 +29,7 @@ app.post("/load", function(req, res) {
 
     form.on('file', function(field, file) {
         
+        // delete temp uploads once data has been loaded to db
         fs.rename(file.path, path.join(form.uploadDir, file.name));
         
         // extra contents of csv
@@ -41,24 +42,33 @@ app.post("/load", function(req, res) {
             var lines = data.trim().split("\n");
             var input = parse(lines);
             
-            
-            
-            
+            // bottleneck?
+            var error = null;
             pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+                
+                // perform all queries in array
                 for (var i = 0; i < input.length; i++) {
-                client.query('insert into malware_table values ($1, $2, $3, $4, $5)', [input[i].md5, input[i].classification_name, input[i].classification_type, input[i].size, input[i].file_type], function(err, result) {
-                    done();
-                    if (err) { 
-                        console.error("Error while post query: " + err); 
-                    }
-                  
-                    else { 
-                        console.log("Successful Query!");
-                    }
-                });
+                    client.query('insert into malware_table values ($1, $2, $3, $4, $5)', [input[i].md5, input[i].classification_name, input[i].classification_type, input[i].size, input[i].file_type], function(err, result) {
+                        done();
+                        if (err) {
+                            error = err;
+                            console.error("Error while post query: " + err); 
+                        }
+
+                        else { 
+                            console.log("Successful Query!");
+                        }
+                    });
                 }
             });
             
+            if (err) {
+                res.send(500);
+            }
+            
+            else {
+                res.send(200);
+            }
         });
     });
     
