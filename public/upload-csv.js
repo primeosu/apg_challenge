@@ -26,7 +26,7 @@ $("#file-upload-btn").click(function() {
             contentType: false,
             success: function(data) {
                 console.log("upload success");
-                csonole.log("data: " + data);
+                console.log("data: " + data);
             },
             error: function(xhr, status, error) {
                 console.log("There was an error: " + error);
