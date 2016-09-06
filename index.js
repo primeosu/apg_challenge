@@ -51,6 +51,8 @@ app.post("/load", function(req, res) {
             
             var lines = data.trim().split("\n");
             var input = parse(lines);
+            console.log(input[0].md5);
+            console.log(input.length);
             for (var i = 0; i < input.length; i++) {
                 
                 // connect to database and execute query
