@@ -65,7 +65,7 @@ console.log(input[0].md5);
                             done();
                             if (err) { 
                                 console.log("THERE WAS A GRAND ERROR");
-                                console.error(err); 
+                                console.error("WHATTT " + err); 
                                 res.send("Error " + err); 
                             }
 
