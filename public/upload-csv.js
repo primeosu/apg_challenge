@@ -25,11 +25,13 @@ $("#file-upload-btn").click(function() {
             processData: false,
             contentType: false,
             success: function(data) {
-                console.log("upload success");
-                //console.log("data: " + data);
+                console.log("AJAX: success");
+                console.log("data: " + data);
             },
             error: function(xhr, status, error) {
+                console.log("AJAX: fail");
                 console.log("There was an error: " + error);
+                console.log("Status: " + status);
             }
         });
     }

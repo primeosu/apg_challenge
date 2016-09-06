@@ -20,7 +20,6 @@ app.get("/", function(req, res) {
 // load csv route
 app.post("/load", function(req, res) {
     
-    console.log("file recieved");
     var form = new formidable.IncomingForm();
     
     form.multiples = true;
@@ -48,6 +47,9 @@ app.post("/load", function(req, res) {
                 
                 // perform all queries in array
                 for (var i = 0; i < input.length; i++) {
+                    
+                    
+                    // check for sql injections later
                     client.query('insert into malware_table values ($1, $2, $3, $4, $5)', [input[i].md5, input[i].classification_name, input[i].classification_type, input[i].size, input[i].file_type], function(err, result) {
                         done();
                         if (err) {
@@ -59,18 +61,27 @@ app.post("/load", function(req, res) {
                             console.log("Successful Query!");
                         }
                     });
+                    
                 }
             });
+            
+            // send response
+            console.log("server sending response");
+            
+            // success
+            if (error) {
+                res.sendStatus(200);
+            }
+            
+            else {
+                res.sendStatus(500);
+            }
         });
     });
     
     // redo
     form.on("error", function(err) {
         console.log("error occured during file upload: " + err);
-    });
-    
-    form.on("end", function() {
-        res.end("success");
     });
     
     form.parse(req);
