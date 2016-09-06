@@ -61,7 +61,7 @@ app.post("/load", function(req, res) {
                         done();
                         if (err) { 
                             console.error(err); 
-                            response.send("Error " + err); 
+                            res.send("Error " + err); 
                         }
                         
                         console.log("query result: " + result);
