@@ -57,9 +57,9 @@ app.post("/load", function(req, res) {
             pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                 
                     
-                    var query_str = "INSERT INTO malware_table values ('" + input.md5 + "', '"  + input.classification_name + "', '" + input.classification_type + "', " + input.size + ", '" + input.file_type + "');\\";
+                    var query_str = "INSERT INTO malware_table values (" + input.md5 + ", "  + input.classification_name + ", " + input.classification_type + ", " + input.size + ", " + input.file_type + ")";
                     
-                    client.query("INSERT INTO malware_table values ('1', '1', '1', 1, '1')", function(err, result) {
+                    client.query(query_str, function(err, result) {
                         done();
                         if (err) { 
                             console.log("THERE WAS A GRAND ERROR");
