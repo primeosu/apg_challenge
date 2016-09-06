@@ -53,24 +53,24 @@ app.post("/load", function(req, res) {
             var input = parse(lines);
             for (var i = 0; i < input.length; i++) {
                 
-            // connect to database and execute query
-            pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-                
-                    
-                    var query_str = "INSERT INTO malware_table values (" + input.md5 + ", "  + input.classification_name + ", " + input.classification_type + ", " + input.size + ", " + input.file_type + ")";
-                    
-                    client.query("INSERT INTO malware_table values (1, 1, 1, 1, 1)", function(err, result) {
-                        done();
-                        if (err) { 
-                            console.log("THERE WAS A GRAND ERROR");
-                            console.error(err); 
-                            res.send("Error " + err); 
-                        }
-                        
-                        console.log("query result: " + result);
-                    });
-                
-            });
+                // connect to database and execute query
+                pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+
+
+                        var query_str = "INSERT INTO malware_table values (" + input.md5 + ", "  + input.classification_name + ", " + input.classification_type + ", " + input.size + ", " + input.file_type + ")";
+                        console.log("STIRNG IS: " + query_str);
+                        client.query(query_str, function(err, result) {
+                            done();
+                            if (err) { 
+                                console.log("THERE WAS A GRAND ERROR");
+                                console.error(err); 
+                                res.send("Error " + err); 
+                            }
+
+                            console.log("query result: " + result);
+                        });
+
+                });
             }
         });
     });
