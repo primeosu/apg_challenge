@@ -45,7 +45,7 @@ app.post("/load", function(req, res) {
             
             
             pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-                client.query('insert into malware_table values ($1, $2, $3, $4, $5)', [input[0].md5, input[0].classification_name, input[0].classification_type, input[0].size, input[0].file_type], function(err, result) {
+                client.query('insert into malware_table values ($1, $2, $3, $4, $5)', [input[i].md5, input[i].classification_name, input[i].classification_type, input[i].size, input[i].file_type], function(err, result) {
                     done();
                     if (err) { 
                         console.error("Error while post query: " + err); 
