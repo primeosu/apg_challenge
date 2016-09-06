@@ -40,11 +40,12 @@ app.post("/load", function(req, res) {
             
             var lines = data.trim().split("\n");
             var input = parse(lines);
-            for (var i = 0; i < input.length; i++) {
+            
             
             
             
             pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+                for (var i = 0; i < input.length; i++) {
                 client.query('insert into malware_table values ($1, $2, $3, $4, $5)', [input[i].md5, input[i].classification_name, input[i].classification_type, input[i].size, input[i].file_type], function(err, result) {
                     done();
                     if (err) { 
@@ -55,8 +56,9 @@ app.post("/load", function(req, res) {
                         console.log("Successful Query!");
                     }
                 });
+                }
             });
-            }
+            
         });
     });
     
