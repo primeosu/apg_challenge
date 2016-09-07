@@ -104,7 +104,7 @@ $(function() {
                             for (var i = 0; i < results.summary.length; i++) {
                                 $("#summary").append("<tr><td>Size: </td><td>" + results.summary[i].len + "</td></tr>");
                             }
-                            for (var i = 0; i < results.summary.length; i++) {
+                            for (var i = 0; i < 5; i++) {
                                 $("#summary").append("<tr><td>key</td><td>value</td></tr>");
                             }
 
