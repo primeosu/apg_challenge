@@ -63,7 +63,7 @@ app.post("/load", function(req, res) {
                 stream.on('error', function(done) {
                     
                     console.log("error on stream");
-                    dont();
+                    done();
                 });
                 stream.on('end', function(done) {
                     console.log("query done");
