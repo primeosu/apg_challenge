@@ -54,27 +54,20 @@ app.post("/load", function(req, res) {
             
             pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                 
-                var stream = client.query(copyFrom('COPY malware_table FROM STDIN'));
-                var fileStream = fs.createReadStream(file.name)
-                
-                fileStream.on('error', function() {
-                    console.log("error on file stream");
-                   
-                });
-                stream.on('error', function() {
-                    
-                    console.log("error on stream");
-                   
-                });
-                stream.on('end', function() {
-                    console.log("query done");
-                    
-                });
-                fileStream.on('error', done);
-                stream.on('error', done);
-                stream.on('end', done);
-                
-                fileStream.pipe(stream);            
+                // check for sql injections later
+                var queryStr = "copy malware_table from '" +file.path + path.join(form.uploadDir, file.name) + "' delimiter ',' csv header";
+                console.log("q str = " + queryStr);
+                client.query(queryStr, function(err, result) {
+                    done();
+                    if (err) {
+                        error = err;
+                        console.error("Error while post query: " + err); 
+                    }
+
+                    else { 
+                        console.log("Successful Query!");
+                    }
+                });              
             });
             
             console.log("sending status");
