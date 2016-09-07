@@ -30,14 +30,14 @@ $("#file-upload-btn").click(function() {
     }
 });
 
-function execute_request(url, operation, contentType, data, success_callback) {
+function execute_request(url, operation, data, contentType, success_callback) {
     
     $.ajax({ 
         url: url,
         type: operation,
         data: data,
-        processData: false,
-        contentType: false,
+        processData: true,
+        contentType: contentType,
         success: success_callback(),
         error: function(xhr, status, error) {
             console.log("AJAX: fail");
