@@ -10,7 +10,7 @@ app.set("port", (process.env.PORT || 3000));
 
 // serve public folder
 app.use(express.static(__dirname + "/public"));
-app.use(express.static(__dirname + "/uploads"));
+
 // root route
 app.get("/", function(req, res) {
     res.sendFile("index.html", {root: path.join(__dirname, "./")});
@@ -56,19 +56,24 @@ app.post("/load", function(req, res) {
                 
                 var stream = client.query(copyFrom('COPY malware_table FROM STDIN'));
                 var fileStream = fs.createReadStream(file.name)
-                fileStream.on('error', function(done) {
+                
+                fileStream.on('error', function() {
                     console.log("error on file stream");
-                    done();
+                   
                 });
-                stream.on('error', function(done) {
+                stream.on('error', function() {
                     
                     console.log("error on stream");
-                    done();
+                   
                 });
-                stream.on('end', function(done) {
+                stream.on('end', function() {
                     console.log("query done");
-                    done();
+                    
                 });
+                fileStream.on('error', done);
+                stream.on('error', done);
+                stream.on('end', done);
+                
                 fileStream.pipe(stream);            
             });
             
