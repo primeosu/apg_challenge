@@ -29,17 +29,13 @@ app.get("/draw", function(req, res) {
                 error = err;
                 console.error("Error while post query: " + err); 
             }
+            
+            else {
+                console.log(result.rows);
+            }
 
         });         
-        
-        query.on("row", function(row, result) {
-            result.addRow(row);
-        });
-        
-        query.on("end", function(result) {
-            console.log("row size: " + result.rows.length);
-            console.log("row: " + result.rows[0]);
-        });
+       
     });
 });
 
