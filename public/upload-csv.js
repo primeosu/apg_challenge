@@ -16,11 +16,14 @@ $("#file-upload-btn").click(function() {
         }
         
         // execute request
-        execute_request("/load", "POST", formData);
+        
+        execute_request("/load", "POST", formData, function(result) {
+            console.log("SUCCESS!!!!");
+        });
     }
 });
 
-function execute_request(url, operation, data) {
+function execute_request(url, operation, data, success_callback) {
     
     $.ajax({ 
         url: url,
@@ -28,10 +31,7 @@ function execute_request(url, operation, data) {
         data: data,
         processData: false,
         contentType: false,
-        success: function(result) {
-            console.log("AJAX: success");
-            console.log("data: " + result);
-        },
+        success: success_callback(),
         error: function(xhr, status, error) {
             console.log("AJAX: fail");
             console.log("There was an error: " + error);
