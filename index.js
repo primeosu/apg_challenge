@@ -48,6 +48,8 @@ app.post("/load", function(req, res) {
             // bottleneck?
             pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                 
+                var lock = input.length;
+                
                 // perform all queries in array
                 for (var i = 0; i < input.length; i++) {
                     
@@ -60,12 +62,15 @@ app.post("/load", function(req, res) {
                             console.error("Error while post query: " + err); 
                         }
 
-                        else { 
-                            console.log("Successful Query!");
-                        }
                     });
+                    
+                    // sending response on end means if a query fails, the app fails
                     query.on("end", function(result) {
-                        console.log("RESULTS: " + result.rowCount);
+                        lock--;
+                        
+                        if (lock <= 0) {
+                            console.log("all querys have been finished: " + lock);
+                        }
                     });
                   
                 }
