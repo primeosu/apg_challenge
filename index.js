@@ -3,7 +3,6 @@ var path = require("path");
 var formidable = require("formidable");
 var fs = require("fs");
 var pg = require("pg");
-var copyFrom = require("pg-copy-streams").from;
 var app = express();
 
 app.set("port", (process.env.PORT || 3000));
@@ -41,40 +40,42 @@ app.post("/load", function(req, res) {
             
             var lines = data.trim().split("\n");
             var input = parse(lines);
-           
-            
-            // perform all queries in array
-            // sync probs could exist here, pass call back to send response
-            // to fix
-            /*
-            for (var i = 0; i < input.length; i++) {
-                executeQuery(input[i]);   
+            var sendCode = function(res) {
+                console.log("server sending response");
+                res.sendStatus(200);
             }
-            */
             
+            // bottleneck?
             pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                 
-                // check for sql injections later
-                var queryStr = "copy malware_table from '" +file.path + path.join(form.uploadDir, file.name) + "' delimiter ',' csv header";
-                console.log("q str = " + queryStr);
-                client.query(queryStr, function(err, result) {
-                    done();
-                    if (err) {
-                        error = err;
-                        console.error("Error while post query: " + err); 
-                    }
+                // perform all queries in array
+                for (var i = 0; i < input.length; i++) {
+                    
+                   
+                    // check for sql injections later
+                    client.query('insert into malware_table values ($1, $2, $3, $4, $5)', [input[i].md5, input[i].classification_name, input[i].classification_type, input[i].size, input[i].file_type], function(err, result) {
+                        done();
+                        if (err) {
+                            error = err;
+                            console.error("Error while post query: " + err); 
+                        }
 
-                    else { 
-                        console.log("Successful Query!");
-                    }
-                });              
+                        else { 
+                            console.log("Successful Query!");
+                        }
+                    }).addListener('result', function() {
+                        console.log("result is HEREEE");
+                    });
+                  
+                }
             });
             
-            console.log("sending status");
-            res.sendStatus(200);
+           
+          
+            
         });
     });
-
+    
     // redo
     form.on("error", function(err) {
         console.log("error occured during file upload: " + err);
