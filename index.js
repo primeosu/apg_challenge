@@ -48,8 +48,7 @@ app.post("/load", function(req, res) {
             }
         });
     });
-});
-    
+
     // redo
     form.on("error", function(err) {
         console.log("error occured during file upload: " + err);
