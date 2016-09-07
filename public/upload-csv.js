@@ -17,9 +17,9 @@ $("#file-upload-btn").click(function() {
         
         // execute request
         
-        execute_request("/load", "POST", formData, function(result) {
+        execute_request("/load", "POST", formData, false, function(result) {
             console.log("SUCCESS!!!!");
-            execute_request("/draw", "GET", null, function(result) {
+            execute_request("/draw", "GET", null, "json", function(result) {
                 
                 for (var i = 0; i < result.length; i++) {
                     console.log(result[i]);    
@@ -30,7 +30,7 @@ $("#file-upload-btn").click(function() {
     }
 });
 
-function execute_request(url, operation, data, success_callback) {
+function execute_request(url, operation, contentType, data, success_callback) {
     
     $.ajax({ 
         url: url,
