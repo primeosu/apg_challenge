@@ -43,9 +43,13 @@ app.post("/load", function(req, res) {
            
             
             // perform all queries in array
+            // sync probs could exist here
             for (var i = 0; i < input.length; i++) {
                 executeQuery(input[i]);   
             }
+            
+            console.log("sending status");
+            res.sendStatus(200);
         });
     });
 
