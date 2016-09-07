@@ -23,7 +23,6 @@ $("#file-upload-btn").click(function() {
 
 function execute_request(url, operation, data) {
     
-    console.log("WHAT");
     $.ajax({ 
         url: url,
         type: operation,

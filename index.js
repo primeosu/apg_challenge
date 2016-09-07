@@ -42,7 +42,7 @@ app.post("/load", function(req, res) {
             var input = parse(lines);
             
             // bottleneck?
-            pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+            pg.connect(process.env.DATABASE_URL, function(err, client, done, sendCode) {
                 
                 // perform all queries in array
                 for (var i = 0; i < input.length; i++) {
@@ -62,13 +62,10 @@ app.post("/load", function(req, res) {
                     });
                   
                 }
-                
+                sendCode(res);
             });
             
-            console.log("server sending response");
-            
-            // send success
-            res.sendStatus(200);
+           
           
             
         });
@@ -87,6 +84,11 @@ app.post("/load", function(req, res) {
 app.listen(app.get("port"), function() {
     console.log("application running on port: " + app.get("port"));
 });
+
+function sendCode(res) {
+     console.log("server sending response");
+    res.sendStatus(200);
+}
 
 // takes array of csv lines represented as strings
 // returns array json
