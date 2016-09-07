@@ -3,6 +3,7 @@ var path = require("path");
 var formidable = require("formidable");
 var fs = require("fs");
 var pg = require("pg");
+var copyFrom = require("pg-copy-streams").from;
 var app = express();
 
 app.set("port", (process.env.PORT || 3000));
@@ -53,20 +54,12 @@ app.post("/load", function(req, res) {
             
             pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                 
-                // check for sql injections later
-                var queryStr = "\\copy malware_table from '" +file.path + path.join(form.uploadDir, file.name) + "' delimiter ',' csv header";
-                console.log("q str = " + queryStr);
-                client.query(queryStr, function(err, result) {
-                    done();
-                    if (err) {
-                        error = err;
-                        console.error("Error while post query: " + err); 
-                    }
-
-                    else { 
-                        console.log("Successful Query!");
-                    }
-                });              
+                var stream = client.query(copyFrom('COPY malware_table FROM STDIN'));
+                var fileStream = fs.createReadStream(file.name)
+                fileStream.on('error', done);
+                stream.on('error', done);
+                stream.on('end', done);
+                fileStream.pipe(stream);            
             });
             
             console.log("sending status");
