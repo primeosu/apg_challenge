@@ -46,11 +46,11 @@ app.post("/load", function(req, res) {
                 
                 // perform all queries in array
                 for (var i = 0; i < input.length; i++) {
-                    console.log("performing query");
+                    
                    
                     // check for sql injections later
                     client.query('insert into malware_table values ($1, $2, $3, $4, $5)', [input[i].md5, input[i].classification_name, input[i].classification_type, input[i].size, input[i].file_type], function(err, result) {
-                        done();
+                        
                         if (err) {
                             error = err;
                             console.error("Error while post query: " + err); 
@@ -59,6 +59,8 @@ app.post("/load", function(req, res) {
                         else { 
                             console.log("Successful Query!");
                         }
+                        
+                        done();
                     });
                   
                 }
@@ -79,7 +81,6 @@ app.post("/load", function(req, res) {
         console.log("error occured during file upload: " + err);
     });
     
-    form.parse(req);
     
    
 });
