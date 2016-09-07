@@ -16,6 +16,31 @@ app.get("/", function(req, res) {
 });
 
 
+// return entire database json
+app.get("/", function(req, res) {
+    
+    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+                
+        // check for sql injections later
+        var query = client.query('select * from malware_table', function(err, result) {
+            done();
+            if (err) {
+                error = err;
+                console.error("Error while post query: " + err); 
+            }
+
+        });         
+        
+        query.on("row", function(row, result) {
+            result.addRow(rows);
+        });
+        
+        query.on("end", function(result) {
+            console.log("row size: " + result.rows.length);
+            console.log("row: " + result.rows[0]);
+        });
+    });
+});
 
 // load csv route
 app.post("/load", function(req, res) {
