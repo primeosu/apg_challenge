@@ -21,7 +21,10 @@ $("#file-upload-btn").click(function() {
             console.log("SUCCESS!!!!");
             execute_request("/draw", "GET", null, function(result) {
                 
-                console.log(result);
+                for (var i = 0; i < result.length; i++) {
+                    console.log(result[i]);    
+                }
+                
             });
         });
     }
