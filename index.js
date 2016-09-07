@@ -19,8 +19,6 @@ app.get("/", function(req, res) {
 // return entire database json
 app.get("/draw", function(req, res) {
     
-    res.send(JSON.stringify(summarize(dat)));
-    
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                 
         // check for sql injections later
