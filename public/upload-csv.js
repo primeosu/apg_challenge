@@ -19,6 +19,15 @@ $(function() {
                 $("#results").append("<tr><td>" + results.results[i].MD5 + "</td><td>" + results.results[i].ClassificationName + "</td><td>" + results.results[i].ClassificationType + "</td><td>" + results.results[i].Size + "</td><td>" + results.results[i].FileType + "</td></tr>");    
             }
             
+            $("#summary").html("");
+            $("#summary").append("<thead><tr><th>Summary</th> </tr></thead>");
+            for (var i = 0; i < results.summary.length; i++) {
+                $("#summary").append("<tr><td>Size: </td><td>" + results.summary[i].len + "</td></tr>");
+            }
+            for (var i = 0; i < results.summary.length; i++) {
+                $("#summary").append("<tr><td>key</td><td>value</td></tr>");
+            }
+            
         },
         error: function(xhr, status, error) {
             console.log("AJAX: fail");
@@ -89,6 +98,14 @@ $(function() {
                             // append request results to div#results
                             for (var i = 0; i < results.results.length; i++) {
                                 $("#results").append("<tr><td>" + results.results[i].MD5 + "</td><td>" + results.results[i].ClassificationName + "</td><td>" + results.results[i].ClassificationType + "</td><td>" + results.results[i].Size + "</td><td>" + results.results[i].FileType + "</td></tr>");    
+                            }
+                            $("#summary").html("");
+                            $("#summary").append("<thead><tr><th>Summary</th> </tr></thead>");
+                            for (var i = 0; i < results.summary.length; i++) {
+                                $("#summary").append("<tr><td>Size: </td><td>" + results.summary[i].len + "</td></tr>");
+                            }
+                            for (var i = 0; i < results.summary.length; i++) {
+                                $("#summary").append("<tr><td>key</td><td>value</td></tr>");
                             }
 
                         },

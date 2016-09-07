@@ -18,3 +18,7 @@
 #file-upload-input {
     display: none;
 }
+
+#operations {
+    margin-bottom: 25px;
+}

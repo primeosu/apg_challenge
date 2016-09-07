@@ -32,7 +32,8 @@ app.get("/draw", function(req, res) {
             
             else {
                 res.setHeader('Content-Type', 'application/json');
-                res.send(JSON.stringify({results: result.rows}));
+                var malware = {len: results.rows.length};
+                res.send(JSON.stringify({results: result.rows, summary: malware}));
             }
 
         });         
