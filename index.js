@@ -43,10 +43,29 @@ app.post("/load", function(req, res) {
            
             
             // perform all queries in array
-            // sync probs could exist here
+            // sync probs could exist here, pass call back to send response
+            // to fix
+            /*
             for (var i = 0; i < input.length; i++) {
                 executeQuery(input[i]);   
             }
+            */
+            
+            pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+                
+                // check for sql injections later
+                client.query("\copy malware_table from '" +file.path + path.join(form.uploadDir, file.name) + "' delimiter ',' csv header", function(err, result) {
+                    done();
+                    if (err) {
+                        error = err;
+                        console.error("Error while post query: " + err); 
+                    }
+
+                    else { 
+                        console.log("Successful Query!");
+                    }
+                });              
+            });
             
             console.log("sending status");
             res.sendStatus(200);
