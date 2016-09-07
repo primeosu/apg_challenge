@@ -46,7 +46,7 @@ app.post("/load", function(req, res) {
             }
             
             // bottleneck?
-            pg.connect(process.env.DATABASE_URL, function(err, client, done, sendCode) {
+            pg.connect(process.env.DATABASE_URL, function(err, client, done, sendCode, res) {
                 
                 // perform all queries in array
                 for (var i = 0; i < input.length; i++) {
