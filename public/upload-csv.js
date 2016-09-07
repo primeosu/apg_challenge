@@ -44,8 +44,10 @@ $("#file-upload-btn").click(function() {
         processData: true,
         contentType: "JSON",
         success: function(results) {
-            console.log("success 2 res: " + results.a); 
-            console.log("success 2 len: " + results.length); 
+            console.log("success 2 res: " + results.results); 
+            console.log("success 2 len: " + results.results.length);
+            
+            console.log("success 2 len: " + results.results[0].md5);
         },
         error: function(xhr, status, error) {
             console.log("AJAX: fail");

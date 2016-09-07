@@ -33,7 +33,7 @@ app.get("/draw", function(req, res) {
             else {
                 res.setHeader('Content-Type', 'application/json');
                 //result.rows
-                res.send(JSON.stringify({a: 1}));
+                res.send(JSON.stringify({results: result.rows}));
             }
 
         });         
