@@ -16,7 +16,7 @@ $(function() {
                
             // append request results to div#results
             var t = results.results;
-            console.log(t);
+            alert(t);
             for (var i = 0; i < results.results.length; i++) {
                 $("#results").append("<tr><td>" + results.results[i].MD5 + "</td><td>" + results.results[i].ClassificationName + "</td><td>" + results.results[i].ClassificationType + "</td><td>" + results.results[i].Size + "</td><td>" + results.results[i].FileType + "</td></tr>");    
             }
