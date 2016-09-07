@@ -35,8 +35,6 @@ $("#file-upload-btn").click(function() {
         processData: false,
         contentType: false,
         success: function(result) {
-            console.log("success 1 res: " + result); 
-            console.log("success 1 len: " + result.length); 
             
             $.ajax({ 
         url: "/draw",
@@ -44,10 +42,15 @@ $("#file-upload-btn").click(function() {
         processData: true,
         contentType: "JSON",
         success: function(results) {
-            console.log("success 2 res: " + results.results); 
-            console.log("success 2 len: " + results.results.length);
             
-            console.log("success 2 len: " + results.results[0].MD5);
+            // wipe table
+            $("#results").html("");
+            
+            // append request results to div#results
+            for (var i = 0; i < results.results.length; i++) {
+                $("#results").append("<tr><td>" + results.results[i].MD5 + "</td><td>" + results.results[i].ClassificationName + "</td><td>" + results.results[i].ClassificationType + "</td><td>" + results.results[i].Size + "</td><td>" + results.results[i].FileType + "</td></tr>");    
+            }
+            
         },
         error: function(xhr, status, error) {
             console.log("AJAX: fail");
