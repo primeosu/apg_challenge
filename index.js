@@ -53,7 +53,7 @@ app.post("/load", function(req, res) {
                     
                    
                     // check for sql injections later
-                    client.query('insert into malware_table values ($1, $2, $3, $4, $5)', [input[i].md5, input[i].classification_name, input[i].classification_type, input[i].size, input[i].file_type], function(err, result) {
+                    var query = client.query('insert into malware_table values ($1, $2, $3, $4, $5)', [input[i].md5, input[i].classification_name, input[i].classification_type, input[i].size, input[i].file_type], function(err, result) {
                         done();
                         if (err) {
                             error = err;
@@ -63,8 +63,9 @@ app.post("/load", function(req, res) {
                         else { 
                             console.log("Successful Query!");
                         }
-                    }).addListener('result', function() {
-                        console.log("result is HEREEE");
+                    });
+                    query.on("end", function(result) {
+                        console.log("RESULTS: " + results.rowCount);
                     });
                   
                 }
