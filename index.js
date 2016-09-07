@@ -42,13 +42,12 @@ app.post("/load", function(req, res) {
             var input = parse(lines);
             
             // bottleneck?
-            var error = null;
             pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                 
                 // perform all queries in array
                 for (var i = 0; i < input.length; i++) {
-                    
-                    
+                    console.log("performing query");
+                   
                     // check for sql injections later
                     client.query('insert into malware_table values ($1, $2, $3, $4, $5)', [input[i].md5, input[i].classification_name, input[i].classification_type, input[i].size, input[i].file_type], function(err, result) {
                         done();
@@ -61,21 +60,17 @@ app.post("/load", function(req, res) {
                             console.log("Successful Query!");
                         }
                     });
-                    
+                  
                 }
+                
             });
             
-            // send response
             console.log("server sending response");
             
-            // success
-            if (error) {
-                res.sendStatus(200);
-            }
+            // send success
+            res.sendStatus(200);
+          
             
-            else {
-                res.sendStatus(500);
-            }
         });
     });
     

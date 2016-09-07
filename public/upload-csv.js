@@ -26,6 +26,7 @@ $("#file-upload-btn").click(function() {
             contentType: false,
             success: function(data) {
                 console.log("AJAX: success");
+            
                 console.log("data: " + data);
             },
             error: function(xhr, status, error) {
