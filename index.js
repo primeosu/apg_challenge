@@ -65,7 +65,7 @@ app.post("/load", function(req, res) {
                         }
                     });
                     query.on("end", function(result) {
-                        console.log("RESULTS: " + results.rowCount);
+                        console.log("RESULTS: " + result.rowCount);
                     });
                   
                 }
