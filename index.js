@@ -85,7 +85,7 @@ app.listen(app.get("port"), function() {
     console.log("application running on port: " + app.get("port"));
 });
 
-function sendCode(res) {
+var sendCode = function(res) {
      console.log("server sending response");
     res.sendStatus(200);
 }
