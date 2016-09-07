@@ -22,7 +22,7 @@ app.get("/draw", function(req, res) {
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                 
         // check for sql injections later
-        var rows = [];
+      
         var query = client.query('select * from malware_table', function(err, result) {
             done();
             if (err) {
@@ -33,7 +33,7 @@ app.get("/draw", function(req, res) {
         });         
         
         query.on("row", function(row, result) {
-            result.addRow(rows);
+            result.addRow(row);
         });
         
         query.on("end", function(result) {
