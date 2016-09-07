@@ -17,23 +17,27 @@ $("#file-upload-btn").click(function() {
         }
         
         // execute request
-        $.ajax({
-            
-            url: "/load",
-            type: "POST",
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function(data) {
-                console.log("AJAX: success");
-            
-                console.log("data: " + data);
-            },
-            error: function(xhr, status, error) {
-                console.log("AJAX: fail");
-                console.log("There was an error: " + error);
-                console.log("Status: " + status);
-            }
-        });
+        execute_request("/load", "POST", formData);
     }
 });
+
+function execute_request(url, operation, data) {
+    // execute request
+    $.ajax({
+            
+        url: url,
+        type: operation,
+        data: data,
+        processData: false,
+        contentType: false,
+        success: function(result {
+            console.log("AJAX: success");
+            console.log("data: " + result);
+        },
+        error: function(xhr, status, error) {
+            console.log("AJAX: fail");
+            console.log("There was an error: " + error);
+            console.log("Status: " + status);
+        }
+    });
+}
