@@ -44,7 +44,7 @@ $("#file-upload-btn").click(function() {
         processData: true,
         contentType: "JSON",
         success: function(results) {
-            console.log("success 2 res: " + results); 
+            console.log("success 2 res: " + results.a); 
             console.log("success 2 len: " + results.length); 
         },
         error: function(xhr, status, error) {
