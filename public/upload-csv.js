@@ -19,6 +19,9 @@ $("#file-upload-btn").click(function() {
         
         execute_request("/load", "POST", formData, function(result) {
             console.log("SUCCESS!!!!");
+            execute_request("/draw", "GET", null, function(result) {
+                
+            });
         });
     }
 });

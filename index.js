@@ -17,7 +17,7 @@ app.get("/", function(req, res) {
 
 
 // return entire database json
-app.get("/", function(req, res) {
+app.get("/draw", function(req, res) {
     
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                 
