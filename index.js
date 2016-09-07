@@ -40,6 +40,10 @@ app.post("/load", function(req, res) {
             
             var lines = data.trim().split("\n");
             var input = parse(lines);
+            var sendCode = function(res) {
+                console.log("server sending response");
+                res.sendStatus(200);
+            }
             
             // bottleneck?
             pg.connect(process.env.DATABASE_URL, function(err, client, done, sendCode) {
@@ -85,10 +89,7 @@ app.listen(app.get("port"), function() {
     console.log("application running on port: " + app.get("port"));
 });
 
-var sendCode = function(res) {
-     console.log("server sending response");
-    res.sendStatus(200);
-}
+
 
 // takes array of csv lines represented as strings
 // returns array json
