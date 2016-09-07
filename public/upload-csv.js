@@ -1,5 +1,4 @@
 $("#file-upload-btn").click(function() {
-    console.log("\\copy");
     var files = $("#file-upload-input").get(0).files;
     
     if (files.length <= 0) {

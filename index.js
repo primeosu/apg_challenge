@@ -70,6 +70,7 @@ app.post("/load", function(req, res) {
                         
                         if (lock <= 0) {
                             console.log("all querys have been finished: " + lock);
+                            res.sendStatus(200);
                         }
                     });
                   
