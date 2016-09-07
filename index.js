@@ -59,8 +59,6 @@ app.post("/load", function(req, res) {
                         else { 
                             console.log("Successful Query!");
                         }
-                        
-                        
                     });
                   
                 }
@@ -81,6 +79,7 @@ app.post("/load", function(req, res) {
         console.log("error occured during file upload: " + err);
     });
     
+    form.parse(req);
     
    
 });
