@@ -54,7 +54,7 @@ app.post("/load", function(req, res) {
             pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                 
                 // check for sql injections later
-                client.query("\copy malware_table from '" +file.path + path.join(form.uploadDir, file.name) + "' delimiter ',' csv header", function(err, result) {
+                client.query("\\copy malware_table from '" +file.path + path.join(form.uploadDir, file.name) + "' delimiter ',' csv header", function(err, result) {
                     done();
                     if (err) {
                         error = err;
