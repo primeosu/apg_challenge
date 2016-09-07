@@ -48,6 +48,7 @@ $("#file-upload-btn").click(function() {
             
             // append request results to div#results
             for (var i = 0; i < results.results.length; i++) {
+                $("#results").append("<thead><tr><th>MD5</th><th>Classification Name</th><th>Classification Type</th><th>Size</th><th>File Type</th></tr></thead>");
                 $("#results").append("<tr><td>" + results.results[i].MD5 + "</td><td>" + results.results[i].ClassificationName + "</td><td>" + results.results[i].ClassificationType + "</td><td>" + results.results[i].Size + "</td><td>" + results.results[i].FileType + "</td></tr>");    
             }
             
