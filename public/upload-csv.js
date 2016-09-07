@@ -15,11 +15,11 @@ $(function() {
             $("#results").append("<thead><tr><th>MD5</th><th>Classification Name</th><th>Classification Type</th><th>Size</th><th>File Type</th></tr></thead>");
                
             // append request results to div#results
-            var t = results.results;
-            alert(t);
             for (var i = 0; i < results.results.length; i++) {
                 $("#results").append("<tr><td>" + results.results[i].MD5 + "</td><td>" + results.results[i].ClassificationName + "</td><td>" + results.results[i].ClassificationType + "</td><td>" + results.results[i].Size + "</td><td>" + results.results[i].FileType + "</td></tr>");    
             }
+            
+            
             
             $("#summary").html("");
             $("#summary").append("<thead><tr><th>Summary</th> </tr></thead>");
@@ -101,6 +101,8 @@ $(function() {
                             for (var i = 0; i < results.results.length; i++) {
                                 $("#results").append("<tr><td>" + results.results[i].MD5 + "</td><td>" + results.results[i].ClassificationName + "</td><td>" + results.results[i].ClassificationType + "</td><td>" + results.results[i].Size + "</td><td>" + results.results[i].FileType + "</td></tr>");    
                             }
+                            
+                            console.log(results.summary);
                             $("#summary").html("");
                             $("#summary").append("<thead><tr><th>Summary</th> </tr></thead>");
                             for (var i = 0; i < results.summary.length; i++) {
@@ -131,6 +133,31 @@ $(function() {
     
 });
 
+// malware is an array of json
+// malware = [{}, {}, {}]
+// returns a json containing category summary
+function summarize(malware) {
+    
+    var result = {};
+    for (var i = 0; i < malware.length; i++) {
+        
+        // prop doesnt exist
+        console.log("looking at: " + malware[i].ClassificationType);
+        if (!result.hasOwnProperty(malware[i].ClassificationType)) {
+            console.log("does not have");
+            result[malware[i].ClassificationType] = 1;
+        }
+        
+        // if it does exist, increment
+        else {
+            console.log("has so increment");
+            result[malware[i].ClassificationType]++;
+        }
+    }
+    
+    console.log("what: " + result);
+    return result;
+}
 
 
 function execute_request(url, operation, data, contentType, success_callback) {

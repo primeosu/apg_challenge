@@ -19,6 +19,8 @@ app.get("/", function(req, res) {
 // return entire database json
 app.get("/draw", function(req, res) {
     
+    res.send(JSON.stringify(summarize(dat)));
+    
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                 
         // check for sql injections later
@@ -35,12 +37,13 @@ app.get("/draw", function(req, res) {
                 console.log("IM SLEEPING AFTER THIS: " + result.rows.length);
                 var malware = {len: result.rows.length};
                 console.log(result.rows);
-                res.send(JSON.stringify({results: result.rows, summary: malware}));
+                res.send(JSON.stringify({results: result.rows, summary: summarize(result.rows)}));
             }
 
         });         
        
     });
+    
 });
 
 // load csv route
@@ -166,4 +169,30 @@ function executeQuery(input) {
             }
         });              
     });
+}
+
+// malware is an array of json
+// malware = [{}, {}, {}]
+// returns a json containing category summary
+function summarize(malware) {
+    
+    var result = {};
+    for (var i = 0; i < malware.length; i++) {
+        
+        // prop doesnt exist
+        console.log("looking at: " + malware[i].ClassificationType);
+        if (!result.hasOwnProperty(malware[i].ClassificationType)) {
+            console.log("does not have");
+            result[malware[i].ClassificationType] = 1;
+        }
+        
+        // if it does exist, increment
+        else {
+            console.log("has so increment");
+            result[malware[i].ClassificationType]++;
+        }
+    }
+    
+    console.log("what: " + result);
+    return result;
 }
