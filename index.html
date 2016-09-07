@@ -11,11 +11,17 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <img id="intel-logo" src="./public/Intel_McAfee_Security.png">
+                <img id="intel-logo" src="Intel_McAfee_Security.png">
             </div>
         </div>
     </nav>
     <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <input type="file" id="file-upload-input" multiple="multiple" name="uploads[]">
+                <button id="file-upload-btn" class="btn btn-primary">Upload</button>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-9">
                 <table class="table table-striped" id="results">
@@ -43,8 +49,7 @@
             <div class="col-md-12">
                 <h1>Hello world</h1>
            
-                <input type="file" id="file-upload-input" multiple="multiple" name="uploads[]">
-                <button id="file-upload-btn" class="btn btn-primary">Upload</button>
+                
              
             </div>
         </div>

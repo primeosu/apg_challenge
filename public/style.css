@@ -14,3 +14,7 @@
 #intel-logo {
     width: 178px;
 }
+
+#file-upload-input {
+    display: none;
+}
