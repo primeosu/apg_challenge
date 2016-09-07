@@ -34,6 +34,7 @@ app.get("/draw", function(req, res) {
                 res.setHeader('Content-Type', 'application/json');
                 console.log("IM SLEEPING AFTER THIS: " + result.rows.length);
                 var malware = {len: result.rows.length};
+                console.log(result.rows);
                 res.send(JSON.stringify({results: result.rows, summary: malware}));
             }
 
