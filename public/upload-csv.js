@@ -1,12 +1,7 @@
 $(function() {
      
     // draw initial table when page loads
-    $.ajax({ 
-        url: "/draw",
-        type: "GET",
-        processData: true,
-        contentType: "JSON",
-        success: function(results) {
+    execute_request("/draw", "GET", null, "JSON", function(results) {
             
             // wipe table
             $("#results").html("");
@@ -22,13 +17,8 @@ $(function() {
             // update summary table
             updateSummary(results.summary);
             
-        },
-        error: function(xhr, status, error) {
-            console.log("AJAX: fail");
-            console.log("There was an error: " + error);
-            console.log("Status: " + status);
-        }
-    });
+        });
+    
     
     $("#file-upload-btn").click(function() {
       
@@ -95,6 +85,7 @@ $(function() {
                             }
                             
                             console.log(results.summary);
+                            
                             $("#summary").html("");
                             $("#summary").append("<thead><tr><th>Summary</th> </tr></thead>");
                             for (var i = 0; i < results.summary.length; i++) {
@@ -124,33 +115,6 @@ $(function() {
     });
     
 });
-
-// malware is an array of json
-// malware = [{}, {}, {}]
-// returns a json containing category summary
-function summarize(malware) {
-    
-    var result = {};
-    for (var i = 0; i < malware.length; i++) {
-        
-        // prop doesnt exist
-        console.log("looking at: " + malware[i].ClassificationType);
-        if (!result.hasOwnProperty(malware[i].ClassificationType)) {
-            console.log("does not have");
-            result[malware[i].ClassificationType] = 1;
-        }
-        
-        // if it does exist, increment
-        else {
-            console.log("has so increment");
-            result[malware[i].ClassificationType]++;
-        }
-    }
-    
-    console.log("what: " + result);
-    return result;
-}
-
 
 function execute_request(url, operation, data, contentType, success_callback) {
     

@@ -177,19 +177,15 @@ function summarize(malware) {
     for (var i = 0; i < malware.length; i++) {
         
         // prop doesnt exist
-        console.log("looking at: " + malware[i].ClassificationType);
         if (!result.hasOwnProperty(malware[i].ClassificationType)) {
-            console.log("does not have");
             result[malware[i].ClassificationType] = 1;
         }
         
         // if it does exist, increment
         else {
-            console.log("has so increment");
             result[malware[i].ClassificationType]++;
         }
     }
     
-    console.log("what: " + result);
     return result;
 }
