@@ -22,3 +22,23 @@
 #operations {
     margin-bottom: 25px;
 }
+
+  svg {
+            display: block;
+            float: left;
+            height: 293px !important;
+            width: 293px !important;
+        }
+        
+        th {
+            text-align: center;
+        }
+        
+        td {
+            text-align: center;
+        }
+        
+        html, body {
+            overflow: hidden;
+            height: 100%;
+        }
