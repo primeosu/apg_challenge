@@ -20,7 +20,7 @@ app.delete("/drop", function(req, res) {
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                 
         // check for sql injections later
-        var query = client.query('delete from malware_table', function(err, result) {
+        var query = client.query('delete from malware1', function(err, result) {
             done();
             if (err) {
                 error = err;
@@ -48,7 +48,7 @@ app.get("/draw", function(req, res) {
                 
         // check for sql injections later
       
-        var query = client.query('select * from malware_table', function(err, result) {
+        var query = client.query('select * from malware1', function(err, result) {
             done();
             if (err) {
                 error = err;
@@ -106,7 +106,9 @@ app.post("/load", function(req, res) {
                     
                    
                     // check for sql injections later
-                    var query = client.query('insert into malware_table values ($1, $2, $3, $4, $5)', [input[i].md5, input[i].classification_name, input[i].classification_type, input[i].size, input[i].file_type], function(err, result) {
+                    //insert into malware1 ("MD5", "ClassificationName", "ClassificationType", "Size", "FileType") select '1','1','1',1,'1' from malware1 where not exists (select 1 from malware1 where "MD5" = '1');
+
+                    var query = client.query('insert into malware1 values ($1, $2, $3, $4, $5)', [input[i].md5, input[i].classification_name, input[i].classification_type, input[i].size, input[i].file_type], function(err, result) {
                         done();
                         if (err) {
                             error = err;
@@ -171,6 +173,7 @@ function parse(lines) {
         data.push(json);
     }
     
+    // remove 
     return data;
 }
 
@@ -179,7 +182,7 @@ function executeQuery(input) {
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                 
         // check for sql injections later
-        client.query('insert into malware_table values ($1, $2, $3, $4, $5)', [input.md5, input.classification_name, input.classification_type, input.size, input.file_type], function(err, result) {
+        client.query('insert into malware1 values ($1, $2, $3, $4, $5)', [input.md5, input.classification_name, input.classification_type, input.size, input.file_type], function(err, result) {
             done();
             if (err) {
                 error = err;
