@@ -1,24 +1,36 @@
 $(function() {
      
     // draw initial table when page loads
-    execute_request("/draw", "GET", null, "JSON", function(results) {
+    $.ajax({ 
+        url: "/draw",
+        type: "GET",
+        processData: true,
+        contentType: "JSON",
+        success: function(results) {
             
             // wipe table
             $("#results").html("");
             
             //append table heading
-            $("#results").append("<thead><tr><th>MD5</th><th>Classification Name</th><th>Classification Type</th><th>Size</th><th>File Type</th></tr></thead>");
+            var table_header = "<thead><tr><th>MD5</th><th>Classification Name</th><th>Classification Type</th><th>Size</th><th>File Type</th></tr></thead>";
+            $("#results").append(table_header);
                
             // append request results to div#results
             for (var i = 0; i < results.results.length; i++) {
-                $("#results").append("<tr><td>" + results.results[i].MD5 + "</td><td>" + results.results[i].ClassificationName + "</td><td>" + results.results[i].ClassificationType + "</td><td>" + results.results[i].Size + "</td><td>" + results.results[i].FileType + "</td></tr>");    
+                var row = "<tr><td>" + results.results[i].MD5 + "</td><td>" + results.results[i].ClassificationName + "</td><td>" + results.results[i].ClassificationType + "</td><td>" + results.results[i].Size + "</td><td>" + results.results[i].FileType + "</td></tr>";
+                $("#results").append(row);    
             }
             
             // update summary table
             updateSummary(results.summary);
             
-        });
-    
+        },
+        error: function(xhr, status, error) {
+            console.log("AJAX: fail");
+            console.log("There was an error: " + error);
+            console.log("Status: " + status);
+        }
+    });
     
     $("#file-upload-btn").click(function() {
       
