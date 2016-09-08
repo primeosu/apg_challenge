@@ -100,18 +100,17 @@ app.post("/load", function(req, res) {
             pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                 
                 var lock = input.length;
-                var duplicate = 0;
+                
                 // perform all queries in array
                 for (var i = 0; i < input.length; i++) {
                     
                    
                     // check for sql injections later
                     //insert into malware1 ("MD5", "ClassificationName", "ClassificationType", "Size", "FileType") select '1','1','1',1,'1' from malware1 where not exists (select 1 from malware1 where "MD5" = '1');
-                    
+
                     var query = client.query('insert into malware1 values ($1, $2, $3, $4, $5)', [input[i].md5, input[i].classification_name, input[i].classification_type, input[i].size, input[i].file_type], function(err, result) {
                         done();
                         if (err) {
-                            duplicate++;
                             error = err;
                             console.error("Error while post query: " + err); 
                         }
@@ -121,10 +120,10 @@ app.post("/load", function(req, res) {
                     // sending response on end means if a query fails, the app fails
                     query.on("end", function(result) {
                         lock--;
-                        console.log(result);
+                        
                         if (lock <= 0) {
                             console.log("all querys have been finished: " + lock);
-                            res.send(JSON.stringify({duplicates: duplicate}));
+                            res.sendStatus(200);
                         }
                     });
                   
