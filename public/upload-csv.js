@@ -151,7 +151,11 @@ function updateMalware(o) {
             //var table_header = "<thead><tr><th>MD5</th><th>Classification Name</th><th>Classification Type</th><th>Size</th><th>File Type</th></tr></thead>";
             //$("#results").append(table_header);
                
-            // append request results to div#results
+            // append request results to div#results(
+    
+            if (0.length <= 0) {
+                $("#results").append("<tr><td colspan=100%>Please upload a csv file to populate this table</td></tr>");
+            }
             for (var i = 0; i < o.length; i++) {
                 var row = "<tr><td>" + o[i].MD5 + "</td><td>" + o[i].ClassificationName + "</td><td>" + o[i].ClassificationType + "</td><td>" + o[i].Size + "</td><td>" + o[i].FileType + "</td></tr>";
                 $("#results").append(row);    
