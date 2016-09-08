@@ -58,7 +58,7 @@ $(function() {
                 });
             });
             */
-            /*
+            
             $.ajax({ 
                 url: "/load",
                 type: "POST",
@@ -111,7 +111,7 @@ $(function() {
                     console.log("Status: " + status);
                 }
             });
-            */
+            
 
         }
     });
