@@ -16,7 +16,7 @@ app.get("/", function(req, res) {
 });
 
 //drop table route
-app.delete("/drop", function() {
+app.delete("/drop", function(req, res) {
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                 
         // check for sql injections later
