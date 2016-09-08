@@ -12,6 +12,9 @@ $(function() {
             console.log(results.results);
             updateMalware(results.results);
             
+            // draw pie chart
+            draw(results.summary);
+            
             // use json to fill summary table
             updateSummary(results.summary);
             
@@ -160,7 +163,7 @@ function updateMalware(o) {
 
 function updateSummary(o) {
     $("#summary").html("");
-    $("#summary").append("<thead><tr><th>Summary</th></tr></thead>");
+    $("#summary").append("<thead><tr><th colspan=100%>Summary</th></tr></thead> <tr><td colspan=100%><svg id='test1' class='mypiechart'></svg></td></tr>");
             
     for (var key in o) {
         if (o.hasOwnProperty(key)) {
@@ -168,3 +171,44 @@ function updateSummary(o) {
         }
     }    
 };
+
+// PI CHART DRAW
+function clearPie() {
+    $(".mypiechart").html("");    
+}
+    
+function draw(o) {
+        
+    // wipe existing pie chart 
+    $(".mypiechart").html("");
+    
+    // create testdata2
+    var testdata2 = [];
+    for (var key in o) {
+        if (o.hasOwnProperty(key)) {
+            testdata2.push({key: key, y: o[key]});
+        }
+    }  
+
+    var height = 350;
+    var width = 350;
+
+    nv.addGraph(function() {
+        var chart = nv.models.pieChart()
+            .x(function(d) { return d.key })
+            .y(function(d) { return d.y })
+            .width(width)
+            .height(height)
+            .showLegend(false);
+
+        d3.select("#test1")
+            .datum(testdata2)
+            .transition().duration(1200)
+            .attr('width', width)
+            .attr('height', height)
+            .call(chart);
+
+        return chart;
+    });
+
+}

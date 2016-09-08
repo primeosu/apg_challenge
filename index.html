@@ -5,8 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="./style.css">
+    
+    <style>
+        
+        svg {
+            display: block;
+            float: left;
+            height: 293px !important;
+            width: 293px !important;
+        }
+        
+        th {
+            text-align: center;
+        }
+        
+        td {
+            text-align: center;
+        }
+        
+    </style>
 </head>
+    
 <body>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -41,13 +62,16 @@
                 </table>
             </div>
             <div class="col-md-3">
+                
             <table class="table table-striped" id="summary">
                 <thead>
                     <tr>
-                        <th>Summary</th>
+                        <th colspan=100%>Summary</th>
                     </tr>
                 </thead> 
-                
+                <tr>
+                    <td colspan=100%><svg id="test1" class="mypiechart"></svg></td>
+                </tr>
             </table>
             </div>
             
@@ -58,7 +82,9 @@
     
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.2/d3.min.js" charset="utf-8"></script>
+    <script src="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.min.js"></script>
     <script src="upload-csv.js"></script>
+  
    
 </html>
