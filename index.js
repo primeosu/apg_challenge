@@ -111,7 +111,7 @@ app.post("/load", function(req, res) {
                     var query = client.query('insert into malware1 values ($1, $2, $3, $4, $5)', [input[i].md5, input[i].classification_name, input[i].classification_type, input[i].size, input[i].file_type], function(err, result) {
                         done();
                         if (err) {
-                            dupicate++;
+                            duplicate++;
                             error = err;
                             console.error("Error while post query: " + err); 
                         }
