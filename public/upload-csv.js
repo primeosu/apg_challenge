@@ -96,7 +96,9 @@ $(function() {
                 processData: false,
                 contentType: false,
                 success: function(result) {
-
+                    
+                    console.log("Number of duplicats: " + result.duplicates);
+                    
                     $.ajax({ 
                         url: "/draw",
                         type: "GET",
