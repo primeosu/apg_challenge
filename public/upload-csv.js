@@ -9,6 +9,7 @@ $(function() {
         success: function(results) {
             
             // use array of jsons to fill malware table
+            console.log(results.results);
             updateMalware(results.results);
             
             // use json to fill summary table
@@ -128,7 +129,7 @@ function updateMalware(o) {
             $("#results").append(table_header);
                
             // append request results to div#results
-            for (var i = 0; i < o; i++) {
+            for (var i = 0; i < o.length; i++) {
                 var row = "<tr><td>" + o[i].MD5 + "</td><td>" + o[i].ClassificationName + "</td><td>" + o[i].ClassificationType + "</td><td>" + o[i].Size + "</td><td>" + o[i].FileType + "</td></tr>";
                 $("#results").append(row);    
             }
