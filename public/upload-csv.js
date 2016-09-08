@@ -74,28 +74,11 @@ $(function() {
                         contentType: "JSON",
                         success: function(results) {
 
-                            // wipe table
-                            $("#results").html("");
+                            // use array of jsons to fill malware table
+                            updateMalware(results.results);
 
-                            //append table heading
-                            $("#results").append("<thead><tr><th>MD5</th><th>Classification Name</th><th>Classification Type</th><th>Size</th><th>File Type</th></tr></thead>");
-
-                            // append request results to div#results
-                            for (var i = 0; i < results.results.length; i++) {
-                                $("#results").append("<tr><td>" + results.results[i].MD5 + "</td><td>" + results.results[i].ClassificationName + "</td><td>" + results.results[i].ClassificationType + "</td><td>" + results.results[i].Size + "</td><td>" + results.results[i].FileType + "</td></tr>");    
-                            }
-                            
-                            console.log(results.summary);
-                            
-                            $("#summary").html("");
-                            $("#summary").append("<thead><tr><th>Summary</th> </tr></thead>");
-                            for (var i = 0; i < results.summary.length; i++) {
-                                $("#summary").append("<tr><td>Size: </td><td>" + results.summary[i].len + "</td></tr>");
-                            }
-                            for (var i = 0; i < 5; i++) {
-                                $("#summary").append("<tr><td>key</td><td>value</td></tr>");
-                            }
-
+                            // use json to fill summary table
+                            updateSummary(results.summary);
                         },
                         error: function(xhr, status, error) {
                             console.log("AJAX: fail");
