@@ -30,7 +30,10 @@ app.delete("/drop", function(req, res) {
             else {
                 
                 // send response back to ajax request
-                res.sendStatus(200);
+                res.setHeader('Content-Type', 'application/json');
+                
+                // send empty results to wipe table on redraw
+                res.send(JSON.stringify({results: [], summary: {}}));
             }
 
         });         
