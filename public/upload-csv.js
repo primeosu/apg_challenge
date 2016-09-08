@@ -20,7 +20,7 @@ $(function() {
             }
             
             // update summary table
-            updateSummary(summarize(results.summary));
+            updateSummary(results.summary);
             
         },
         error: function(xhr, status, error) {

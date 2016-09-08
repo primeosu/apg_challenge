@@ -31,10 +31,9 @@ app.get("/draw", function(req, res) {
             }
             
             else {
+                
+                // send response back to ajax request
                 res.setHeader('Content-Type', 'application/json');
-                console.log("IM SLEEPING AFTER THIS: " + result.rows.length);
-                var malware = {len: result.rows.length};
-                console.log(result.rows);
                 res.send(JSON.stringify({results: result.rows, summary: summarize(result.rows)}));
             }
 
@@ -128,7 +127,7 @@ app.listen(app.get("port"), function() {
 
 // takes array of csv lines represented as strings
 // returns array json
-function parse (lines) {
+function parse(lines) {
     
     var data = [];
     
