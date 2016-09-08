@@ -121,7 +121,7 @@ app.post("/load", function(req, res) {
                     // sending response on end means if a query fails, the app fails
                     query.on("end", function(result) {
                         lock--;
-                        
+                        console.log(result);
                         if (lock <= 0) {
                             console.log("all querys have been finished: " + lock);
                             res.send(JSON.stringify({duplicates: duplicate}));
