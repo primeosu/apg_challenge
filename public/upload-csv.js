@@ -12,9 +12,6 @@ $(function() {
             console.log(results.results);
             updateMalware(results.results);
             
-            // draw pie chart
-            draw(results.summary);
-            
             // use json to fill summary table
             updateSummary(results.summary);
             
@@ -162,6 +159,11 @@ function updateMalware(o) {
 }
 
 function updateSummary(o) {
+    
+    // draw pie chart
+    draw(results.summary);
+    
+    // draw summary table
     $("#summary").html("");
     $("#summary").append("<thead><tr><th colspan=100%>Summary</th></tr></thead> <tr><td colspan=100%><svg id='test1' class='mypiechart'></svg></td></tr>");
             
