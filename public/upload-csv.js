@@ -161,7 +161,7 @@ function updateMalware(o) {
 function updateSummary(o) {
     
     // draw pie chart
-    draw(results.summary);
+    draw(o);
     
     // draw summary table
     $("#summary").html("");
