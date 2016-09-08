@@ -25,6 +25,10 @@
             text-align: center;
         }
         
+        html, body {
+            overflow: hidden;
+            height: 100%;
+        }
     </style>
 </head>
     
@@ -41,16 +45,18 @@
             <div class="col-md-12">
                 <!--multiple="multiple" add back in later--> 
                 <input type="file" id="file-upload-input" name="uploads[]">
+                
                 <div class="btn-group">
+                    <h3 style="display: inline;">Options: </h3>
                     <button id="file-upload-btn" class="btn btn-primary">Upload CSV</button>
                     <button id="table-drop-btn" class="btn btn-danger">Delete All Rows</button>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-9"  style="overflow: auto; height: 100%">
                 <table class="table table-striped" id="results">
-                    <thead>
+                    <thead style="position: relative;">
                     <tr>
                         <th>MD5</th>
                         <th>Classification Name</th>
@@ -59,6 +65,9 @@
                         <th>File Type</th>
                     </tr>
                     </thead>
+                    <tbody id="results">
+                    
+                        </tbody>
                 </table>
             </div>
             <div class="col-md-3">

@@ -148,8 +148,8 @@ function updateMalware(o) {
             $("#results").html("");
             
             //append table heading
-            var table_header = "<thead><tr><th>MD5</th><th>Classification Name</th><th>Classification Type</th><th>Size</th><th>File Type</th></tr></thead>";
-            $("#results").append(table_header);
+            //var table_header = "<thead><tr><th>MD5</th><th>Classification Name</th><th>Classification Type</th><th>Size</th><th>File Type</th></tr></thead>";
+            //$("#results").append(table_header);
                
             // append request results to div#results
             for (var i = 0; i < o.length; i++) {
