@@ -46,7 +46,7 @@ $(function() {
             }
 
             // execute request
-            
+            /*
             execute_request("/load", "POST", formData, false, function(result) {
                 console.log("SUCCESS!!!!");
                 execute_request("/draw", "GET", null, "json", function(result) {
@@ -57,7 +57,7 @@ $(function() {
 
                 });
             });
-            
+            */
             /*
             $.ajax({ 
                 url: "/load",
