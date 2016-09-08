@@ -15,6 +15,28 @@ app.get("/", function(req, res) {
     res.sendFile("index.html", {root: path.join(__dirname, "./")});
 });
 
+//drop table route
+app.delete("/drop", function() {
+    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+                
+        // check for sql injections later
+        var query = client.query('delete from malware_table', function(err, result) {
+            done();
+            if (err) {
+                error = err;
+                console.error("Error while post query: " + err); 
+            }
+            
+            else {
+                
+                // send response back to ajax request
+                res.sendStatus(200);
+            }
+
+        });         
+       
+    });
+});
 
 // return entire database json
 app.get("/draw", function(req, res) {

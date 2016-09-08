@@ -18,14 +18,43 @@ $(function() {
         },
         
         error: function(xhr, status, error) {
-            console.log("AJAX: fail");
-            console.log("There was an error: " + error);
-            console.log("Status: " + status);
+            console.log(status + ": " + error);
         }
     });
     
     $("#file-upload-btn").click(function() {
+        
+        // reset file input value to null so that you can select
+        // the same file to upload
+        $("#file-upload-input").click(function() {
+            $("#file-upload-input").val(null);
+        });
+        
         $("#file-upload-input").click();
+    });
+    
+    $("#table-drop-btn").click(function() {
+        console.log("drop clicked");
+        $.ajax({ 
+        url: "/drop",
+        type: "DELETE",
+        success: function(results) {
+            
+            // use array of jsons to fill malware table
+            console.log(results.results);
+            updateMalware(results.results);
+            
+            // use json to fill summary table
+            updateSummary(results.summary);
+            
+            console.log("table dropped");
+            
+        },
+        
+        error: function(xhr, status, error) {
+            console.log(status + ": " + error);
+        }
+    });
     });
     
     $("#file-upload-input").change(function() {
@@ -82,18 +111,14 @@ $(function() {
                             updateSummary(results.summary);
                         },
                         error: function(xhr, status, error) {
-                            console.log("AJAX: fail");
-                            console.log("There was an error: " + error);
-                            console.log("Status: " + status);
-                        }
+            console.log(status + ": " + error);
+        }
                     });
 
                 },
                 error: function(xhr, status, error) {
-                    console.log("AJAX: fail");
-                    console.log("There was an error: " + error);
-                    console.log("Status: " + status);
-                }
+            console.log(status + ": " + error);
+        }
             });
             
 
@@ -112,9 +137,7 @@ function execute_request(url, operation, data, contentType, success_callback) {
         contentType: contentType,
         success: success_callback(),
         error: function(xhr, status, error) {
-            console.log("AJAX: fail");
-            console.log("There was an error: " + error);
-            console.log("Status: " + status);
+            console.log(status + ": " + error);
         }
     });
 }
