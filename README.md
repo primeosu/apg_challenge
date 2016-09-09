@@ -28,3 +28,24 @@ Evaluation of your submission will be based on the following criteria:
 1. Did your application fulfill the basic requirements?
 1. Did you document the method for setting up and running your application?
 1. Did you follow the instructions for submission?
+
+-----------------
+##Application Usage Instructions
+
+1. Download XAMPP
+2. Move App files to /xampp/htdocs
+3. Uncomment "extension=php_intl.dll" in xampp/php/php.ini to use extension for app
+4. Start Apache Web Server and MySQL Server using XAMPP interface
+    3.1 If first time use: Run script below to create "Malware" table into "malwaredatabase"
+5. View app: Open a web browser and go to localhost/malwareChallengeApp/malware/fileupload
+
+#Creates Malware table to hold malware information
+Create Database malwaredatabase;
+
+CREATE TABLE Malware (
+  md5 varchar(34) PRIMARY KEY,
+  ClassificationName varchar(15),
+  ClassificationType varchar(15),
+  Size int(10),
+  FileType varchar(10)
+ );
