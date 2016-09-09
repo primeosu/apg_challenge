@@ -4,7 +4,7 @@ var formidable = require("formidable");
 var fs = require("fs");
 var pg = require("pg");
 var app = express();
-
+var connectionString = process.env.DATABASE_URL || "postgres://postgres:apg-challenge@localhost:5432/postgres";
 app.set("port", (process.env.PORT || 3000));
 
 // serve public folder
@@ -17,7 +17,7 @@ app.get("/", function(req, res) {
 
 //drop table route
 app.delete("/drop", function(req, res) {
-    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+    pg.connect(connectionString, function(err, client, done) {
                 
         // check for sql injections later
         var query = client.query('delete from malware1', function(err, result) {
@@ -44,7 +44,7 @@ app.delete("/drop", function(req, res) {
 // return entire database json
 app.get("/draw", function(req, res) {
     
-    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+    pg.connect(connectionString, function(err, client, done) {
                 
         // check for sql injections later
       
@@ -97,7 +97,7 @@ app.post("/load", function(req, res) {
             }
             
             // bottleneck?
-            pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+            pg.connect(connectionString, function(err, client, done) {
                 
                 var lock = input.length;
                 
@@ -179,7 +179,7 @@ function parse(lines) {
 
 function executeQuery(input) {
     
-    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+    pg.connect(connectionString, function(err, client, done) {
                 
         // check for sql injections later
         client.query('insert into malware1 values ($1, $2, $3, $4, $5)', [input.md5, input.classification_name, input.classification_type, input.size, input.file_type], function(err, result) {

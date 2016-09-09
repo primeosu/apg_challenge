@@ -1,0 +1,9 @@
+versions used:
+
+- ubuntu 16.04.01
+- psql 9.4
+
+
+
+- download pg: http://serverfault.com/questions/514329/installing-postgres-on-ubuntu-package-not-available
+-
