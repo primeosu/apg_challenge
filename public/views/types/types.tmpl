@@ -1,0 +1,68 @@
+<div class="box">
+  <div class="box-header">
+    <span class="fa fa-server fa-fw fa-lg box-icon"></span>
+    <h1>Types</h1>
+  </div>
+  <div id="types-content" class="box-content">
+
+    <% if (types.length) { %>
+      <h1>Malware Types</h1>
+      <h2 id="types-page-loading" class="hidden">Loading...</h2>
+
+      <div class="table-wrapper">
+        <table id="type-table" class="table table-bordered">
+          <thead>
+            <tr>
+              <th>
+                <div class="col-xs-11">
+                  <span>Classification Type</span>
+                </div>
+                <div class="col-xs-1 text-right">
+                  <a class="sort-link" href="#" data-key="classificationType">
+                    <% if (types.sortMethod.key === 'classificationType') { %>
+                      <span class="fa <%- (types.sortMethod.direction > 0) ? 'fa-sort-up' : 'fa-sort-down' %> sort-icon"></span>
+                    <% } else { %>
+                      <span class="fa fa-sort sort-icon"></span>
+                    <% } %>
+                  </a>
+                </div>
+              </th>
+              <th>
+                <div class="col-xs-11">
+                  <span>Amount of Malware</span>
+                </div>
+                <div class="col-xs-1 text-right">
+                  <a class="sort-link" href="#" data-key="amount">
+                    <% if (types.sortMethod.key === 'amount') { %>
+                      <span class="fa <%- (types.sortMethod.direction > 0) ? 'fa-sort-up' : 'fa-sort-down' %> sort-icon"></span>
+                    <% } else { %>
+                      <span class="fa fa-sort sort-icon"></span>
+                    <% } %>
+                  </a>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% _.each(types.models, function (type) { %>
+              <tr>
+                <td><%- type.get('classificationType') %></td>
+                <td><%- type.get('amount') %></td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      <% } else { %>
+        <div id="no-types-wrapper">
+          <div id="no-types-vertical-align"></div>
+          <div id="no-types" class="text-center">
+            <h1>No malwares types where found.</h1>
+            <h2>Upload some malware on the <span>Upload</span> page and then come back.</h2>
+          </div>
+        </div>
+      <% } %>
+    </div>
+
+  </div>
+</div>
+

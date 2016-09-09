@@ -1,0 +1,24 @@
+#!/bin/bash
+# Description: Starts the server
+# Author: Chris Young (young.c.5690@gmail.com)
+# Created: September 17th 2015
+
+if [ -z $APG_USER ]; then
+  export APG_USER="root"
+fi
+
+if [ -z $APG_PASS ]; then
+  export APG_PASS=""
+fi
+
+if [ -d ~/.nvm ]; then
+  ~/.nvm/nvm.sh use 4.0.0
+
+  if [ $? != 0 ]; then
+    echo "Failed select node v4.0.0"
+    exit 1
+  fi
+fi
+
+node --use-strict --harmony_destructuring ./server.js
+

@@ -1,0 +1,37 @@
+#types-content {
+  height: 100%;
+
+  h1 {
+    display: inline-block;
+    font-size: 2rem;
+  }
+
+  h2 {
+    color: #AAA;
+    display: inline;
+    font-size: 1.8rem;
+    margin-left: 1rem;
+  }
+
+  #no-types-wrapper {
+    height: 100%;
+
+    #no-types-vertical-align {
+      display: inline-block;
+      height: 100%;
+      width: 1px;
+      vertical-align: middle;
+    }
+
+    #no-types {
+      display: inline-block;
+      width: 99%;
+      vertical-align: middle;
+
+      h1 {
+        display: block;
+      }
+    }
+  }
+}
+
