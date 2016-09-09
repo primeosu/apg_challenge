@@ -28,3 +28,28 @@ Evaluation of your submission will be based on the following criteria:
 1. Did your application fulfill the basic requirements?
 1. Did you document the method for setting up and running your application?
 1. Did you follow the instructions for submission?
+
+## Setup
+To setup this server, you must do the following.
+
+* Setup an .env file at the root of this project. This is included, but should not normally be included in version control.
+* Have the following installed on the machine:
+ * PHP 5.5.9+
+ * OpenSSL PHP Extension
+  * http://php.net/manual/en/openssl.installation.php
+ * PDO PHP Extension of database of choice
+  * http://php.net/manual/en/pdo.installation.php
+ * Mbstring PHP Extension
+  * http://php.net/manual/en/mbstring.installation.php
+ * Tokenizer PHP Extension  
+  * http://php.net/manual/en/tokenizer.installation.php
+ * Composer
+  * https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx
+
+Once the above is setup, run 'composer update' and 'composer install.' This updates and installs the dependancies for Laravel.
+
+After the above finishes, run 'php artisan serve' in this directory to start a server on localhost:8000
+
+## Heroku
+This app is currently hosted on Heroku available to anyone that doesn't want to set it up on their own machines.
+It is available here: https://apg-challenge.herokuapp.com/
