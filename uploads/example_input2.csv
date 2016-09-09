@@ -1,0 +1,13 @@
+MD5,ClassificationName,ClassificationType,Size,FileType
+e8f6b5fc63babb3b151b21be721e0211,Downloader,trojan,25,exe
+6e226fa05872e4c15f79d8beac856c1f,Windows,clean,2161,exe
+27f44206e454e0a029590bb7f7be6992,unknown,clean,6604,exe
+0559944274ac30455b63212fe5067c2e,unknown,unknown,7219,dll
+740a06507622bb8577d44d97b05bccc2,Downloader,trojan,7250,exe
+e40fef7d4bb9d2c5c09e02c65985d51e,Windows,clean,34816,exe
+ec1f0c6e51501ea453a4e15cbca6dfed,Downloader,trojan,38509,unknown
+eb8df754bcf17e0ab678fd37753a97c6,Windows,virus,65536,unknown
+80f112a7b15f8fb05edc221bc8cca4c5,Backdoor,trojan,129536,exe
+fbdf292cb503a85aab271d5b893fc335,unknown,pup,176128,unknown
+27fda46891955e9bbb0222edab5f4c55,Downloader,trojan,198826,unknown
+450db836ef510416689ab8d62fc4bf12,DNSChanger,trojan,304673,unknown

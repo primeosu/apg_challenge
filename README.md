@@ -1,6 +1,13 @@
 # Intel Security Programming Challenge
 Please complete the following programming challenge.  It is used to better assess a candidate's software development skills.   You have as much time as you'd like (though we ask that you not spend more than a few hours) and may use any programming language or framework you'd like.  Feel free to contact the original sender if you have any questions.
 
+## Submission Installation Instructions
+1. First, install the latest distribution of Python 2.7.
+1. Next, use easy_install or pip to install the following dependencies: flask, flask-bootstrap, and werkzeug (pip install flask flask-bootstrap werkzeug).
+1. Next, run AppParser.py (python AppParser.py) to start the application.
+1. Finally, navigate to 127.0.0.1:5000 to use the application.
+
+
 ## Submission Instructions
 1. First, fork this project on github.  You will need to create an account if you don't already have one.
 1. Next, complete the project as described below within your fork.
