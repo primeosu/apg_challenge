@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coding Challenge</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css">
+
+  </head>
+  <body>
+      <h1>CSV Parser</h1>
+      <div class="hold-form">
+          <form enctype="multipart/form-data" name="upload" id="target" action="/parse" method="post" value="">
+              <input id="csv" name="theFile" type="file" />
+              <p></p>
+              <input id="send" type="submit"/>
+          </form>
+      </div>
+      <p></p>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script>
+  </body>
+</html>
+
+<table data-toggle="table" data-url="data.json" width="100%">
+    <thead>
+        <tr>
+            <th data-field="ClassificationType" data-sortable="true">Classification Type</th>
+            <th data-field="COUNT(*)" data-sortable="true">Count</th>
+        </tr>
+    </thead>
+</table>
+<script type="text/javascript">
+    $(document).ready(function() {
+            $('#send').click( function() {
+                $('#target').submit();
+            });
+    });
+</script>

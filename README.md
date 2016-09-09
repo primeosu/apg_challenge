@@ -1,5 +1,12 @@
 # Intel Security Programming Challenge
-Please complete the following programming challenge.  It is used to better assess a candidate's software development skills.   You have as much time as you'd like (though we ask that you not spend more than a few hours) and may use any programming language or framework you'd like.  Feel free to contact the original sender if you have any questions.
+To set up the program you must first have mysql installed. Depening on your Linux distro the command for installing it may vary, but in most RedHat distros you can enter `sudo yum install mysql -y`
+
+The other requirement is Nodejs. The installation varies from each distro, but the following site has guides for multiple distros. `http://www.liquidweb.com/kb/how-to-install-node-js-on-fedora-23/`
+
+Now all you need to do is run the setup script by typing the following:
+`sudo ./setup.sh`
+
+The script automatically builds the mysql table, adds the user, installs all node dependencies, and starts the server. After the script finishes executing open your browser and navigate to `http://127.0.0.1:3030`
 
 ## Submission Instructions
 1. First, fork this project on github.  You will need to create an account if you don't already have one.
