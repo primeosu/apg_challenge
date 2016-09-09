@@ -1,0 +1,45 @@
+// Colors
+$body-bg: #0f212e;
+$body-bg-accent: #01111D;
+$brand-primary: #c64f31;
+$brand-error: #c64f31;
+$headings-color: #3b82b5;
+$text-color: #a0c5e0;
+
+// Typography
+$font-family-base: "Roboto", Helvetica, Arial, sans-serif;
+$headings-font-family: "RobotoLight", Helvetica, Arial, sans-serif;;
+
+// Components
+$border-radius-base: 0;
+$border-radius-small: 0;
+$border-radius-large: 0;
+
+// Tables
+$table-condensed-cell-padding: 3px;
+$table-bg-accent: $body-bg-accent;
+$table-border-color: #134163;
+
+// Forms
+$input-bg: $body-bg-accent;
+$input-bg-disabled: $body-bg-accent;
+$input-color: #eee;
+
+// Navbar
+$navbar-height: 40px;
+$navbar-default-bg: $body-bg-accent;
+$navbar-default-color: $text-color;
+$navbar-default-link-color: $headings-color;
+
+// Media queries
+$screen-sm-min: 768px;
+$screen-md-min: 992px;
+
+.has-error > p.help-block {
+  color: $brand-error;
+  word-break: break-all;
+}
+
+.navbar-header .navbar-brand {
+  font-size: 25px;
+}
