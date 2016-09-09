@@ -1,0 +1,39 @@
+.navbar {
+    padding: 8px 0px;
+}
+
+.container {
+    padding: 10px;
+}
+
+#intel-logo {
+    width: 178px;
+}
+
+#file-upload-input {
+    display: none;
+}
+
+#operations {
+    margin-bottom: 25px;
+}
+
+  svg {
+            display: block;
+            float: left;
+            height: 293px !important;
+            width: 293px !important;
+        }
+        
+        th {
+            text-align: center;
+        }
+        
+        td {
+            text-align: center;
+        }
+        
+        html, body {
+            overflow: hidden;
+            height: 100%;
+        }
