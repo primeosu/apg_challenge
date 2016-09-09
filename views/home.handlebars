@@ -1,0 +1,43 @@
+<div class="container">
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3>Upload Malware Data File</h3>
+    </div>
+
+    <div class="panel-body">
+        <div role="alert" class="alert alert-success dont-display">
+          <div>The file data has been updated.</div>
+        </div>
+        <div role="alert" class="alert alert-danger dont-display">
+          <div>Please use a valid CSV file.</div>
+        </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div>
+          <form id="uploadForm" enctype="multipart/form-data" action="/api/classificationType" method="post">
+
+            <div class="form-group">
+              <label for="malwareDataFile">File input</label>
+              <input type="file" name="malwareDataFile"/>
+              <p class="help-block">Example CSV file can be found <a href="examples/example_input.csv">here</a>.</p>
+            </div>
+            <input id="submitButton" class="btn btn-primary" type="submit" value="Upload File" name="submit"/>
+
+          </form>
+        </div>
+    </div>
+
+    <div class="well well-lg col-md-8">
+      MalStash stores your malware data files to a database, and provides updated information for each classification type!
+    </div>
+
+    <div class="col-md-12 table-div">
+      <table id="table"></table>
+    </div>
+  </div>
+
+    </div>
+  </div>
+</div>
