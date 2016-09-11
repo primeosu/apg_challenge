@@ -31,12 +31,6 @@ define("HOST", "localhost");
 define("USER", "root");
 define("PASS", "root");
 ```
-
-## [Demo](http://www.sangminlee.me/demo/intel/)
-I have uploaded the project to my personal website.
-Click on the header to view.
-
-
 ## Uses
 
 Users can simply drag & drop a csv file to the form or click on the form to choose a file. 
