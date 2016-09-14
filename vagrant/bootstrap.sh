@@ -14,8 +14,7 @@ sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again p
 sudo apt-get install -y mysql-server curl build-essential
 sudo apt-get install -y apache2 php7.0 php7.0-common libapache2-mod-php7.0 php7.0-mysql php7.0-curl php7.0-json php7.0-mbstring php7.0-readline php7.0-opcache php7.0-dev php7.0-cli php7.0-xml php7.0-zip
 
-curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-sudo apt-get install -y nodejs redis-server
+sudo apt-get install -y redis-server
 
 sudo a2enmod rewrite
 
@@ -37,11 +36,6 @@ php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php
 php composer-setup.php
 php -r "unlink('composer-setup.php');"
 sudo mv composer.phar /usr/bin/composer
-
-for KEY in `cat /var/config_files/apikey.txt`
-do
-    composer config -g github-oauth.github.com $KEY
-done
 
 #pushd;
 cd /srv/web

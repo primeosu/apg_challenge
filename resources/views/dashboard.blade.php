@@ -26,7 +26,11 @@
             </table>
         </div>
         <div class="col-xs-12 col-sm-4">
-            <canvas id="myChart" width="400" height="400"></canvas>
+            @if(count($classification) == 0)
+                <h3>You need more data!</h3>
+            @else
+                <canvas id="myChart" width="400" height="400"></canvas>
+            @endif
         </div>
     </div>
     <script>
