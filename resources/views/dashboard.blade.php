@@ -16,7 +16,7 @@
                 <tbody>
                     <tr>
                         <th scope="row">All</th>
-                        <td>{{$classification->sum('numHashes')}}</td>
+                        <td>{{$classification->sum('count')}}</td>
                     </tr>
                     <tr><td colspan="2"></td></tr>
             @foreach($classification as $name)
@@ -42,7 +42,7 @@
                 labels: {!! $classification->pluck('name') !!},
                 datasets: [{
                     label: '# of Records',
-                    data: {!! $classification->pluck('numHashes') !!},
+                    data: {!! $classification->pluck('count') !!},
                     backgroundColor: [
                         @foreach($classification as $n)
                             'rgba({{rand(0,255)}},{{rand(0,255)}},{{rand(0,255)}},0.6)',

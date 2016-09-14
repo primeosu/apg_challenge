@@ -6,3 +6,4 @@ Homestead.json
 Homestead.yaml
 
 *.iml
+.vagrant

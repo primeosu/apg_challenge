@@ -28,3 +28,17 @@ Evaluation of your submission will be based on the following criteria:
 1. Did your application fulfill the basic requirements?
 1. Did you document the method for setting up and running your application?
 1. Did you follow the instructions for submission?
+
+# Installation
+
+You need to [install vagrant](https://www.vagrantup.com/docs/installation/) and configure it to run with your VM of choice.
+
+You will also need to install [vagrant hostsupdater](https://github.com/cogitatio/vagrant-hostsupdater) to be able to access the
+vm by dns automatically.
+
+Run `vagrant up` from the `apg_challenge` directory and let the system configure itself. You can then visit [apg.dev](apg.dev) 
+to access the site.
+
+## Notes
+
+If you would like to setup everything yourself (and running on linux) you can run `vagrant/bootstrap.sh` to setup all requirements.
