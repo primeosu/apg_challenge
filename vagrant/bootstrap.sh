@@ -40,4 +40,6 @@ sudo mv composer.phar /usr/bin/composer
 #pushd;
 cd /srv/web
 composer install
+
+php artisan migrate
 #popd;
