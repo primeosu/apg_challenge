@@ -1,4 +1,4 @@
-Installation Instructions
+## Installation Instructions
 1. First, install the latest distribution of Python 2.7.
 1. Next, use easy_install or pip to install the following dependencies: flask, flask-bootstrap, and werkzeug (pip install flask flask-bootstrap werkzeug).
 1. Next, run AppParser.py (python AppParser.py) to start the application.
