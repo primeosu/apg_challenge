@@ -1,0 +1,56 @@
+<!-- Title -->
+<div class="header">
+  <h1> CSV Importr</h1>
+</div>
+
+<!-- Data Table -->
+<table class="table table-hover table-responsive">
+  <thead>
+    <tr>
+      <th>MD5</th>
+      <th>Classification Name</th>
+      <th>Classification Type</th>
+      <th>Size</th>
+      <th>FileType</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @defects.each do |defect| %>
+    <tr>
+      <td><%= defect.md5 %></td>
+      <td><%= defect.classificationname %></td>
+      <td><%= defect.classificationtype %></td>
+      <td><%= defect.size %></td>
+      <td><%= defect.filetype %></td>
+    </tr>
+    <%end%>
+  </tbody>
+</table>
+
+
+<!-- Import Functionality -->
+<div class="import-title">
+  <h3>Import Info</h3>
+</div>
+
+<hr class="hr-style">
+
+<div class="import-file">
+  <%= form_tag import_defects_path, multipart: true do %>
+  <%= file_field_tag :file %>
+</div>
+
+<div class="submit">
+  <%= submit_tag "Import", :class => "btn btn-primary btn-sm" %>
+  <% end %>
+</div>
+
+<!-- Column Chart -->
+
+<div class="chart-title">
+  <h2> Classification Types</h2>
+</div>
+
+<div id="chart">
+  <%= column_chart Defect.group(:classificationtype).count%>
+</div>
