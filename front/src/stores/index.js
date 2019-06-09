@@ -17,7 +17,7 @@ class RootStore {
     this.uiStore = new UiStore(this);
     this.userStore = new UserStore(this);
     this.routingStore = new RouterStore(this);
-    this.schoolStore = new SchoolStore(this);
+
   }
 }
 
