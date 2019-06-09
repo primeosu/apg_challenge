@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 import { observable, action,computed, extendObservable ,set} from "mobx";
-import { DEFAULT_GEOLOCATION, GOOGLE_DETAILS_FIELDS } from "../constants/mapConstants";
 import Spot from "../models/Spot";
 import firebase from 'firebase';
 import Geopoint from "../models/Geopoint";

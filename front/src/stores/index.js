@@ -15,7 +15,7 @@ class RootStore {
     this.spotStore = new SpotStore(this);
     this.commentStore = new CommentStore(this);
     this.uiStore = new UiStore(this);
-    this.userStore = new UserStore(this);
+
     this.routingStore = new RouterStore(this);
 
   }

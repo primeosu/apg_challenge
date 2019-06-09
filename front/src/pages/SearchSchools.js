@@ -1,24 +1,18 @@
 import React, { Component } from 'react';
-import { inject, observer } from 'mobx-react';
 import posed from 'react-pose';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Dropzone from 'react-dropzone'
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import Divider from '@material-ui/core/Divider';
 
-
-
 const Slide = posed.div({
   enter: { x: 0, opacity: 1 },
   exit: { x: -50, opacity: 0 }
 });
+
 const config = { headers: { 'Content-Type': 'multipart/form-data' } };
 
-
-
 class SearchSchools extends Component {
-
   state = {
     loading: false,
     summary: {}
@@ -36,21 +30,16 @@ class SearchSchools extends Component {
         console.log(response);
       })
       .catch(function(error) {
-        // handle error
         console.log(error);
-      })
-      .finally(function() {
-        // always executed
       });
   }
 
   uploadCSV(acceptedFiles) {
-    console.log(acceptedFiles);
     const form = new FormData();
     form.append('data', acceptedFiles[0]);
     axios.post('/upload', form, config).then(res => {
       this.getMalwareCounts();
-      toast("File Uploaded!");
+      toast('File Uploaded!');
     });
   }
 
@@ -59,13 +48,13 @@ class SearchSchools extends Component {
       <React.Fragment>
         <Slide>
           <div className='container container-dashboard'>
-
-
-          <div className='spacer' />
             <div className='spacer' />
             <div className='spacer' />
-            <h2 style={{marginBottom:"5px"}} className='display-3'>Upload CSV</h2>
-            <Divider  />
+            <div className='spacer' />
+            <h2 style={{marginBottom: '5px'}} className='display-3'>
+              Upload CSV
+            </h2>
+            <Divider />
             <Dropzone onDrop={acceptedFiles => this.uploadCSV(acceptedFiles)}>
               {({getRootProps, getInputProps}) => (
                 <div className='rsg--preview-60' data-preview='Class Components'>
@@ -83,9 +72,11 @@ class SearchSchools extends Component {
 
             <div className='spacer' />
             <div className='spacer' />
-            <h2 style={{marginBottom:"5px"}}  className='display-3'>Counts</h2>
-            <Divider  />
-            <div style={{height:"16px"}}></div>
+            <h2 style={{marginBottom: '5px'}} className='display-3'>
+              Counts
+            </h2>
+            <Divider />
+            <div style={{height: '16px'}} />
 
             <section>
               <div className='search-container'>
@@ -98,12 +89,6 @@ class SearchSchools extends Component {
                 </div>
               </div>
             </section>
-
-
-
-
-
-
           </div>
         </Slide>
       </React.Fragment>

@@ -1,5 +1,4 @@
 import { observable, action } from "mobx";
-import preventDefault from "../utils/eventListeners"
 import { disableBodyScroll, enableBodyScroll,clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 class UiStore {
@@ -108,27 +107,6 @@ class UiStore {
 
   @action openDrawerDelayed(){
       setTimeout(() =>  this.drawerState = true, 800);
-  }
-
-  hideModal = () =>{ 
-    window.addEventListener('touchmove', preventDefault, { passive: false });
-    this.openDrawer();
-    this.modalState = false;
-    window.scrollTo(0, 0);
-    document.body.style.overflowY = "auto";
-  }
-
-  goToUserHideModal = () =>{ 
-    window.addEventListener('touchmove', preventDefault, { passive: false });
-    this.modalState = false;
-    window.scrollTo(0, 0);
-    document.body.style.overflowY = "auto";
-  }
-
-  showModal = () => { 
-    window.removeEventListener('touchmove', preventDefault); 
-    this.modalState = true;
-    this.closeDrawer();
   }
 
 
