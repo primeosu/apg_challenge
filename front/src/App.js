@@ -12,6 +12,7 @@ import posed, {PoseGroup} from 'react-pose';
 import  Home  from "./pages/Home"
 import './css/App.css';
 
+
 const browserHistory = createBrowserHistory();
 const history = syncHistoryWithStore(browserHistory, rootStore.routingStore);
 const RoutesContainer = posed.div({

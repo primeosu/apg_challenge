@@ -4,15 +4,28 @@ import Dropzone from 'react-dropzone'
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import Divider from '@material-ui/core/Divider';
+import {inject, observer} from 'mobx-react';
+
+const  BarChart = require("react-chartjs").Bar;
 
 const Slide = posed.div({
   enter: { x: 0, opacity: 1 },
   exit: { x: -50, opacity: 0 }
 });
 
+const chartOptions = {
+  responsive: true
+}
+
 const config = { headers: { 'Content-Type': 'multipart/form-data' } };
 
+
+@inject('appStore')
+@observer
 class Home extends Component {
+
+  appStore = this.props.appStore;
+
   state = {
     loading: false,
     summary: {}
@@ -27,7 +40,9 @@ class Home extends Component {
       .get('/summary')
       .then(response => {
         this.setState({summary: response.data});
-        console.log(response);
+        const values = Object.values(response.data)
+    this.appStore.barData.datasets[0].data  = values
+    
       })
       .catch(function(error) {
         console.log(error);
@@ -77,7 +92,6 @@ class Home extends Component {
             </h2>
             <Divider />
             <div style={{height: '16px'}} />
-
             <section>
               <div className='search-container'>
                 <div className='row'>
@@ -87,6 +101,9 @@ class Home extends Component {
                   <div className='col-md-2 count-text'>Virus: {this.state.summary.virusCount}</div>
                   <div className='col-md-2 count-text'>Pup: {this.state.summary.pupCount}</div>
                 </div>
+                <div style={{height: '50px'}} />
+                <BarChart options={chartOptions} data={this.appStore.barData}  width="600" height="250" redraw/>
+
               </div>
             </section>
           </div>
