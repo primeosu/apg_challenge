@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Switch, Route} from 'react-router-dom';
-import withAuthentication from './components/hoc/withAuthentication';
 import Navbar from './components/layout/Navbar';
 import {Router} from 'react-router-dom';
 import {ToastContainer} from 'react-toastify';
@@ -54,4 +53,4 @@ class App extends Component {
   }
 }
 
-export default withAuthentication(App);
+export default App;
