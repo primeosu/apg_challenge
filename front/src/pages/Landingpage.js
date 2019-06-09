@@ -12,7 +12,7 @@ const Fade = posed.div({
   visible: {opacity: 1}
 });
 
-@inject('routingStore', 'sessionStore')
+@inject('routingStore')
 @observer
 class Landingpage extends Component {
   
@@ -51,7 +51,7 @@ class Landingpage extends Component {
                         <div className='spacer' />
                       </Fade>
                       <div className='btn-wrapper'>
-                        <Link to='/searchschools' className='btn btn-lg  btn-white btn-icon mb-3 mb-sm-0' style={{width: '70%'}}>
+                        <Link to='/home' className='btn btn-lg  btn-white btn-icon mb-3 mb-sm-0' style={{width: '70%'}}>
                           <span className='btn-inner--text'>Enter</span>
                         </Link>
                       </div>

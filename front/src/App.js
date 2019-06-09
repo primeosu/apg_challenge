@@ -1,16 +1,15 @@
 import React, {Component} from 'react';
 import {Switch, Route} from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
-import {Router} from 'react-router-dom';
-import {ToastContainer} from 'react-toastify';
-import Landingpage from './pages/Landingpage';
+import { Router } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import LandingPage from './pages/LandingPage'
 import createBrowserHistory from 'history/createBrowserHistory';
 import {syncHistoryWithStore} from 'mobx-react-router';
 import rootStore from './stores';
 import ScrollToTop from './components/layout/ScrollToTop';
 import posed, {PoseGroup} from 'react-pose';
-import { inject, observer } from 'mobx-react';
-import  SearchSchools  from "./pages/SearchSchools"
+import  Home  from "./pages/Home"
 import './css/App.css';
 
 const browserHistory = createBrowserHistory();
@@ -21,8 +20,6 @@ const RoutesContainer = posed.div({
     duration: 200
   } }
 });
-
-
 
 class App extends Component {
 
@@ -38,8 +35,8 @@ class App extends Component {
                 <PoseGroup style={{height: '100%'}}>
                   <RoutesContainer key={location.pathname}>
                     <Switch location={location}>                
-                      <Route path='/searchschools' component={SearchSchools} key='SearchSchools' />
-                      <Route exact path='/' component={Landingpage} key='landingPage' />
+                      <Route path='/home' component={Home} key='home' />
+                      <Route exact path='/' component={LandingPage} key='landingPage' />
                     </Switch>
                   </RoutesContainer>
                 </PoseGroup>

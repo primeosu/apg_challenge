@@ -12,7 +12,7 @@ const Slide = posed.div({
 
 const config = { headers: { 'Content-Type': 'multipart/form-data' } };
 
-class SearchSchools extends Component {
+class Home extends Component {
   state = {
     loading: false,
     summary: {}
@@ -96,4 +96,4 @@ class SearchSchools extends Component {
   }
 }
 
-export default SearchSchools;
+export default Home;

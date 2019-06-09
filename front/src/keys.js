@@ -1,4 +1,2 @@
- const bootstrapURLKeys = {
-    key: "AIzaSyAJdMUyuQiG2DEHgGG3Tvebb9-BzR0JXwE"
-}
+ const bootstrapURLKeys = {}
 export default bootstrapURLKeys
