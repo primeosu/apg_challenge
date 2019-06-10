@@ -1,6 +1,9 @@
 {
   "name": "adonisjs-create-react-app",
   "version": "1.0.0",
+  "engines": {
+    "node": "10.3.0"
+  },
   "adonis-version": "1.0.0",
   "description": "Adonisjs + Create React App Boilerplate",
   "main": "index.js",
