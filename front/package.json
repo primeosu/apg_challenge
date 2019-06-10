@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:3333",
+  "homepage": "./react",
   "dependencies": {
     "@babel/core": "7.1.0",
     "@fortawesome/fontawesome-free": "^5.3.1",
