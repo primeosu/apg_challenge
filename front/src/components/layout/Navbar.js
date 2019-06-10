@@ -16,7 +16,7 @@ class Navbar extends Component {
     const NavigationNonAuth = () => (
       <nav className='navbar navbar-expand-lg py-2'>
         <div className='container'>
-          <Link style={{textDecoration: 'none'}} to='/searchschools'>
+          <Link style={{textDecoration: 'none'}} to='/'>
           <img className='rounded-circle avatar-image--icon' src={require("../../img/apg.png")} alt='Logo' />
             <b className='ml-3'>APG</b>
           </Link>
