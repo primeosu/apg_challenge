@@ -8,21 +8,6 @@ import {inject, observer} from 'mobx-react';
 import produce from "immer"
 import { Bar } from 'react-chartjs-2';
 
-const data = {
-  labels: ["Trojan", "Clean", "Unknown", "Virus", "Pup"],
-  datasets: [
-    {
-      
-      backgroundColor: 'rgba(255,99,132,0.2)',
-      borderColor: 'rgba(255,99,132,1)',
-      borderWidth: 1,
-      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-      hoverBorderColor: 'rgba(255,99,132,1)',
-      data: [65, 59, 80, 81, 56, 55, 40]
-    }
-  ]
-};
-
 const Slide = posed.div({
   enter: { x: 0, opacity: 1 },
   exit: { x: -50, opacity: 0 }
@@ -30,19 +15,18 @@ const Slide = posed.div({
 
 const config = { headers: { 'Content-Type': 'multipart/form-data' } };
 
-@inject('appStore')
+
 @observer
 class Home extends Component {
 
-  appStore = this.props.appStore;
 
   state = {
     loading: false,
     summary: {},
-    chartData : {
-      labels: ["Trojan", "Clean", "Unknown", "Virus", "Pup"],
+    chartData: {
+      labels: ['Trojan', 'Clean', 'Unknown', 'Virus', 'Pup'],
       datasets: [
-        {        
+        {
           backgroundColor: 'rgba(255,99,132,0.2)',
           borderColor: 'rgba(255,99,132,1)',
           borderWidth: 1,
@@ -62,15 +46,14 @@ class Home extends Component {
     axios
       .get('/summary')
       .then(response => {
-    
-        const values = Object.values(response.data)
+        const values = Object.values(response.data);
 
-      this.setState(
-        produce(this.state, draft => {
-            draft.chartData.datasets[0].data = values
-            draft.summary = response.data
-        })
-    )
+        this.setState(
+          produce(this.state, draft => {
+            draft.chartData.datasets[0].data = values;
+            draft.summary = response.data;
+          })
+        );
       })
       .catch(function(error) {
         console.log(error);
@@ -116,7 +99,7 @@ class Home extends Component {
             <div className='spacer' />
             <div className='spacer' />
             <h2 style={{marginBottom: '5px'}} className='display-3'>
-              MalwareCounts
+              Malware Counts
             </h2>
             <Divider />
             <div style={{height: '16px'}} />
@@ -131,15 +114,14 @@ class Home extends Component {
                 </div>
                 <div style={{height: '50px'}} />
                 <Bar
-          data={this.state.chartData}
-  
-          options={{
-            maintainAspectRatio: true,
-            legend:{
-              display:false
-            }
-          }}
-        />
+                  data={this.state.chartData}
+                  options={{
+                    maintainAspectRatio: true,
+                    legend: {
+                      display: false
+                    }
+                  }}
+                />
               </div>
             </section>
           </div>
