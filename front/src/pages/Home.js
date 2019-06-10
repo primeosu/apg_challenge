@@ -28,12 +28,7 @@ const Slide = posed.div({
   exit: { x: -50, opacity: 0 }
 });
 
-const chartOptions = {
-  responsive: true
-}
-
 const config = { headers: { 'Content-Type': 'multipart/form-data' } };
-
 
 @inject('appStore')
 @observer
@@ -47,8 +42,7 @@ class Home extends Component {
     chartData : {
       labels: ["Trojan", "Clean", "Unknown", "Virus", "Pup"],
       datasets: [
-        {
-          
+        {        
           backgroundColor: 'rgba(255,99,132,0.2)',
           borderColor: 'rgba(255,99,132,1)',
           borderWidth: 1,
@@ -68,13 +62,13 @@ class Home extends Component {
     axios
       .get('/summary')
       .then(response => {
-        this.setState({summary: response.data});
+    
         const values = Object.values(response.data)
-        // this.appStore.barData.datasets[0].data  = values
-      //  this.appStore.updateChart(values)
+
       this.setState(
         produce(this.state, draft => {
             draft.chartData.datasets[0].data = values
+            draft.summary = response.data
         })
     )
       })
@@ -136,12 +130,14 @@ class Home extends Component {
                   <div className='col-md-2 count-text'>Pup: {this.state.summary.pupCount}</div>
                 </div>
                 <div style={{height: '50px'}} />
-                {/* <BarChart options={chartOptions} data={this.appStore.barData}  width="600" height="250" redraw/> */}
                 <Bar
           data={this.state.chartData}
   
           options={{
-            maintainAspectRatio: true
+            maintainAspectRatio: true,
+            legend:{
+              display:false
+            }
           }}
         />
               </div>
