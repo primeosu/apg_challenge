@@ -34,7 +34,7 @@ class Landingpage extends Component {
                   <div className='row'>
                     <div className='col-lg-12 text-center'>
                       <Fade pose={this.state.isVisible ? 'visible' : 'hidden'}>
-                        <h1 className='display-1'> APG  Data Digest Tool</h1>
+                        <h1 className='display-1'> APG Data Digest Tool</h1>
 
                         <h1 className='display-4'> McAfee Advanced Programs Group</h1>
                         <div className='spacer' />
