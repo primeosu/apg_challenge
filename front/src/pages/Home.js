@@ -5,8 +5,23 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import Divider from '@material-ui/core/Divider';
 import {inject, observer} from 'mobx-react';
+import produce from "immer"
+import { Bar } from 'react-chartjs-2';
 
-const  BarChart = require("react-chartjs").Bar;
+const data = {
+  labels: ["Trojan", "Clean", "Unknown", "Virus", "Pup"],
+  datasets: [
+    {
+      
+      backgroundColor: 'rgba(255,99,132,0.2)',
+      borderColor: 'rgba(255,99,132,1)',
+      borderWidth: 1,
+      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+      hoverBorderColor: 'rgba(255,99,132,1)',
+      data: [65, 59, 80, 81, 56, 55, 40]
+    }
+  ]
+};
 
 const Slide = posed.div({
   enter: { x: 0, opacity: 1 },
@@ -28,7 +43,21 @@ class Home extends Component {
 
   state = {
     loading: false,
-    summary: {}
+    summary: {},
+    chartData : {
+      labels: ["Trojan", "Clean", "Unknown", "Virus", "Pup"],
+      datasets: [
+        {
+          
+          backgroundColor: 'rgba(255,99,132,0.2)',
+          borderColor: 'rgba(255,99,132,1)',
+          borderWidth: 1,
+          hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+          hoverBorderColor: 'rgba(255,99,132,1)',
+          data: [0, 0, 0, 0, 0, 0, 0]
+        }
+      ]
+    }
   };
 
   componentDidMount() {
@@ -41,8 +70,13 @@ class Home extends Component {
       .then(response => {
         this.setState({summary: response.data});
         const values = Object.values(response.data)
-    this.appStore.barData.datasets[0].data  = values
-    
+        // this.appStore.barData.datasets[0].data  = values
+      //  this.appStore.updateChart(values)
+      this.setState(
+        produce(this.state, draft => {
+            draft.chartData.datasets[0].data = values
+        })
+    )
       })
       .catch(function(error) {
         console.log(error);
@@ -88,7 +122,7 @@ class Home extends Component {
             <div className='spacer' />
             <div className='spacer' />
             <h2 style={{marginBottom: '5px'}} className='display-3'>
-              Counts
+              MalwareCounts
             </h2>
             <Divider />
             <div style={{height: '16px'}} />
@@ -102,8 +136,14 @@ class Home extends Component {
                   <div className='col-md-2 count-text'>Pup: {this.state.summary.pupCount}</div>
                 </div>
                 <div style={{height: '50px'}} />
-                <BarChart options={chartOptions} data={this.appStore.barData}  width="600" height="250" redraw/>
-
+                {/* <BarChart options={chartOptions} data={this.appStore.barData}  width="600" height="250" redraw/> */}
+                <Bar
+          data={this.state.chartData}
+  
+          options={{
+            maintainAspectRatio: true
+          }}
+        />
               </div>
             </section>
           </div>
