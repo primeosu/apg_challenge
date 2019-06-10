@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
+    "heroku-postbuild": "cd front && npm install && npm install run build",
     "test": "node ace test"
   },
   "keywords": [
@@ -27,7 +28,8 @@
     "csv": "^5.1.1",
     "csv-parse": "^4.4.3",
     "fast-csv": "^2.5.0",
-    "pg": "^7.11.0"
+    "pg": "^7.11.0",
+    "url-parse": "^1.4.7"
   },
   "devDependencies": {},
   "autoload": {
