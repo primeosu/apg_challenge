@@ -16,7 +16,7 @@ const Slide = posed.div({
 const config = { headers: { 'Content-Type': 'multipart/form-data' } };
 
 
-@observer
+
 class Home extends Component {
 
 

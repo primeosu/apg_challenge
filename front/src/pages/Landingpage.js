@@ -12,8 +12,7 @@ const Fade = posed.div({
   visible: {opacity: 1}
 });
 
-@inject('routingStore')
-@observer
+
 class Landingpage extends Component {
   
   state = {isVisible: false};
