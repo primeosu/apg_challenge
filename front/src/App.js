@@ -3,7 +3,7 @@ import {Switch, Route} from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import { Router } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import LandingPage from './pages/LandingPage'
+import Landing from './pages/Landingpage'
 import createBrowserHistory from 'history/createBrowserHistory';
 import {syncHistoryWithStore} from 'mobx-react-router';
 import rootStore from './stores';
@@ -37,7 +37,7 @@ class App extends Component {
                   <RoutesContainer key={location.pathname}>
                     <Switch location={location}>                
                       <Route path='/home' component={Home} key='home' />
-                      <Route exact path='/' component={LandingPage} key='landingPage' />
+                      <Route exact path='/' component={Landing} key='landingPage' />
                     </Switch>
                   </RoutesContainer>
                 </PoseGroup>

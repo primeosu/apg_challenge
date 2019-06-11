@@ -216,5 +216,11 @@
     "purgecss-webpack-plugin": "^1.4.0",
     "purify-css": "^1.2.5",
     "react-testing-library": "^5.2.3"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
