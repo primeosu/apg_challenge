@@ -1,3 +1,9 @@
+# Enviroment
+
+-  Node v10.9.0 and the AdonisJS Framework
+-  Postgres 11.2
+-  React 16.8.6
+
 # Setup
 
 Install AdonisJs CLI globally :
@@ -31,6 +37,10 @@ Install React App dependencies :
     npm install
 
 # Start
+
+Run the following to create the Postgres Malware table :
+
+    adonis migration:run
 
 Run the following command to start the HTTP server :
 
