@@ -3,7 +3,7 @@
 https://apg-challenge.herokuapp.com/
 
 # Enviroment
-
+-  Test in both Windows 7 and MacOS High Sierra 
 -  Node v10.9.0 and the AdonisJS Framework
 -  Postgres 11.2
 -  React 16.8.6
