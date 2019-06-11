@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "react-fire-9a99e"
+  },
+  "targets": {
+    "react-fire-9a99e": {
+      "hosting": {
+        "DoggieTime-Prod": [
+          "universityoflife"
+        ],
+        "en": [
+          "university-of-life"
+        ]
+      }
+    }
+  }
+}

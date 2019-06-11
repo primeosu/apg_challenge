@@ -1,3 +1,65 @@
+# Demo
+
+https://apg-challenge.herokuapp.com/
+
+# Enviroment
+-  Tested in both Windows 7 and MacOS High Sierra 
+-  Node v10.9.0 and the AdonisJS Framework
+-  Postgres 11.2
+-  React 16.8.6
+
+# Setup
+
+Install AdonisJs CLI globally :
+
+    npm i -g @adonisjs/cli
+
+Install Server dependencies :
+
+    npm install
+    
+Create a .env file at the root directory with the following:
+
+    HOST=localhost
+    PORT=3333
+    NODE_ENV=development
+    APP_URL=http://${HOST}:${PORT}
+    CACHE_VIEWS=false
+    APP_KEY=htbLFNPcTijD2F5gYbMflhY9JRaDvlYl
+    DB_CONNECTION=pg
+    DB_HOST=127.0.0.1
+    DB_PORT=[your DB port, usually 5432 ] 
+    DB_USER=[your DB user, usually postgres]
+    DB_PASSWORD=[your DB passowrd]
+    DB_DATABASE=[your DB name]
+    SESSION_DRIVER=cookie
+    HASH_DRIVER=bcrypt
+
+Install React App dependencies :
+
+    cd front
+    npm install
+
+# Start
+
+Run the following to create the Postgres Malware table :
+
+    adonis migration:run
+
+Run the following command to start the HTTP server :
+
+    adonis serve --dev
+
+Runs the React app in development mode :
+
+    cd front
+    npm start
+
+Then you can access to the React App using :
+
+    http://localhost:3000/
+
+
 # Intel Security Programming Challenge
 Please complete the following programming challenge.  It is used to better assess a candidate's software development skills.   You have as much time as you'd like (though we ask that you not spend more than a few hours) and may use any programming language or framework you'd like.  Feel free to contact the original sender if you have any questions.
 
