@@ -1,0 +1,53 @@
+li {
+  list-style: none;
+  text-align: left;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  padding-left: 70px;
+  text-align: left;
+  float: left;
+  width: 25%;
+  padding: 10px;
+  height: 20px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+.classification-types {
+  text-align: left;
+  font-family: 'Helvetica', sans-serif;
+  font-size: 12;
+}
+* {
+  box-sizing: border-box;
+  font-family: 'Helvetica', sans-serif;
+}
+
+.container {
+  text-align: center;
+  padding: 15px;
+  margin: 10px auto;
+}
+
+.csv-input {
+  padding: 10px;
+  display: block;
+  margin: 15px auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.container p {
+  padding-top: 10px;
+  color: #666;
+}
